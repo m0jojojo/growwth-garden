@@ -47,13 +47,13 @@
     <div class="hero__inner">
       <!-- left column -->
       <aside class="hero__left">
-        <div class="team">
-          <div class="team__avatars" aria-hidden="true">
+        <div class="crew">
+          <div class="crew__avatars" aria-hidden="true">
             <img src="assets/avatar-1.svg" alt="">
             <img src="assets/avatar-2.svg" alt="">
             <img src="assets/avatar-3.svg" alt="">
           </div>
-          <p class="team__text">The expert team brings<br>a creativity to every<br>project.</p>
+          <p class="crew__text">The expert team brings<br>a creativity to every<br>project.</p>
         </div>
 
         <ul class="stats">
@@ -104,8 +104,193 @@
     </div>
   </section>
 
-  <!-- next section placeholder (built in the next step) -->
-  <section class="next" id="about"></section>
+  <!-- ============ WHAT WE DO ============ -->
+  <section class="services" id="services">
+    <div class="container">
+      <div class="services__head">
+        <p class="eyebrow"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#star"/></svg><span>What we do</span></p>
+        <h2 class="services__title">Designing for seamless and enjoyable interactions.</h2>
+        <a class="btn btn--sm" href="#services">
+          <span>All Services</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="currentColor"/><path d="M10 7l5 5-5 5" fill="none" stroke="#242424" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <div class="cards">
+        <article class="card">
+          <div class="card__top">
+            <h3 class="card__title">Brand building &amp; strategy.</h3>
+            <a class="card__arrow" href="#" aria-label="Brand building &amp; strategy"><svg viewBox="0 0 24 24"><path d="M6 18L18 6M8 6h10v10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg></a>
+          </div>
+          <p class="card__text">Lorem ipsum do adipiscing elit Ut elit tellus luctus nec ullamcorper mattis pulvinar dapibus leo.</p>
+          <img class="card__img" src="assets/service-1.svg" alt="Team planning a brand strategy" loading="lazy">
+        </article>
+
+        <article class="card card--featured">
+          <img class="card__img card__img--mono" src="assets/service-2.svg" alt="Colleagues reviewing creative work" loading="lazy">
+          <div class="card__body">
+            <div class="card__top">
+              <h3 class="card__title">Creative digital solution.</h3>
+              <a class="card__arrow" href="#" aria-label="Creative digital solution"><svg viewBox="0 0 24 24"><path d="M6 18L18 6M8 6h10v10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg></a>
+            </div>
+            <p class="card__text">Lorem ipsum do adipiscing elit Ut elit tellus luctus nec ullamcorper mattis pulvinar dapibus leo.</p>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card__top">
+            <h3 class="card__title">Marketing &amp; campaign.</h3>
+            <a class="card__arrow" href="#" aria-label="Marketing &amp; campaign"><svg viewBox="0 0 24 24"><path d="M6 18L18 6M8 6h10v10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg></a>
+          </div>
+          <p class="card__text">Lorem ipsum do adipiscing elit Ut elit tellus luctus nec ullamcorper mattis pulvinar dapibus leo.</p>
+          <img class="card__img" src="assets/service-3.svg" alt="Team working on a marketing campaign" loading="lazy">
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WHO WE ARE ============ -->
+  <section class="about" id="about">
+    <div class="about__noise" aria-hidden="true"></div>
+    <div class="container about__grid">
+
+      <div class="about__left" data-reveal="left">
+        <p class="eyebrow eyebrow--dark"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#star"/></svg><span>Who we are</span></p>
+        <h2 class="about__title">Creativity meets strategy.</h2>
+        <p class="about__text">With a team of passionate designers, marketers, and innovators, we specialize in delivering unique solutions that elevate your brand and captivate your audience.</p>
+        <ul class="facts">
+          <li>
+            <span class="facts__icon facts__icon--lime">
+              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><g id="brain-half"><path d="M16 4.6C13.8 4.6 12 5.8 11.4 7.6 9 8 7 9.9 7 12.4c0 1.2.5 2.2 1.2 3-.8.8-1.2 1.9-1.2 3.1 0 2.4 1.9 4.3 4.2 4.4.7 1.8 2.5 3 4.8 3"/><path d="M11.4 7.6c0 2 1.2 3.2 2.8 3.4M8.2 15.4c2.3 0 3.8-1.1 4.1-2.7M11.2 22.9c.4-2 1.8-3.2 3.4-3.4M13.4 15.5c.9.3 1.7.9 2.2 1.8"/></g><use href="#brain-half" transform="translate(32 0) scale(-1 1)"/><path d="M16 4.6v21.9M12.5 28h7"/></svg>
+            </span>
+            <span class="facts__label">Over 10 years of experience</span>
+          </li>
+          <li>
+            <span class="facts__icon facts__icon--blue">
+              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.5 14v4.5a1.8 1.8 0 001.8 1.8h3.2l9.8 5.2V7.5l-9.8 5.2H7.3A1.8 1.8 0 005.5 14zM11 20.4l1.6 6.1h3.2l-1.3-5.6M24.5 11.3l2.4-1.6M25.2 16h3.1M24.5 20.7l2.4 1.6M8 7l1.6 1.8M13 4.5l.4 2.3"/></svg>
+            </span>
+            <span class="facts__label">Trusted by global brands</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="about__center" data-reveal="up">
+        <span class="about__frame" aria-hidden="true"></span>
+        <img class="about__person" src="assets/about-person.svg" alt="Creative professional enjoying a drink">
+      </div>
+
+      <div class="about__right" data-reveal="right">
+        <img class="about__photo" src="assets/about-office.svg" alt="Team member working on a laptop" loading="lazy">
+        <ul class="skills">
+          <li><div class="skills__row"><span>Successful campaign launches</span><b data-to="95">95%</b></div><div class="skills__track"><i class="skills__bar skills__bar--lime" data-to="95"></i></div></li>
+          <li><div class="skills__row"><span>Innovative design</span><b data-to="85">85%</b></div><div class="skills__track"><i class="skills__bar skills__bar--blue" data-to="85"></i></div></li>
+          <li><div class="skills__row"><span>High impact project</span><b data-to="100">100%</b></div><div class="skills__track"><i class="skills__bar skills__bar--dark" data-to="100"></i></div></li>
+        </ul>
+        <p class="about__text">Consectetuer adipiscing congue aptent placera senec efficitur aptent malesuada sit conubia tincidunt iaculis</p>
+        <a class="btn btn--blue" href="#contact">
+          <span>About Us</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="currentColor"/><path d="M10 7l5 5-5 5" fill="none" stroke="#e3e3e3" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <!-- client logo carousel -->
+      <div class="logos" aria-label="Clients">
+        <div class="logos__track">
+          <span class="logos__item"><svg viewBox="0 0 80 60" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"><path d="M10 10h38l22 8-30 32z"/><path d="M10 10l30 40"/></svg></span>
+          <span class="logos__item"><svg viewBox="0 0 80 60"><circle cx="28" cy="30" r="20" fill="currentColor"/><circle cx="50" cy="30" r="20" fill="none" stroke="currentColor" stroke-width="4"/></svg></span>
+          <span class="logos__item"><svg viewBox="0 0 80 60" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"><path d="M40 8c8 8 10 18 0 30-10-12-8-22 0-30zM40 38C30 28 18 26 8 30c6 12 20 16 32 8zM40 38c10-10 22-12 32-8-6 12-20 16-32 8zM22 24c-6 0-12 2-16 6M58 24c6 0 12 2 16 6"/></svg></span>
+          <span class="logos__item"><svg viewBox="0 0 80 60" fill="currentColor"><circle cx="58" cy="12" r="6"/><circle cx="22" cy="48" r="6"/><path d="M26 30l22-22 6 6-22 22zM14 42l22-22 6 6-22 22z" transform="translate(8 4)"/></svg></span>
+          <span class="logos__item"><svg viewBox="0 0 80 60" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"><path d="M4 54L28 12l24 42zM30 54l18-30 22 30z"/></svg></span>
+          <span class="logos__item"><svg viewBox="0 0 80 60" fill="currentColor"><path d="M8 6c18 0 26 8 26 26S26 52 8 52zM38 6h10v24l22 4C66 46 52 54 38 54z"/></svg></span>
+          <span class="logos__item"><svg viewBox="0 0 80 60" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"><path d="M24 54V8h24c10 0 14 6 14 13s-4 13-14 13H24M40 34l22 20M32 54V16h14c5 0 8 3 8 6s-3 6-8 6"/></svg></span>
+          <span class="logos__item"><svg viewBox="0 0 80 60" fill="currentColor"><path d="M14 40L44 8l-4 24 18 6-8 16-24-6z"/><ellipse cx="46" cy="32" rx="26" ry="9" fill="none" stroke="currentColor" stroke-width="3" transform="rotate(-18 46 32)"/></svg></span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ STATEMENT ============ -->
+  <section class="statement" aria-label="Agency statement">
+    <blockquote class="statement__quote" data-statement>
+      <span class="chip chip--blue" data-tilt="-3"><span class="outline outline--lime">&ldquo;We are dreamers,</span></span>
+      builders, and, storytellers<br>
+      dedicated to knowing
+      <span class="pic"><img src="assets/statement-1.svg" alt="" loading="lazy"></span>
+      each brand&rsquo;s<br>
+      unique
+      <span class="pic pic--wide"><img src="assets/statement-2.svg" alt="" loading="lazy"></span>
+      voice.
+      <span class="outline outline--white">We step into</span><br>
+      <span class="outline outline--white">your world,</span>
+      mixing strategy with
+      <span class="pop" data-tilt="3">creativity</span>
+      to<br>
+      <span class="chip chip--lime" data-tilt="0"><span class="outline outline--dark">grow brands</span></span>
+      that don&rsquo;t just exist but thrive in the<br>
+      hearts of their
+      <a class="outline outline--lime tilt" data-tilt="-5" href="#">audiences.&rdquo;</a>
+    </blockquote>
+    <p class="statement__sign">
+      <svg viewBox="0 0 100 100" aria-hidden="true"><use href="#star"/></svg>
+      <span>Growwth Garden Creative Agency &reg;</span>
+    </p>
+  </section>
+
+  <!-- ============ TEAM ============ -->
+  <section class="team" id="team">
+    <div class="about__noise" aria-hidden="true"></div>
+    <div class="container team__grid">
+      <div class="team__copy" data-team-reveal>
+        <p class="eyebrow eyebrow--dark"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#star"/></svg><span>Meet the expert</span></p>
+        <h2 class="team__title">Team of expert</h2>
+        <p class="about__text">Lorem ipsum odor amet, consectetuer adipiscing elit. Congue aptent placerat neque senectus amet cras efficitur. Aptent malesuada sit conubia tincidunt iaculis faucibus Arcu et aliquet ad.</p>
+        <ul class="team__stats">
+          <li><span class="team__num"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#star"/></svg><b data-count="300">300</b><i>+</i></span><span class="team__label">Successful project</span></li>
+          <li><span class="team__num"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#star"/></svg><b data-count="200">200</b><i>+</i></span><span class="team__label">Brand grow globally</span></li>
+        </ul>
+      </div>
+      <div class="team__panels" data-team-reveal>
+        <article class="team__card" tabindex="0">
+          <img src="assets/team-1.svg" alt="Maya Reyes, Creative Director" loading="lazy">
+          <div class="team__info"><h3>Maya Reyes</h3><p>Creative Director</p></div>
+        </article>
+        <article class="team__card is-open" tabindex="0">
+          <img src="assets/team-2.svg" alt="Liam Brooks, Art Director" loading="lazy">
+          <div class="team__info"><h3>Liam Brooks</h3><p>Art Director</p></div>
+        </article>
+        <article class="team__card" tabindex="0">
+          <img src="assets/team-3.svg" alt="Emma Hart, Digital Strategist" loading="lazy">
+          <div class="team__info"><h3>Emma Hart</h3><p>Digital Strategist</p></div>
+        </article>
+        <article class="team__card" tabindex="0">
+          <img src="assets/team-4.svg" alt="Noah Kim, UI/UX Designer" loading="lazy">
+          <div class="team__info"><h3>Noah Kim</h3><p>UI/UX Designer</p></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA ============ -->
+  <section class="cta" id="contact" aria-label="Contact call to action">
+    <img class="cta__bg" src="assets/cta-bg.svg" alt="" loading="lazy">
+    <div class="container cta__wrap">
+      <div class="cta__card">
+        <h2 class="cta__title">Let&rsquo;s create something extraordinary together.</h2>
+        <a class="btn btn--sm cta__btn" href="mailto:hello@growwthgarden.com"><span>Contact Us</span></a>
+
+        <div class="cta__badge" aria-hidden="true">
+          <svg class="cta__ring" viewBox="0 0 500 500">
+            <defs><path id="ringPath" d="M250 250m-205 0a205 205 0 1 1 410 0a205 205 0 1 1-410 0"/></defs>
+            <text fill="currentColor"><textPath href="#ringPath" startOffset="0">Branding * Graphic Design * Web Design * Digital Marketing * Social Media Management * Video Production * </textPath></text>
+          </svg>
+          <svg class="cta__emblem" viewBox="0 0 500 500">
+            <path fill="currentColor" d="M250 112C257 150 262 188 286 232L214 232C238 188 243 150 250 112zM62 318C140 316 205 290 250 244 295 290 360 316 438 318 404 366 340 392 250 392 160 392 96 366 62 318zM96 252C140 262 176 288 190 318 150 322 114 300 96 252zM404 252C360 262 324 288 310 318 350 322 386 300 404 252z"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- shared 4-point star -->
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">

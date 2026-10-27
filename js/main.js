@@ -16,6 +16,7 @@
   document.fonts.ready.then(fitHeadline);
   window.addEventListener('resize', fitHeadline);
 
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (!window.gsap) return;
   gsap.registerPlugin(ScrollTrigger);
 
@@ -37,7 +38,6 @@
   });
 
   /* ---------- load-in timeline ---------- */
-  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (!reduce) {
     const tl = gsap.timeline({ defaults: { ease: 'power4.out' }, delay: .15 });
     tl.from('.header', { y: -40, autoAlpha: 0, duration: .9 })
@@ -52,5 +52,79 @@
       const o = { v: 0 };
       gsap.to(o, { v: +el.dataset.count, duration: 2, delay: .9, ease: 'power2.out', onUpdate: () => (el.textContent = Math.round(o.v)) });
     });
+  }
+  /* ---------- services: reveal on scroll (fadeInUp, 200ms stagger like the original) ---------- */
+  if (!reduce) {
+    const reveal = (targets, vars, trigger) =>
+      gsap.from(targets, { y: 50, autoAlpha: 0, duration: .9, ease: 'power3.out', ...vars, scrollTrigger: { trigger, start: 'top 85%', once: true } });
+    reveal('.services__head > *', { stagger: .15 }, '.services__head');
+    document.querySelectorAll('.card').forEach((card, i) => reveal(card, { delay: i * .2, clearProps: 'all' }, '.cards'));
+  }
+  /* ---------- who we are: reveal, skill bars, logo carousel ---------- */
+  const logosTrack = document.querySelector('.logos__track');
+  if (logosTrack) {
+    const items = [...logosTrack.children];
+    items.forEach(n => logosTrack.appendChild(n.cloneNode(true)));      // 16 slides, 8 visible
+    const step = () => items[0].getBoundingClientRect().width + parseFloat(getComputedStyle(items[0]).marginRight);
+    const slide = gsap.to(logosTrack, {
+      x: () => -step(), duration: 1, ease: 'power2.inOut', repeat: -1, repeatDelay: 1.5,
+      onRepeat: () => { logosTrack.appendChild(logosTrack.firstElementChild); gsap.set(logosTrack, { x: 0 }); },
+    });
+    const strip = document.querySelector('.logos');
+    strip.addEventListener('mouseenter', () => slide.pause());
+    strip.addEventListener('mouseleave', () => slide.resume());
+  }
+
+  const skillBars = document.querySelectorAll('.skills__bar');
+  if (!reduce) {
+    const dir = { left: { x: -60 }, right: { x: 60 }, up: { y: 60 } };
+    document.querySelectorAll('[data-reveal]').forEach((el, i) => {
+      gsap.from(el, { ...dir[el.dataset.reveal], autoAlpha: 0, duration: 1, delay: i * .15, ease: 'power3.out', clearProps: 'all',
+        scrollTrigger: { trigger: '.about', start: 'top 70%', once: true } });
+    });
+    skillBars.forEach((bar, i) => {
+      const num = bar.closest('li').querySelector('b');
+      const o = { v: 0 };
+      gsap.to(bar, { width: bar.dataset.to + '%', duration: 1.6, delay: .4 + i * .15, ease: 'power2.out', scrollTrigger: { trigger: '.skills', start: 'top 85%', once: true } });
+      gsap.to(o, { v: +bar.dataset.to, duration: 1.6, delay: .4 + i * .15, ease: 'power2.out', onUpdate: () => (num.textContent = Math.round(o.v) + '%'), scrollTrigger: { trigger: '.skills', start: 'top 85%', once: true } });
+    });
+  } else {
+    skillBars.forEach(bar => (bar.style.width = bar.dataset.to + '%'));
+  }
+  /* ---------- statement: tilted chips straighten on hover, lines reveal on scroll ---------- */
+  document.querySelectorAll('[data-tilt]').forEach(el => {
+    const r = +el.dataset.tilt;
+    el.style.setProperty('--r', r);
+    const hoverR = r === 0 ? -2 : 0;               // resting-straight chip tilts on hover; tilted ones straighten
+    el.addEventListener('mouseenter', () => el.style.setProperty('--r', hoverR));
+    el.addEventListener('mouseleave', () => el.style.setProperty('--r', r));
+  });
+  if (!reduce) {
+    gsap.from('.statement__quote', { y: 60, autoAlpha: 0, duration: 1.1, ease: 'power3.out', clearProps: 'opacity,visibility,transform',
+      scrollTrigger: { trigger: '.statement', start: 'top 70%', once: true } });
+    gsap.from('.statement__sign', { y: 30, autoAlpha: 0, duration: .9, delay: .3, ease: 'power3.out',
+      scrollTrigger: { trigger: '.statement', start: 'top 60%', once: true } });
+  }
+  /* ---------- team accordion ---------- */
+  if (!reduce) {
+    gsap.from('[data-team-reveal]', { y: 50, autoAlpha: 0, duration: 1, stagger: .2, ease: 'power3.out', clearProps: 'all',
+      scrollTrigger: { trigger: '.team', start: 'top 70%', once: true } });
+    document.querySelectorAll('.team [data-count]').forEach(el => {
+      const o = { v: Math.round(+el.dataset.count * .9) };
+      gsap.to(o, { v: +el.dataset.count, duration: 2, ease: 'power2.out', onUpdate: () => (el.textContent = Math.round(o.v)),
+        scrollTrigger: { trigger: '.team', start: 'top 70%', once: true } });
+    });
+  }
+  const cards = [...document.querySelectorAll('.team__card')];
+  const rest = cards.findIndex(c => c.classList.contains('is-open'));
+  const open = i => cards.forEach((c, k) => c.classList.toggle('is-open', k === i));
+  cards.forEach((c, i) => { c.addEventListener('mouseenter', () => open(i)); c.addEventListener('focus', () => open(i)); });
+  document.querySelector('.team__panels').addEventListener('mouseleave', () => open(rest));
+  /* ---------- cta: ring text turns with scroll (Lottie data-on-scroll in the original) ---------- */
+  if (!reduce) {
+    gsap.to('.cta__ring', { rotation: 360, ease: 'none', transformOrigin: '50% 50%',
+      scrollTrigger: { trigger: '.cta', start: 'top bottom', end: 'bottom top', scrub: .6 } });
+    gsap.from('.cta__card', { y: 60, autoAlpha: 0, duration: 1, ease: 'power3.out', clearProps: 'all',
+      scrollTrigger: { trigger: '.cta', start: 'top 65%', once: true } });
   }
 })();
