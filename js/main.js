@@ -6,15 +6,27 @@
 
   /* Fit the headline to the 1280px design: "CREATIVE" spans 710 design-px. */
   function fitHeadline() {
-    const u = window.innerWidth <= 900 ? window.innerWidth / 760 : window.innerWidth / 1280;
+    const w1 = innerWidth;
     const probe = lines1[0];
     probe.style.fontSize = '100px';
     const w = probe.getBoundingClientRect().width;
-    const size = (710 * u) / w * 100;
+    /* phones/tablets: "CREATIVE" spans the content width; desktop: 710 design-px */
+    const target = w1 <= 900 ? document.querySelector('.hero__inner').offsetWidth : 710 * (w1 <= 1100 ? w1 / 1100 : w1 / 1280);
+    const size = target / w * 100;
     document.querySelectorAll('.headline__line').forEach(el => (el.style.fontSize = size + 'px'));
+    root.style.setProperty('--hl', size + 'px');
   }
   document.fonts.ready.then(fitHeadline);
   window.addEventListener('resize', fitHeadline);
+
+  /* mobile menu */
+  const menu = document.querySelector('.menu'), navEl = document.querySelector('.nav');
+  menu.addEventListener('click', () => {
+    const open = menu.classList.toggle('is-open');
+    navEl.classList.toggle('is-open', open);
+    menu.setAttribute('aria-expanded', open);
+  });
+  navEl.addEventListener('click', e => { if (e.target.closest('a')) { menu.classList.remove('is-open'); navEl.classList.remove('is-open'); menu.setAttribute('aria-expanded', false); } });
 
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (!window.gsap) return;
