@@ -131,15 +131,15 @@
       scrollTrigger: { trigger: '.process__head', start: 'top 85%', once: true } });
   }
   /* ---------- testimonials: looping carousel, 2 per view, one slide every few seconds (Swiper in the original) ---------- */
-  const track = document.querySelector('.testi__track');
-  if (track && !reduce) {
-    const step = () => track.children[0].getBoundingClientRect().width + parseFloat(getComputedStyle(track).columnGap || 0);
+  const tTrack = document.querySelector('.testi__track');
+  if (tTrack && !reduce) {
+    const step = () => tTrack.children[0].getBoundingClientRect().width + parseFloat(getComputedStyle(tTrack).columnGap || 0);
     let paused = false;
     const next = () => {
       if (paused || document.hidden) return;
-      gsap.to(track, { x: -step(), duration: 1, ease: 'power2.inOut', onComplete: () => { track.appendChild(track.children[0]); gsap.set(track, { x: 0 }); } });
+      gsap.to(tTrack, { x: -step(), duration: 1, ease: 'power2.inOut', onComplete: () => { tTrack.appendChild(tTrack.children[0]); gsap.set(tTrack, { x: 0 }); } });
     };
-    setInterval(() => { if (!gsap.isTweening(track)) next(); }, 3500);
+    setInterval(() => { if (!gsap.isTweening(tTrack)) next(); }, 3500);
     const slider = document.querySelector('.testi__slider');
     slider.addEventListener('mouseenter', () => (paused = true));
     slider.addEventListener('mouseleave', () => (paused = false));
