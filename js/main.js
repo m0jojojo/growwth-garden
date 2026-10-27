@@ -58,7 +58,7 @@
     const reveal = (targets, vars, trigger) =>
       gsap.from(targets, { y: 50, autoAlpha: 0, duration: .9, ease: 'power3.out', ...vars, scrollTrigger: { trigger, start: 'top 85%', once: true } });
     reveal('.services__head > *', { stagger: .15 }, '.services__head');
-    document.querySelectorAll('.card').forEach((card, i) => reveal(card, { delay: i * .2, clearProps: 'all' }, '.cards'));
+    document.querySelectorAll('.card').forEach((card, i) => reveal(card, { y: 230, duration: .5, delay: i * .09, ease: 'power3.out', clearProps: 'all' }, '.cards'));
   }
   /* ---------- who we are: reveal, skill bars, logo carousel ---------- */
   const logosTrack = document.querySelector('.logos__track');
@@ -120,10 +120,55 @@
   const open = i => cards.forEach((c, k) => c.classList.toggle('is-open', k === i));
   cards.forEach((c, i) => { c.addEventListener('mouseenter', () => open(i)); c.addEventListener('focus', () => open(i)); });
   document.querySelector('.team__panels').addEventListener('mouseleave', () => open(rest));
-  /* ---------- cta: ring text turns with scroll (Lottie data-on-scroll in the original) ---------- */
+  /* ---------- process: cards rise, their titles slide in from the left ---------- */
   if (!reduce) {
-    gsap.to('.cta__ring', { rotation: 360, ease: 'none', transformOrigin: '50% 50%',
-      scrollTrigger: { trigger: '.cta', start: 'top bottom', end: 'bottom top', scrub: .6 } });
+    document.querySelectorAll('.step').forEach((step, i) => {
+      const st = { trigger: '.steps', start: 'top 85%', once: true };
+      gsap.from(step, { y: 40, autoAlpha: 0, duration: .8, delay: i * .12, ease: 'power3.out', clearProps: 'all', scrollTrigger: st });
+      gsap.from(step.querySelector('.step__title span'), { xPercent: -40, autoAlpha: 0, duration: 1, delay: .3 + i * .12, ease: 'power3.out', clearProps: 'all', scrollTrigger: st });
+    });
+    gsap.from('.process__head > *', { y: 40, autoAlpha: 0, duration: .9, stagger: .15, ease: 'power3.out', clearProps: 'all',
+      scrollTrigger: { trigger: '.process__head', start: 'top 85%', once: true } });
+  }
+  /* ---------- testimonials: looping carousel, 2 per view, one slide every few seconds (Swiper in the original) ---------- */
+  const track = document.querySelector('.testi__track');
+  if (track && !reduce) {
+    const step = () => track.children[0].getBoundingClientRect().width + parseFloat(getComputedStyle(track).columnGap || 0);
+    let paused = false;
+    const next = () => {
+      if (paused || document.hidden) return;
+      gsap.to(track, { x: -step(), duration: 1, ease: 'power2.inOut', onComplete: () => { track.appendChild(track.children[0]); gsap.set(track, { x: 0 }); } });
+    };
+    setInterval(() => { if (!gsap.isTweening(track)) next(); }, 3500);
+    const slider = document.querySelector('.testi__slider');
+    slider.addEventListener('mouseenter', () => (paused = true));
+    slider.addEventListener('mouseleave', () => (paused = false));
+    gsap.from('.testi__head > *', { y: 40, autoAlpha: 0, duration: .9, stagger: .15, ease: 'power3.out', clearProps: 'all',
+      scrollTrigger: { trigger: '.testi', start: 'top 70%', once: true } });
+    gsap.from('.tcard', { y: 60, autoAlpha: 0, duration: 1, stagger: .15, ease: 'power3.out', clearProps: 'all',
+      scrollTrigger: { trigger: '.testi__slider', start: 'top 90%', once: true } });
+  }
+  /* ---------- blog: heading and posts fade up ---------- */
+  if (!reduce) {
+    gsap.from('.blog__head > *', { y: 50, autoAlpha: 0, duration: .9, stagger: .15, ease: 'power3.out', clearProps: 'all',
+      scrollTrigger: { trigger: '.blog__head', start: 'top 85%', once: true } });
+    document.querySelectorAll('.post').forEach((post, i) =>
+      gsap.from(post, { y: 60, autoAlpha: 0, duration: .9, delay: i * .15, ease: 'power3.out', clearProps: 'all',
+        scrollTrigger: { trigger: '.posts', start: 'top 85%', once: true } }));
+  }
+  /* ---------- newsletter: card rises, copy slides in from the left, star keeps turning ---------- */
+  if (!reduce) {
+    const nst = { trigger: '.news', start: 'top 85%', once: true };
+    gsap.from('.news', { y: 60, autoAlpha: 0, duration: .9, ease: 'power3.out', clearProps: 'all', scrollTrigger: nst });
+    gsap.from('.news__body > *', { xPercent: -8, autoAlpha: 0, duration: 1, delay: .25, stagger: .12, ease: 'power3.out', clearProps: 'all', scrollTrigger: nst });
+    gsap.to('.news__star', { rotation: 360, duration: 24, ease: 'none', repeat: -1, transformOrigin: '50% 50%' });
+    gsap.from('.footer__grid > *', { y: 40, autoAlpha: 0, duration: .9, stagger: .12, ease: 'power3.out', clearProps: 'all',
+      scrollTrigger: { trigger: '.footer', start: 'top 85%', once: true } });
+  }
+  /* ---------- cta: ring text turns non-stop (Lottie autoplay + loop in the original) ---------- */
+  if (!reduce) {
+    gsap.to('.cta__ring', { rotation: 360, duration: 18, ease: 'none', repeat: -1, transformOrigin: '50% 50%' });
+    gsap.to('.cta__emblem', { rotation: -360, duration: 26, ease: 'none', repeat: -1, transformOrigin: '50% 50%' });
     gsap.from('.cta__card', { y: 60, autoAlpha: 0, duration: 1, ease: 'power3.out', clearProps: 'all',
       scrollTrigger: { trigger: '.cta', start: 'top 65%', once: true } });
   }
