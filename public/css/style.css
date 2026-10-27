@@ -250,7 +250,7 @@ a.outline { display: inline-block; }
 
 .pic { display: inline-block; width: calc(var(--u) * 100); height: calc(var(--u) * 38); margin: 0 calc(var(--u) * 6); border-radius: 99px; overflow: hidden; vertical-align: middle; transform: translateY(calc(var(--u) * -3)); }
 .pic--wide { width: calc(var(--u) * 164); }
-.pic img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.pic img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 45%; display: block; }
 
 .statement__sign { display: inline-flex; align-items: center; gap: calc(var(--u) * 12); margin-top: calc(var(--u) * 54); font-family: var(--font-display); font-size: calc(var(--u) * 13); text-transform: uppercase; }
 .statement__sign svg { width: calc(var(--u) * 22); height: calc(var(--u) * 22); color: var(--lime); }
@@ -271,9 +271,9 @@ a.outline { display: inline-block; }
 .team__label { margin-top: calc(var(--u) * 14); font-family: var(--font-display); font-size: calc(var(--u) * 15); text-transform: uppercase; }
 
 .team__panels { display: flex; gap: calc(var(--u) * 15); height: calc(var(--u) * 410); }
-.team__card { position: relative; flex: 0 0 calc(var(--u) * 87); overflow: hidden; cursor: pointer; transition: flex-basis .6s cubic-bezier(.65,0,.25,1); background: #bbb; outline: none; }
-.team__card.is-open { flex-basis: calc(var(--u) * 260); }
-.team__card img { position: absolute; top: 0; left: 50%; height: 100%; width: calc(var(--u) * 260); max-width: none; object-fit: cover; transform: translateX(-50%); }
+.team__card { position: relative; flex: 1 1 0; min-width: 0; overflow: hidden; cursor: pointer; transition: flex-grow .6s cubic-bezier(.65,0,.25,1); background: #bbb; outline: none; }
+.team__card.is-open { flex-grow: 2.5; }
+.team__card img { position: absolute; top: 0; left: 50%; height: 100%; width: calc(var(--u) * 400); max-width: none; object-fit: cover; transform: translateX(-50%); }
 .team__info { position: absolute; left: 0; right: 0; bottom: 0; padding: calc(var(--u) * 60) calc(var(--u) * 15) calc(var(--u) * 14); background: linear-gradient(to top, #000 8%, rgba(0,0,0,0)); opacity: 0; transition: opacity .35s; }
 .team__card.is-open .team__info { opacity: 1; transition-delay: .25s; }
 .team__info h3 { font-family: var(--font-display); font-weight: 400; font-size: calc(var(--u) * 24); line-height: 1.2; text-transform: uppercase; color: #fff; white-space: nowrap; }
@@ -388,9 +388,9 @@ a.outline { display: inline-block; }
 .cta__title { position: relative; z-index: 2; font-family: var(--font-display); font-weight: 400; font-size: calc(var(--u) * 55.5); line-height: 1.13; text-transform: uppercase; max-width: calc(var(--u) * 550); }
 .cta__btn { position: absolute; z-index: 2; left: calc(var(--u) * 30); bottom: calc(var(--u) * 30); margin: 0; }
 
-.cta__badge { position: absolute; z-index: 1; right: calc(var(--u) * -70); bottom: calc(var(--u) * -190); width: calc(var(--u) * 380); height: calc(var(--u) * 380); color: var(--lime); }
+.cta__badge { position: absolute; z-index: 1; right: calc(var(--u) * -27); bottom: calc(var(--u) * -169); width: calc(var(--u) * 354); height: calc(var(--u) * 354); color: var(--lime); }
 .cta__badge svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
-.cta__ring text { font-family: var(--font-display); font-size: 40px; text-transform: uppercase; letter-spacing: 1px; }
+.cta__ring text { font-family: var(--font-display); font-size: 46px; text-transform: uppercase; }
 .cta__ring, .cta__emblem { transform-origin: 50% 50%; will-change: transform; }
 
 /* ---------- responsive ---------- */
@@ -481,8 +481,7 @@ a.outline { display: inline-block; }
   .team__copy .about__text { font-size: 14px; }
   .team__stats { padding-left: 44px; gap: 64px; }
   .team__panels { height: 360px; gap: 8px; }
-  .team__card { flex-basis: 48px; } .team__card.is-open { flex-basis: 170px; }
-  .team__card img { width: 170px; }
+  .team__card img { width: calc(100vw - 32px); }
 
   .cta { padding: 12px 0; }
   .cta__wrap { height: auto; padding: 40px 0; justify-content: center; }
