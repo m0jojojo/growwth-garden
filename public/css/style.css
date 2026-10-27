@@ -94,9 +94,9 @@ ul { list-style: none; }
 .headline__layer--outline { z-index: 3; color: transparent; -webkit-text-stroke: calc(var(--u) * 1.5) var(--lime); }
 
 .hero__person {
-  position: absolute; z-index: 2; left: calc(var(--u) * 211); top: calc(var(--u) * -26);
-  width: calc(var(--u) * 580); height: auto; will-change: transform;
-  clip-path: inset(0 0 calc(var(--u) * 82) 0); /* cut at the hero edge, under the marquee */
+  position: absolute; z-index: 2; left: calc(var(--u) * 183); top: calc(var(--u) * 83);
+  width: calc(var(--u) * 636); height: auto; will-change: transform;
+  clip-path: inset(0 0 0 0); /* image ends under the marquee */
 }
 
 /* ---------- right column ---------- */
