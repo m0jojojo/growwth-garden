@@ -16,8 +16,16 @@
     document.querySelectorAll('.headline__line').forEach(el => (el.style.fontSize = size + 'px'));
     root.style.setProperty('--hl', size + 'px');
   }
-  document.fonts.ready.then(fitHeadline);
-  window.addEventListener('resize', fitHeadline);
+  /* re-fit once Anton has really loaded (fonts.ready can resolve early), on load, and on width changes only */
+  fitHeadline();
+  if (document.fonts) {
+    document.fonts.load('100px Anton', 'CREATIVE').then(fitHeadline);
+    document.fonts.ready.then(fitHeadline);
+    document.fonts.addEventListener && document.fonts.addEventListener('loadingdone', fitHeadline);
+  }
+  window.addEventListener('load', fitHeadline);
+  let lastW = innerWidth;
+  window.addEventListener('resize', () => { if (innerWidth !== lastW) { lastW = innerWidth; fitHeadline(); } });
 
   /* mobile menu */
   const menu = document.querySelector('.menu'), navEl = document.querySelector('.nav');

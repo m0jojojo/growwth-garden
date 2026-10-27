@@ -425,8 +425,9 @@ a.outline { display: inline-block; }
   .hero { height: auto; padding-bottom: 60px; }
   .hero__inner { position: relative; height: auto; padding-top: calc(min(80vw, 460px) * 1.49 + 84px); }
   .headline { z-index: 2; }
-  .headline__line--1 { top: calc(var(--hl, 110px) * .98); left: 0; }
-  .headline__line--2 { top: calc(var(--hl, 110px) * 1.98); left: 8%; }
+  .headline__line { font-size: calc(min(100vw - 32px, 720px) / 3.2); }
+  .headline__line--1 { top: calc(var(--hl, min(100vw - 32px, 720px) / 3.2) * .98); left: 0; }
+  .headline__line--2 { top: calc(var(--hl, min(100vw - 32px, 720px) / 3.2) * 1.98); left: 8%; }
   .hero__person { width: min(80vw, 460px); left: 50%; margin-left: calc(min(80vw, 460px) / -2 + 8px); top: 56px; clip-path: none; -webkit-mask-image: linear-gradient(#000 82%, transparent); mask-image: linear-gradient(#000 82%, transparent); }
   .hero__badge { display: none; }
   .hero__left, .hero__right { position: static; width: auto; }
