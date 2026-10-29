@@ -7,9 +7,14 @@
   /* Fit the headline to the 1280px design: "CREATIVE" spans 710 design-px. */
   function fitHeadline() {
     const w1 = innerWidth;
-    const probe = lines1[0];
-    probe.style.fontSize = '100px';
+    /* measure the original "CREATIVE" word so the font size (and every ratio) stays unchanged for any headline text */
+    const probe = document.createElement('span');
+    probe.className = 'headline__line';
+    probe.style.cssText = 'visibility:hidden;font-size:100px';
+    probe.textContent = 'CREATIVE';
+    document.body.appendChild(probe);
     const w = probe.getBoundingClientRect().width;
+    probe.remove();
     /* phones/tablets: "CREATIVE" spans the content width; desktop: 710 design-px */
     const target = w1 <= 900 ? document.querySelector('.hero__inner').offsetWidth : 710 * (w1 <= 1100 ? w1 / 1100 : w1 / 1280);
     const size = target / w * 100;
@@ -40,13 +45,27 @@
   if (!window.gsap) return;
   gsap.registerPlugin(ScrollTrigger);
 
+  /* ---------- service tags: highlight one pill at a time per card, hover takes over ---------- */
+  document.querySelectorAll('.card__tags').forEach(list => {
+    const tags = [...list.children].filter(li => !li.classList.contains('card__break'));
+    let cur = 0, hovering = false;
+    const show = i => tags.forEach((t, k) => t.classList.toggle('is-active', k === i));
+    show(cur);
+    tags.forEach((t, i) => {
+      t.addEventListener('mouseenter', () => { hovering = true; cur = i; show(i); });
+      t.addEventListener('mouseleave', () => { hovering = false; });
+    });
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches)
+      setInterval(() => { if (!hovering) { cur = (cur + 1) % tags.length; show(cur); } }, 2200);
+  });
+
   /* ---------- marquee: seamless loop ---------- */
   const track = document.querySelector('.marquee__track');
   const group = track.querySelector('.marquee__group');
   const copies = Math.ceil((window.innerWidth * 1.1) / group.offsetWidth) + 1;
   for (let i = 0; i < copies; i++) track.appendChild(group.cloneNode(true));
   const loop = gsap.to(track, {
-    x: () => -group.offsetWidth, duration: 22, ease: 'none', repeat: -1,
+    x: () => -group.offsetWidth, duration: 15, ease: 'none', repeat: -1,
     modifiers: { x: gsap.utils.unitize(x => parseFloat(x) % group.offsetWidth) },
   });
   /* scroll speeds the marquee up a touch, direction-aware */
@@ -65,7 +84,7 @@
       .from('.headline__line--2 span', { xPercent: 110, duration: 1.3 }, .1)
       .from('.hero__person', { xPercent: 40, autoAlpha: 0, duration: 1.3 }, .2)
       .from('.hero__left > *', { y: 30, autoAlpha: 0, duration: .9, stagger: .15 }, .6)
-      .from('.hero__right > *, .hero__badge', { y: 30, autoAlpha: 0, duration: .9, stagger: .12 }, .7)
+      .from('.hero__right > *', { y: 30, autoAlpha: 0, duration: .9, stagger: .12 }, .7)
       .from('.marquee', { yPercent: 100, duration: 1 }, .5);
 
     document.querySelectorAll('[data-count]').forEach(el => {
@@ -111,35 +130,6 @@
   } else {
     skillBars.forEach(bar => (bar.style.width = bar.dataset.to + '%'));
   }
-  /* ---------- statement: tilted chips straighten on hover, lines reveal on scroll ---------- */
-  document.querySelectorAll('[data-tilt]').forEach(el => {
-    const r = +el.dataset.tilt;
-    el.style.setProperty('--r', r);
-    const hoverR = r === 0 ? -2 : 0;               // resting-straight chip tilts on hover; tilted ones straighten
-    el.addEventListener('mouseenter', () => el.style.setProperty('--r', hoverR));
-    el.addEventListener('mouseleave', () => el.style.setProperty('--r', r));
-  });
-  if (!reduce) {
-    gsap.from('.statement__quote', { y: 60, autoAlpha: 0, duration: 1.1, ease: 'power3.out', clearProps: 'opacity,visibility,transform',
-      scrollTrigger: { trigger: '.statement', start: 'top 70%', once: true } });
-    gsap.from('.statement__sign', { y: 30, autoAlpha: 0, duration: .9, delay: .3, ease: 'power3.out',
-      scrollTrigger: { trigger: '.statement', start: 'top 60%', once: true } });
-  }
-  /* ---------- team accordion ---------- */
-  if (!reduce) {
-    gsap.from('[data-team-reveal]', { y: 50, autoAlpha: 0, duration: 1, stagger: .2, ease: 'power3.out', clearProps: 'all',
-      scrollTrigger: { trigger: '.team', start: 'top 70%', once: true } });
-    document.querySelectorAll('.team [data-count]').forEach(el => {
-      const o = { v: Math.round(+el.dataset.count * .9) };
-      gsap.to(o, { v: +el.dataset.count, duration: 2, ease: 'power2.out', onUpdate: () => (el.textContent = Math.round(o.v)),
-        scrollTrigger: { trigger: '.team', start: 'top 70%', once: true } });
-    });
-  }
-  const cards = [...document.querySelectorAll('.team__card')];
-  const rest = cards.findIndex(c => c.classList.contains('is-open'));
-  const open = i => cards.forEach((c, k) => c.classList.toggle('is-open', k === i));
-  cards.forEach((c, i) => { c.addEventListener('mouseenter', () => open(i)); c.addEventListener('focus', () => open(i)); });
-  document.querySelector('.team__panels').addEventListener('mouseleave', () => open(rest));
   /* ---------- process: cards rise, their titles slide in from the left ---------- */
   if (!reduce) {
     document.querySelectorAll('.step').forEach((step, i) => {
