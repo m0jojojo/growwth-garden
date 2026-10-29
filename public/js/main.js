@@ -7,15 +7,16 @@
   /* Fit the headline to the 1280px design: "CREATIVE" spans 710 design-px. */
   function fitHeadline() {
     const w1 = innerWidth;
-    /* measure the original "CREATIVE" word so the font size (and every ratio) stays unchanged for any headline text */
+    /* desktop: measure the original "CREATIVE" word so the design's font size stays unchanged;
+       phones/tablets: measure the real word so "MARKETING" fits inside the screen */
     const probe = document.createElement('span');
     probe.className = 'headline__line';
     probe.style.cssText = 'visibility:hidden;font-size:100px';
-    probe.textContent = 'CREATIVE';
+    probe.textContent = w1 <= 900 ? 'MARKETING' : 'CREATIVE';
     document.body.appendChild(probe);
     const w = probe.getBoundingClientRect().width;
     probe.remove();
-    /* phones/tablets: "CREATIVE" spans the content width; desktop: 710 design-px */
+    /* phones/tablets: the headline word spans the content width; desktop: 710 design-px */
     const target = w1 <= 900 ? document.querySelector('.hero__inner').offsetWidth : 710 * (w1 <= 1100 ? w1 / 1100 : w1 / 1280);
     const size = target / w * 100;
     document.querySelectorAll('.headline__line').forEach(el => (el.style.fontSize = size + 'px'));
