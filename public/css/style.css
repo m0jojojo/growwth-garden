@@ -490,9 +490,9 @@ a.outline { display: inline-block; }
   .cards { flex-direction: column; margin-top: 36px; gap: 20px; }
   .card, .card--featured { width: 100%; transform: none; }
   .card__title { font-size: 28px; }
-  .card__text { font-size: 16px; }
+  .card__text { font-size: 14px; }
   .card__tags { gap: 7px 6px; }
-  .card__tags li { padding: 7px 13px; font-size: 14px; }
+  .card__tags li { padding: 6px 11px; font-size: 12px; }
   .eyebrow { margin-top: 0; font-size: 15px; }
   .btn--sm { justify-self: start; padding: 11px 18px; font-size: 12px; }
 
