@@ -23,7 +23,7 @@ async function handleContact(request, env, url) {
 
   if (clean(data.website, 200)) return json({ ok: true }); // honeypot: bots fill the hidden field
 
-  const name = clean(data.name, 100), email = clean(data.email, 200), phone = clean(data.phone, 40);
+  const name = clean(data.name, 100), email = clean(data.email, 200), phone = clean(data.phone, 40), country = clean(data.country, 80);
   const subject = clean(data.subject, 150), message = clean(data.message, 5000);
   if (!name || !EMAIL.test(email) || !message) return json({ error: 'Please fill in your name, a valid email and a message.' }, 400);
 
@@ -40,8 +40,8 @@ async function handleContact(request, env, url) {
       to: [env.CONTACT_TO],
       reply_to: email,
       subject: `${subject || 'New website inquiry'} - ${name}`,
-      text: `Name: ${name}\nEmail: ${email}\nTelephone: ${phone || '-'}\nSubject: ${subject || '-'}\n\n${message}`,
-      html: `<p><b>Name:</b> ${esc(name)}<br><b>Email:</b> ${esc(email)}<br><b>Telephone:</b> ${esc(phone || '-')}<br><b>Subject:</b> ${esc(subject || '-')}</p><p style="white-space:pre-wrap">${esc(message)}</p>`,
+      text: `Name: ${name}\nEmail: ${email}\nTelephone: ${phone || '-'}\nCountry: ${country || '-'}\nSubject: ${subject || '-'}\n\n${message}`,
+      html: `<p><b>Name:</b> ${esc(name)}<br><b>Email:</b> ${esc(email)}<br><b>Telephone:</b> ${esc(phone || '-')}<br><b>Country:</b> ${esc(country || '-')}<br><b>Subject:</b> ${esc(subject || '-')}</p><p style="white-space:pre-wrap">${esc(message)}</p>`,
     }),
   });
 
