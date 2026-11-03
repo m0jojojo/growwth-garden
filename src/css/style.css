@@ -631,6 +631,7 @@ a.outline { display: inline-block; }
 .prose { position: relative; background: #e3e3e3; color: var(--dark); padding: calc(var(--u) * 74) 0 calc(var(--u) * 80); z-index: 1; overflow: hidden; }
 .prose .container { position: relative; max-width: 100%; }
 .prose__lead { max-width: calc(var(--u) * 760); font-size: calc(var(--u) * 17); line-height: 1.6; color: #333; }
+.prose--tight { padding-top: 0; }
 .prose__h { margin-top: calc(var(--u) * 54); font-family: var(--font-display); font-weight: 400; font-size: calc(var(--u) * 37); line-height: 1.1; text-transform: uppercase; }
 .prose p { max-width: calc(var(--u) * 760); margin-top: calc(var(--u) * 14); font-size: calc(var(--u) * 14); line-height: 1.7; color: #4a4a4a; }
 .prose__list { margin-top: calc(var(--u) * 16); display: grid; grid-template-columns: repeat(2, 1fr); gap: calc(var(--u) * 14) calc(var(--u) * 28); max-width: calc(var(--u) * 760); }
@@ -639,6 +640,15 @@ a.outline { display: inline-block; }
 .prose__list b { color: var(--dark); }
 .prose__sub { margin-top: calc(var(--u) * 26); font-family: var(--font-body); font-weight: 600; font-size: calc(var(--u) * 16); line-height: 1.4; color: var(--dark); }
 .prose__sub + p { margin-top: calc(var(--u) * 6); }
+.faq { max-width: calc(var(--u) * 760); border-bottom: 1px solid #c4c4c4; }
+.prose__h + .faq { margin-top: calc(var(--u) * 20); border-top: 1px solid #c4c4c4; }
+.faq summary { display: flex; align-items: center; justify-content: space-between; gap: calc(var(--u) * 20); padding: calc(var(--u) * 16) 0; cursor: pointer; list-style: none; font-weight: 600; font-size: calc(var(--u) * 16); line-height: 1.4; color: var(--dark); }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; flex: none; display: grid; place-items: center; width: calc(var(--u) * 24); height: calc(var(--u) * 24); font-family: var(--font-body); font-weight: 400; font-size: calc(var(--u) * 24); line-height: 1; color: var(--blue); }
+.faq[open] summary::after { content: "\2212"; }
+.faq summary:hover { color: var(--blue); }
+.faq summary:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+.faq p { margin-top: 0; padding-bottom: calc(var(--u) * 18); }
 .prose__cta { margin-top: calc(var(--u) * 54); }
 .prose a:not(.btn) { color: var(--blue); text-decoration: underline; text-underline-offset: 3px; }
 .prose .btn { margin-top: calc(var(--u) * 20); }
@@ -649,5 +659,8 @@ a.outline { display: inline-block; }
   .prose p, .prose__list li { font-size: 15px; }
   .prose__list { grid-template-columns: 1fr; gap: 12px; }
   .prose__sub { margin-top: 22px; font-size: 17px; }
+  .faq summary { padding: 14px 0; font-size: 17px; }
+  .faq summary::after { width: 26px; height: 26px; font-size: 26px; }
+  .faq p { padding-bottom: 16px; }
   .prose__cta { margin-top: 40px; }
 }

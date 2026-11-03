@@ -6,7 +6,7 @@ const ORIGIN = 'https://growwthgarden.com';
 const header = readFileSync('src/partials/header.html', 'utf8');
 const footer = readFileSync('src/partials/footer.html', 'utf8');
 
-const faqHtml = items => items.map(([q, a]) => `<h3 class="prose__sub">${q}</h3>\n      <p>${a}</p>`).join('\n      ');
+const faqHtml = items => items.map(([q, a]) => `<details class="faq">\n        <summary>${q}</summary>\n        <p>${a}</p>\n      </details>`).join('\n      ');
 const faqSchema = items => ({ '@type': 'FAQPage', mainEntity: items.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a.replace(/<[^>]+>/g, '') } })) });
 
 const websitesFaq = [
@@ -271,7 +271,7 @@ for (const p of pages) {
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.min.css?v=5">
+  <link rel="stylesheet" href="/css/style.min.css?v=8">
 </head>
 <body class="page-content">
 
@@ -294,7 +294,7 @@ for (const p of pages) {
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="/js/page.min.js?v=5"></script>
+  <script src="/js/page.min.js?v=8"></script>
 </body>
 </html>
 `;
