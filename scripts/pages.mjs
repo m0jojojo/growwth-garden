@@ -11,7 +11,7 @@ const faqSchema = items => ({ '@type': 'FAQPage', mainEntity: items.map(([q, a])
 
 const websitesFaq = [
   ['What do you build?', 'Business websites, e-commerce stores, mobile and web apps, AI systems and AI automations. Everything is designed around your customers and built to be fast and easy to find on Google.'],
-  ['How long does a website take?', 'Timelines depend on scope. We build lean and move quickly, and many websites go live within days. Larger apps, e-commerce stores and custom AI systems take longer, and we give you a clear timeline before we start.'],
+  ['How long does a website take?', 'Your website and campaigns are typically ready in 7–10 days, with no months of back and forth. Larger apps, e-commerce stores and custom AI systems depend on scope, and we give you a clear timeline before we start.'],
   ['Will my website be SEO-ready?', 'Yes. Every site we build has clean, fast code, mobile-first layouts, unique page titles and descriptions, structured data, a sitemap and clean URLs, so search engines can understand and rank it.'],
   ['What are AI automations?', 'AI automations are workflows that handle repetitive work for you, such as capturing and qualifying leads, replying to common questions and routing inquiries to the right person, so your team spends time on real conversations.'],
   ['Where are you based?', 'Our office is at H.no 1405, Sector 4, Rewari, Haryana, 123401. We work with clients across India and beyond.'],
@@ -221,39 +221,6 @@ const pages = [
       <div class="prose__cta">
         <h2 class="prose__h" style="margin-top:0">Not sure where to start?</h2>
         <p>Tell us about your business and goals and we will recommend the right mix.</p>
-        <a class="btn btn--blue" href="/contact"><span>Talk to our team</span></a>
-      </div>`,
-  },
-  {
-    path: '/about',
-    title: 'About Growwth Garden | Marketing Agency in Rewari, Haryana',
-    description: 'Growwth Garden is a Rewari-based marketing agency combining websites, branding and lead generation so your growth runs as one system.',
-    h1: 'About Us',
-    crumbs: [['Home', '/'], ['About Us']],
-    body: `
-      <p class="prose__lead">Growwth Garden is a marketing agency based in Rewari, Haryana. We turn ideas into viral reels, brands into something people feel, and messages into stories that drive action. Web, branding and revenue, working together.</p>
-
-      <h2 class="prose__h">What we do</h2>
-      <p>Most businesses buy a website from one vendor, a logo from another and ads from a third, and none of it connects. We build the three parts together so each one makes the others work harder.</p>
-      <ul class="prose__list">
-        <li><b><a href="/services/websites-apps-ai">Websites, Apps &amp; AI Systems</a></b> built fast, SEO-ready and wired with automation.</li>
-        <li><b><a href="/services/branding">Branding</a></b> strategy, identity and content so the market knows who you are.</li>
-        <li><b><a href="/services/lead-generation">Lead Generation</a></b> SEO, social, performance marketing and automated follow-up.</li>
-      </ul>
-
-      <h2 class="prose__h">How we work</h2>
-      <ul class="prose__list">
-        <li><b>1. Discover.</b> We start by understanding your vision, your customers and your market.</li>
-        <li><b>2. Design.</b> We craft unique concepts around what your customers respond to.</li>
-        <li><b>3. Develop.</b> We bring the designs to life with clean, fast code and the right channels.</li>
-        <li><b>4. Deliver.</b> We launch with care, then measure and improve.</li>
-      </ul>
-
-      <h2 class="prose__h">Where to find us</h2>
-      <p>H.no 1405, Sector 4, Rewari, Haryana, 123401. Open Monday to Friday, 9:00 AM to 6:00 PM. Call <a href="tel:+919369033958">+91-9369033958</a> or email <a href="mailto:growwthgarden@gmail.com">growwthgarden@gmail.com</a>.</p>
-
-      <div class="prose__cta">
-        <h2 class="prose__h" style="margin-top:0">Ready to grow?</h2>
         <a class="btn btn--blue" href="/contact"><span>Talk to our team</span></a>
       </div>`,
   },
