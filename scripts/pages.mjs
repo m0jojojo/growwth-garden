@@ -304,7 +304,7 @@ for (const p of pages) {
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.min.css?v=4">
+  <link rel="stylesheet" href="/css/style.min.css?v=5">
 </head>
 <body class="page-content">
 
@@ -327,7 +327,7 @@ for (const p of pages) {
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="/js/page.min.js?v=4"></script>
+  <script src="/js/page.min.js?v=5"></script>
 </body>
 </html>
 `;
