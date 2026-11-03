@@ -664,3 +664,5 @@ a.outline { display: inline-block; }
   .faq p { padding-bottom: 16px; }
   .prose__cta { margin-top: 40px; }
 }
+
+.sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }

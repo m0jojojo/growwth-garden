@@ -14,7 +14,7 @@ const websitesFaq = [
   ['How long does a website take?', 'Your website and campaigns are typically ready in 7–10 days, with no months of back and forth. Larger apps, e-commerce stores and custom AI systems depend on scope, and we give you a clear timeline before we start.'],
   ['Will my website be SEO-ready?', 'Yes. Every site we build has clean, fast code, mobile-first layouts, unique page titles and descriptions, structured data, a sitemap and clean URLs, so search engines can understand and rank it.'],
   ['What are AI automations?', 'AI automations are workflows that handle repetitive work for you, such as capturing and qualifying leads, replying to common questions and routing inquiries to the right person, so your team spends time on real conversations.'],
-  ['Where are you based?', 'Our office is at H.no 1405, Sector 4, Rewari, Haryana, 123401. We work with clients across India and beyond.'],
+  ['Where are you based?', 'We are a marketing agency based in Delhi, India, serving clients across India and beyond.'],
 ];
 
 const brandingFaq = [
@@ -37,8 +37,8 @@ const pages = [
   {
     path: '/services/websites-apps-ai',
     nav: '/services',
-    title: 'Website, App & AI Development Services | Growwth Garden',
-    description: 'SEO-ready websites, apps, e-commerce and AI automations built fast and clean by Growwth Garden in Rewari, Haryana. Talk to our team.',
+    title: 'Website, App & AI Development in Delhi | Growwth Garden',
+    description: 'SEO-ready websites, apps, e-commerce and AI automations built fast and clean by Growwth Garden in Delhi. Talk to our team.',
     h1: 'Websites, Apps & AI Systems',
     crumbs: [['Home', '/'], ['Our Services', '/services'], ['Websites, Apps & AI Systems']],
     schema: [
@@ -81,8 +81,8 @@ const pages = [
   {
     path: '/services/branding',
     nav: '/services',
-    title: 'Branding Services: Strategy, Identity & Content | Growwth Garden',
-    description: 'Brand strategy, identity, rebranding and content from Growwth Garden in Rewari, Haryana. Shape a brand the market knows before the ads start.',
+    title: 'Branding Services in Delhi | Growwth Garden',
+    description: 'Brand strategy, identity, rebranding and content from Growwth Garden in Delhi. Shape a brand the market knows before the ads start.',
     h1: 'Branding',
     crumbs: [['Home', '/'], ['Our Services', '/services'], ['Branding']],
     schema: [
@@ -127,8 +127,8 @@ const pages = [
   {
     path: '/services/lead-generation',
     nav: '/services',
-    title: 'Lead Generation: SEO, Social & Performance Marketing | Growwth Garden',
-    description: 'Lead generation from Growwth Garden in Rewari, Haryana: SEO, AEO, GEO, social, performance marketing and automated follow-up.',
+    title: 'Lead Generation in Delhi: SEO, Social & Ads | Growwth Garden',
+    description: 'Lead generation from Growwth Garden in Delhi: SEO, AEO, GEO, social, performance marketing and automated follow-up.',
     h1: 'Lead Generation',
     crumbs: [['Home', '/'], ['Our Services', '/services'], ['Lead Generation']],
     schema: [
@@ -171,8 +171,8 @@ const pages = [
   },
   {
     path: '/services',
-    title: 'Marketing, Website & Branding Services | Growwth Garden',
-    description: 'Websites, apps and AI systems, branding, and lead generation (SEO, social, performance marketing) from Growwth Garden in Rewari, Haryana.',
+    title: 'Marketing, Website & Branding Services in Delhi | Growwth Garden',
+    description: 'Websites, apps and AI systems, branding, and lead generation (SEO, social, performance marketing) from Growwth Garden in Delhi.',
     h1: 'Our Services',
     crumbs: [['Home', '/'], ['Our Services']],
     schema: [
@@ -271,7 +271,7 @@ for (const p of pages) {
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.min.css?v=8">
+  <link rel="stylesheet" href="/css/style.min.css?v=11">
 </head>
 <body class="page-content">
 
@@ -294,7 +294,7 @@ for (const p of pages) {
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="/js/page.min.js?v=8"></script>
+  <script src="/js/page.min.js?v=11"></script>
 </body>
 </html>
 `;
