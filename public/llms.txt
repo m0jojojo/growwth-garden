@@ -1,0 +1,16 @@
+# Growwth Garden
+
+> Growwth Garden is a marketing agency in Delhi, India. We build websites, apps and AI systems, shape brands, and run lead generation (SEO, AEO, GEO, social media, performance marketing) so businesses get more of the right inquiries.
+
+## Services
+
+- [Our Services](https://growwthgarden.com/services): Overview of everything we offer.
+- [Websites, Apps & AI Systems](https://growwthgarden.com/services/websites-apps-ai): SEO-ready websites, apps, e-commerce, AI systems and AI automations.
+- [Branding](https://growwthgarden.com/services/branding): Brand strategy, identity, rebranding, content and communication design.
+- [Lead Generation](https://growwthgarden.com/services/lead-generation): SEO, AEO and GEO, social media, performance and influencer marketing, email and WhatsApp marketing.
+
+## Company
+
+- [Contact](https://growwthgarden.com/contact): Phone +91-9369033958, email growwthgarden@gmail.com, office hours Monday to Friday, 9:00 AM to 6:00 PM.
+- [Privacy Policy](https://growwthgarden.com/privacy-policy)
+- [Terms of Service](https://growwthgarden.com/terms)

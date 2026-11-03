@@ -22,6 +22,7 @@
   <meta name="twitter:description" content="Growwth Garden is a marketing agency in Delhi. We build websites, apps &amp; AI systems, branding and lead generation that grow your business.">
   <meta name="twitter:image" content="https://growwthgarden.com/assets/og-image.jpg">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/logo-512.png">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -31,15 +32,35 @@
         "@id": "https://growwthgarden.com/#organization",
         "name": "Growwth Garden",
         "url": "https://growwthgarden.com/",
-        "logo": "https://growwthgarden.com/favicon.svg",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://growwthgarden.com/logo-512.png",
+          "width": 512,
+          "height": 512
+        },
+        "description": "Marketing agency in Delhi offering websites, apps & AI systems, branding and lead generation.",
         "email": "growwthgarden@gmail.com",
-        "telephone": "+91-9369033958"
-      },,
+        "telephone": "+91-9369033958",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Delhi",
+          "addressRegion": "Delhi",
+          "addressCountry": "IN"
+        },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "customer service",
+          "telephone": "+91-9369033958",
+          "email": "growwthgarden@gmail.com",
+          "areaServed": "IN",
+          "availableLanguage": ["English", "Hindi"]
+        },
         "sameAs": [
           "https://www.instagram.com/growwthgarden/",
           "https://www.linkedin.com/company/the-growwth-garden/",
           "https://www.youtube.com/@GrowwthGarden"
         ]
+      },
       {
         "@type": "ProfessionalService",
         "@id": "https://growwthgarden.com/#localbusiness",
