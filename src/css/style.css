@@ -624,6 +624,8 @@ a.outline { display: inline-block; }
 .prose__list li { padding-left: calc(var(--u) * 18); position: relative; font-size: calc(var(--u) * 14); line-height: 1.5; color: #4a4a4a; }
 .prose__list li::before { content: ""; position: absolute; left: 0; top: .55em; width: calc(var(--u) * 8); height: calc(var(--u) * 8); background: var(--blue); }
 .prose__list b { color: var(--dark); }
+.prose__sub { margin-top: calc(var(--u) * 26); font-family: var(--font-body); font-weight: 600; font-size: calc(var(--u) * 16); line-height: 1.4; color: var(--dark); }
+.prose__sub + p { margin-top: calc(var(--u) * 6); }
 .prose__cta { margin-top: calc(var(--u) * 54); }
 .prose a:not(.btn) { color: var(--blue); text-decoration: underline; text-underline-offset: 3px; }
 .prose .btn { margin-top: calc(var(--u) * 20); }
@@ -633,5 +635,6 @@ a.outline { display: inline-block; }
   .prose__h { margin-top: 40px; font-size: 32px; }
   .prose p, .prose__list li { font-size: 15px; }
   .prose__list { grid-template-columns: 1fr; gap: 12px; }
+  .prose__sub { margin-top: 22px; font-size: 17px; }
   .prose__cta { margin-top: 40px; }
 }
