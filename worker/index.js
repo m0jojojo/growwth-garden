@@ -55,7 +55,20 @@ async function handleContact(request, env, url) {
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
+
+    // one canonical origin: https, no www, no /index.html
+    if (/(^|\.)growwthgarden\.com$/.test(url.hostname) && (url.protocol === 'http:' || url.hostname.startsWith('www.') || url.pathname === '/index.html')) {
+      url.protocol = 'https:';
+      url.hostname = url.hostname.replace(/^www\./, '');
+      if (url.pathname === '/index.html') url.pathname = '/';
+      return Response.redirect(url.toString(), 301);
+    }
+
     if (url.pathname === '/api/contact') return handleContact(request, env, url);
-    return env.ASSETS.fetch(request);
+
+    const res = await env.ASSETS.fetch(request);
+    if (res.status !== 404) return res;
+    const page = await env.ASSETS.fetch(new Request(new URL('/404', url)));
+    return new Response(page.body, { status: 404, headers: page.headers });
   },
 };

@@ -179,7 +179,7 @@ ul { list-style: none; }
 .about { position: relative; background: #e3e3e3; color: var(--dark); padding: calc(var(--u) * 74) 0 calc(var(--u) * 70); z-index: 1; overflow: hidden; }
 .about__noise, .cta::before {
   content: ''; position: absolute; inset: 0; pointer-events: none;
-  background: #e3e3e3 url("../assets/bg-1.jpg") center center / cover fixed;
+  background: #e3e3e3 url("../assets/bg-1.webp") center center / cover fixed;
 }
 .about__grid { position: relative; display: grid; grid-template-columns: calc(var(--u) * 367) calc(var(--u) * 367) calc(var(--u) * 248); column-gap: calc(var(--u) * 5); align-items: start; }
 
