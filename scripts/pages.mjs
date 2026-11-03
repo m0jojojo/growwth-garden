@@ -170,6 +170,103 @@ const pages = [
       </div>`,
   },
   {
+    path: '/privacy-policy',
+    title: 'Privacy Policy | Growwth Garden',
+    description: 'How Growwth Garden collects, uses and protects the personal information you share through our website and contact form.',
+    h1: 'Privacy Policy',
+    crumbs: [['Home', '/'], ['Privacy Policy']],
+    body: `
+      <p class="prose__meta">Last updated: 3 November 2026</p>
+      <p class="prose__lead">This policy explains what personal information Growwth Garden collects through growwthgarden.com, why we collect it and what we do with it. By using the site you agree to this policy.</p>
+
+      <h2 class="prose__h">Who we are</h2>
+      <p>Growwth Garden is a marketing agency based in Delhi, India. You can reach us at <a href="mailto:growwthgarden@gmail.com">growwthgarden@gmail.com</a> or on <a href="tel:+919369033958">+91-9369033958</a>.</p>
+
+      <h2 class="prose__h">Information we collect</h2>
+      <ul class="prose__list">
+        <li><b>Contact form.</b> Your name, email address, telephone number, country, subject and message, which you choose to send us.</li>
+        <li><b>Emails and calls.</b> Any details you share when you email or phone us.</li>
+        <li><b>Technical data.</b> Our hosting provider and the services described below may receive your IP address, browser type and the pages you visit, as part of normal web traffic.</li>
+      </ul>
+
+      <h2 class="prose__h">How we use it</h2>
+      <p>We use your information to reply to your inquiry, understand your business needs, prepare proposals and provide our services. We do not sell your personal information, and we do not use the contact form to send marketing emails unless you ask us to.</p>
+
+      <h2 class="prose__h">Services that handle data</h2>
+      <p>To run this website we rely on trusted providers, and your data may pass through them:</p>
+      <ul class="prose__list">
+        <li><b>Cloudflare.</b> Hosts and delivers the website.</li>
+        <li><b>Resend.</b> Delivers contact form messages to our email inbox.</li>
+        <li><b>Google Fonts and Google Maps.</b> Load fonts and the map on the contact page, so Google may receive your IP address.</li>
+        <li><b>cdnjs.</b> Delivers a script library used for page animations.</li>
+      </ul>
+      <p>If we add analytics or advertising tools, we will update this policy to say so.</p>
+
+      <h2 class="prose__h">How long we keep it</h2>
+      <p>We keep inquiry details for as long as needed to respond to you and manage any resulting work, and for a reasonable period afterwards for our business records. You can ask us to delete your information at any time.</p>
+
+      <h2 class="prose__h">Your rights</h2>
+      <p>You can ask us to tell you what information we hold about you, correct it or delete it. To do so, email us at <a href="mailto:growwthgarden@gmail.com">growwthgarden@gmail.com</a> and we will respond as soon as we reasonably can.</p>
+
+      <h2 class="prose__h">Security</h2>
+      <p>The website is served over HTTPS, and contact form messages are sent to us through an encrypted connection. No method of transmission over the internet is completely secure, so we cannot guarantee absolute security.</p>
+
+      <h2 class="prose__h">Children</h2>
+      <p>Our website and services are not directed at children, and we do not knowingly collect their personal information.</p>
+
+      <h2 class="prose__h">Changes to this policy</h2>
+      <p>We may update this policy from time to time. The date at the top shows when it was last changed.</p>
+
+      <div class="prose__cta">
+        <h2 class="prose__h" style="margin-top:0">Questions about your data?</h2>
+        <p>Get in touch and we will be glad to help.</p>
+        <a class="btn btn--blue" href="/contact"><span>Contact us</span></a>
+      </div>`,
+  },
+  {
+    path: '/terms',
+    title: 'Terms of Service | Growwth Garden',
+    description: 'The terms that apply when you use the Growwth Garden website and when you enquire about our marketing, branding and web services.',
+    h1: 'Terms of Service',
+    crumbs: [['Home', '/'], ['Terms of Service']],
+    body: `
+      <p class="prose__meta">Last updated: 3 November 2026</p>
+      <p class="prose__lead">These terms apply to your use of growwthgarden.com and to inquiries you make through it. By using the site, you agree to them. If you do not agree, please do not use the site.</p>
+
+      <h2 class="prose__h">About us</h2>
+      <p>This website is operated by Growwth Garden, a marketing agency based in Delhi, India. You can contact us at <a href="mailto:growwthgarden@gmail.com">growwthgarden@gmail.com</a>.</p>
+
+      <h2 class="prose__h">Using the website</h2>
+      <p>You may use this site for lawful purposes only. You agree not to misuse it, attempt to interfere with its operation, send spam through the contact form, or try to gain unauthorised access to any part of it.</p>
+
+      <h2 class="prose__h">Our services</h2>
+      <p>Information on this site about our services, including <a href="/services/websites-apps-ai">websites, apps and AI systems</a>, <a href="/services/branding">branding</a> and <a href="/services/lead-generation">lead generation</a>, is for general information and is not a binding offer. Work only begins once we have agreed the scope, timeline and fees with you in writing. Any project is then governed by that agreement.</p>
+
+      <h2 class="prose__h">Timelines and results</h2>
+      <p>We work hard to deliver on the timelines we agree with you. Delivery times depend on scope and on timely input from you, such as content and approvals. Marketing outcomes such as rankings, traffic, leads and sales depend on many factors outside our control, so we cannot guarantee specific results.</p>
+
+      <h2 class="prose__h">Intellectual property</h2>
+      <p>The content on this site, including text, graphics, logos and design, belongs to Growwth Garden or its licensors and is protected by intellectual property laws. You may not copy or reuse it without our written permission. Ownership of work created for a client is set out in the agreement for that project.</p>
+
+      <h2 class="prose__h">Third-party links and services</h2>
+      <p>This site may link to other websites, such as our social profiles, and uses third-party services described in our <a href="/privacy-policy">Privacy Policy</a>. We are not responsible for the content or practices of third parties.</p>
+
+      <h2 class="prose__h">Disclaimer and limitation of liability</h2>
+      <p>The website is provided on an &ldquo;as is&rdquo; basis. We do not promise that it will always be available or free of errors. To the fullest extent permitted by law, Growwth Garden is not liable for any indirect or consequential loss arising from your use of the site.</p>
+
+      <h2 class="prose__h">Governing law</h2>
+      <p>These terms are governed by the laws of India. Any dispute arising from them is subject to the courts of Delhi.</p>
+
+      <h2 class="prose__h">Changes to these terms</h2>
+      <p>We may update these terms from time to time. The date at the top shows when they were last changed. Continuing to use the site means you accept the updated terms.</p>
+
+      <div class="prose__cta">
+        <h2 class="prose__h" style="margin-top:0">Questions about these terms?</h2>
+        <p>Get in touch and we will be glad to help.</p>
+        <a class="btn btn--blue" href="/contact"><span>Contact us</span></a>
+      </div>`,
+  },
+  {
     path: '/services',
     title: 'Marketing, Website & Branding Services in Delhi | Growwth Garden',
     description: 'Websites, apps and AI systems, branding, and lead generation (SEO, social, performance marketing) from Growwth Garden in Delhi.',
