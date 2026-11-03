@@ -12,7 +12,7 @@
     const probe = document.createElement('span');
     probe.className = 'headline__line';
     probe.style.cssText = 'visibility:hidden;font-size:100px';
-    probe.textContent = w1 <= 900 ? 'MARKETING' : 'CREATIVE';
+    probe.textContent = w1 <= 900 ? 'GROWWTH' : 'CREATIVE';
     document.body.appendChild(probe);
     const w = probe.getBoundingClientRect().width;
     probe.remove();

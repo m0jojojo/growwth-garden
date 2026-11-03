@@ -95,7 +95,7 @@ ul { list-style: none; }
   text-transform: uppercase;
 }
 .headline__line--1 { top: calc(var(--u) * 102); left: 0; width: 100%; text-align: center; } /* centred on the page, in line with the person */
-.headline__line--2 { top: calc(var(--u) * 322); left: calc(var(--u) * 199); }
+.headline__line--2 { top: calc(var(--u) * 322); left: 0; width: 100%; text-align: center; }
 .headline__line span { display: block; will-change: transform; }
 
 .headline__layer--fill { z-index: 1; color: var(--lime); }
@@ -481,9 +481,9 @@ a.outline { display: inline-block; }
   .hero { height: auto; padding-bottom: 60px; }
   .hero__inner { position: relative; height: auto; padding-top: calc(min(80vw, 460px) * 1.49 + 84px); }
   .headline { z-index: 2; }
-  .headline__line { font-size: calc(min(100vw - 32px, 720px) / 4.047); }
-  .headline__line--1 { top: calc(var(--hl, min(100vw - 32px, 720px) / 4.047) * .98); left: 0; }
-  .headline__line--2 { top: calc(var(--hl, min(100vw - 32px, 720px) / 4.047) * 1.98); left: 0; width: 100%; text-align: center; }
+  .headline__line { font-size: calc(min(100vw - 32px, 720px) / 3.649); }
+  .headline__line--1 { top: calc(var(--hl, min(100vw - 32px, 720px) / 3.649) * .98); left: 0; }
+  .headline__line--2 { top: calc(var(--hl, min(100vw - 32px, 720px) / 3.649) * 1.98); left: 0; width: 100%; text-align: center; }
   .hero__person { width: min(80vw, 460px); left: 50%; margin-left: calc(min(80vw, 460px) / -2 + 8px); top: 56px; clip-path: none; -webkit-mask-image: linear-gradient(#000 82%, transparent); mask-image: linear-gradient(#000 82%, transparent); }
   .hero__left, .hero__right { position: static; width: auto; }
   .hero__left { display: grid; grid-template-columns: 1fr; gap: 26px; }
