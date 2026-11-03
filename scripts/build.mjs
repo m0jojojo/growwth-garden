@@ -6,3 +6,5 @@ const common = { minify: true, logLevel: 'info' };
 await build({ ...common, entryPoints: ['src/css/style.css'], outfile: 'public/css/style.min.css' });
 await build({ ...common, entryPoints: ['src/js/main.js'], outfile: 'public/js/main.min.js' });
 await build({ ...common, entryPoints: ['src/js/contact.js'], outfile: 'public/js/contact.min.js' });
+await build({ ...common, entryPoints: ['src/js/page.js'], outfile: 'public/js/page.min.js' });
+await import('./pages.mjs');

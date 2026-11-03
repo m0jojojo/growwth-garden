@@ -2,7 +2,8 @@
   "name": "growwth-garden",
   "private": true,
   "scripts": {
-    "build": "node scripts/build.mjs"
+    "build": "node scripts/build.mjs",
+    "pages": "node scripts/pages.mjs"
   },
   "devDependencies": {
     "esbuild": "^0.28.2"
