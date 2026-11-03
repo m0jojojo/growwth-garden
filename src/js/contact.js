@@ -37,6 +37,7 @@
       const out = await res.json().catch(() => ({}));
       if (!res.ok) throw new Error(out.error || 'Something went wrong.');
       say('Thank you! Your message has been sent. We will get back to you soon.');
+      if (window.gtag) gtag('event', 'generate_lead', { form_name: 'contact' });
       form.reset(); form.querySelectorAll('.field').forEach(f => f.classList.remove('is-filled'));
     } catch (err) {
       say(err.message || 'Sorry, we could not send your message. Please email growwthgarden@gmail.com.', true);

@@ -176,7 +176,7 @@ const pages = [
     h1: 'Privacy Policy',
     crumbs: [['Home', '/'], ['Privacy Policy']],
     body: `
-      <p class="prose__meta">Last updated: 3 November 2026</p>
+      <p class="prose__meta">Last updated: 4 November 2026</p>
       <p class="prose__lead">This policy explains what personal information Growwth Garden collects through growwthgarden.com, why we collect it and what we do with it. By using the site you agree to this policy.</p>
 
       <h2 class="prose__h">Who we are</h2>
@@ -187,6 +187,7 @@ const pages = [
         <li><b>Contact form.</b> Your name, email address, telephone number, country, subject and message, which you choose to send us.</li>
         <li><b>Emails and calls.</b> Any details you share when you email or phone us.</li>
         <li><b>Technical data.</b> Our hosting provider and the services described below may receive your IP address, browser type and the pages you visit, as part of normal web traffic.</li>
+        <li><b>Analytics data.</b> We use Google Analytics to understand how visitors use the site, such as the pages viewed, the device and browser used, the approximate location and how you found us. It uses cookies and does not tell us who you are.</li>
       </ul>
 
       <h2 class="prose__h">How we use it</h2>
@@ -197,9 +198,10 @@ const pages = [
       <ul class="prose__list">
         <li><b>Cloudflare.</b> Hosts and delivers the website.</li>
         <li><b>Resend.</b> Delivers contact form messages to our email inbox.</li>
+        <li><b>Google Analytics.</b> Measures how the website is used, as described above.</li>
         <li><b>Google Maps.</b> Loads the map on the contact page, so Google may receive your IP address when you open that page.</li>
       </ul>
-      <p>If we add analytics or advertising tools, we will update this policy to say so.</p>
+      <p>Google Analytics is provided by Google. You can opt out by installing the <a href="https://tools.google.com/dlpage/gaoptout" rel="noopener">Google Analytics opt-out browser add-on</a> or by blocking cookies in your browser settings. If we add advertising tools, we will update this policy to say so.</p>
 
       <h2 class="prose__h">How long we keep it</h2>
       <p>We keep inquiry details for as long as needed to respond to you and manage any resulting work, and for a reasonable period afterwards for our business records. You can ask us to delete your information at any time.</p>
@@ -366,7 +368,8 @@ for (const p of pages) {
   <script type="application/ld+json">${JSON.stringify(ld)}</script>
   <link rel="preload" href="/fonts/anton-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/poppins-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/css/style.min.css?v=13">
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-2PJVVDJ4FC');if(location.hostname==='growwthgarden.com')addEventListener('load',function(){var s=document.createElement('script');s.async=1;s.src='https://www.googletagmanager.com/gtag/js?id=G-2PJVVDJ4FC';document.head.appendChild(s)})</script>
+  <link rel="stylesheet" href="/css/style.min.css?v=14">
 </head>
 <body class="page-content">
 
@@ -389,7 +392,7 @@ for (const p of pages) {
 
   <script defer src="/js/vendor/gsap.min.js"></script>
   <script defer src="/js/vendor/ScrollTrigger.min.js"></script>
-  <script defer src="/js/page.min.js?v=13"></script>
+  <script defer src="/js/page.min.js?v=14"></script>
 </body>
 </html>
 `;
