@@ -23,7 +23,7 @@
     root.style.setProperty('--hl', size + 'px');
   }
   /* re-fit once Anton has really loaded (fonts.ready can resolve early), on load, and on width changes only */
-  fitHeadline();
+  if (!document.fonts || document.fonts.check('100px Anton')) fitHeadline(); /* else the CSS size (already Anton-correct) holds until Anton loads */
   if (document.fonts) {
     document.fonts.load('100px Anton', 'CREATIVE').then(fitHeadline);
     document.fonts.ready.then(fitHeadline);

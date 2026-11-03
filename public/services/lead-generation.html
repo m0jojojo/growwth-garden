@@ -23,10 +23,9 @@
   <meta name="twitter:image" content="https://growwthgarden.com/assets/og-image.jpg">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://growwthgarden.com/"},{"@type":"ListItem","position":2,"name":"Our Services","item":"https://growwthgarden.com/services"},{"@type":"ListItem","position":3,"name":"Lead Generation","item":"https://growwthgarden.com/services/lead-generation"}]},{"@type":"Service","name":"Lead Generation","serviceType":"Lead generation and digital marketing","description":"SEO, AEO and GEO, social media, performance and influencer marketing, email and WhatsApp marketing, ORM and automation.","provider":{"@id":"https://growwthgarden.com/#organization"},"areaServed":"IN"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is lead generation?","acceptedAnswer":{"@type":"Answer","text":"Lead generation is getting the right people to enquire about your business. We find your ideal customers, reach them where they spend time online and capture their details so your team can follow up."}},{"@type":"Question","name":"What are SEO, AEO and GEO?","acceptedAnswer":{"@type":"Answer","text":"SEO helps your pages rank in search results. AEO (answer engine optimisation) and GEO (generative engine optimisation) make your content easy for answer engines and AI assistants such as ChatGPT to find, understand and cite."}},{"@type":"Question","name":"Which channels do you use?","acceptedAnswer":{"@type":"Answer","text":"SEO, AEO and GEO, social media marketing, performance marketing, influencer marketing, email and WhatsApp marketing, online reputation management (ORM) and ChatGPT ads. We choose the mix based on where your customers actually are."}},{"@type":"Question","name":"What is an ideal customer profile (ICP)?","acceptedAnswer":{"@type":"Answer","text":"It is a clear description of the customers who are the best fit for your business: who they are, where they spend time online and what makes them buy. Every campaign we run is built around it."}},{"@type":"Question","name":"How do you handle leads once they come in?","acceptedAnswer":{"@type":"Answer","text":"We automate the flow so every inquiry is captured, qualified and followed up without you chasing it, using email, WhatsApp and CRM-style automations."}}]}]}</script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.min.css?v=11">
+  <link rel="preload" href="/fonts/anton-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/poppins-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/style.min.css?v=13">
 </head>
 <body class="page-content">
 
@@ -56,7 +55,7 @@
         <a href="/contact">Contact Us</a>
       </nav>
 
-      <a class="phone" href="tel:+919369033958">
+      <a class="phone" href="tel:+919369033958" aria-label="Call Growwth Garden on +91-9369033958">
         <span class="phone__icon">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 006.6 6.6l2.2-2.2a1 1 0 011-.25 11.4 11.4 0 003.6.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.57a1 1 0 01-.25 1z"/></svg>
         </span>
@@ -182,8 +181,8 @@
     <symbol id="star" viewBox="0 0 100 100"><path fill="currentColor" d="M50 0C54 30 70 46 100 50 70 54 54 70 50 100 46 70 30 54 0 50 30 46 46 30 50 0z"/></symbol>
   </svg>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="/js/page.min.js?v=11"></script>
+  <script defer src="/js/vendor/gsap.min.js"></script>
+  <script defer src="/js/vendor/ScrollTrigger.min.js"></script>
+  <script defer src="/js/page.min.js?v=13"></script>
 </body>
 </html>

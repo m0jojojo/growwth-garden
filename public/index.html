@@ -68,13 +68,13 @@
     ]
   }
   </script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.min.css?v=11">
+  <link rel="preload" href="/fonts/anton-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/poppins-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/style.min.css?v=13">
 </head>
 <body>
 
+  <main id="main">
   <!-- ============ HERO ============ -->
   <section class="hero" id="home">
     <div class="hero__noise" aria-hidden="true"></div>
@@ -103,7 +103,7 @@
         <a href="/contact">Contact Us</a>
       </nav>
 
-      <a class="phone" href="tel:+919369033958">
+      <a class="phone" href="tel:+919369033958" aria-label="Call Growwth Garden on +91-9369033958">
         <span class="phone__icon">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 006.6 6.6l2.2-2.2a1 1 0 011-.25 11.4 11.4 0 003.6.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.57a1 1 0 01-.25 1z"/></svg>
         </span>
@@ -132,7 +132,7 @@
           <span class="headline__line headline__line--1"><span>MARKETING</span></span>
           <span class="headline__line headline__line--2"><span>AGENCY</span></span>
         </span>
-        <img class="hero__person" src="/assets/hero-person.webp" alt="Smiling creative wearing headphones" width="1200" height="1788" fetchpriority="high">
+        <img class="hero__person" src="/assets/hero-person-800.webp" srcset="/assets/hero-person-480.webp 480w, /assets/hero-person-800.webp 800w, /assets/hero-person.webp 1200w" sizes="(max-width: 900px) min(80vw, 460px), 46vw" alt="Smiling creative wearing headphones" width="1200" height="1788" fetchpriority="high">
         <span class="headline__layer headline__layer--outline" aria-hidden="true">
           <span class="headline__line headline__line--1"><span>MARKETING</span></span>
           <span class="headline__line headline__line--2"><span>AGENCY</span></span>
@@ -285,7 +285,7 @@
       </div>
 
       <!-- client logo carousel -->
-      <div class="logos" aria-label="Clients">
+      <div class="logos" role="group" aria-label="Clients">
         <div class="logos__track">
           <span class="logos__item"><svg viewBox="0 0 80 60" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"><path d="M10 10h38l22 8-30 32z"/><path d="M10 10l30 40"/></svg></span>
           <span class="logos__item"><svg viewBox="0 0 80 60"><circle cx="28" cy="30" r="20" fill="currentColor"/><circle cx="50" cy="30" r="20" fill="none" stroke="currentColor" stroke-width="4"/></svg></span>
@@ -303,7 +303,7 @@
 
   <!-- ============ CTA ============ -->
   <section class="cta" id="contact" aria-label="Contact call to action">
-    <img class="cta__bg" src="/assets/cta-bg.jpg" alt="" width="1920" height="1080" loading="lazy">
+    <img class="cta__bg" src="/assets/cta-bg.webp" alt="" width="1920" height="1080" loading="lazy">
     <div class="container cta__wrap">
       <div class="cta__card">
         <h2 class="cta__title">Let&rsquo;s create something extraordinary together.</h2>
@@ -463,6 +463,8 @@
     </div>
   </section>
 
+  </main>
+
   <!-- ============ FOOTER ============ -->
   <footer class="footer">
     <div class="container">
@@ -516,8 +518,8 @@
     <symbol id="star" viewBox="0 0 100 100"><path fill="currentColor" d="M50 0C54 30 70 46 100 50 70 54 54 70 50 100 46 70 30 54 0 50 30 46 46 30 50 0z"/></symbol>
   </svg>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="/js/main.min.js?v=11"></script>
+  <script src="/js/vendor/gsap.min.js"></script>
+  <script src="/js/vendor/ScrollTrigger.min.js"></script>
+  <script src="/js/main.min.js?v=13"></script>
 </body>
 </html>

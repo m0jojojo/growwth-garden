@@ -197,8 +197,7 @@ const pages = [
       <ul class="prose__list">
         <li><b>Cloudflare.</b> Hosts and delivers the website.</li>
         <li><b>Resend.</b> Delivers contact form messages to our email inbox.</li>
-        <li><b>Google Fonts and Google Maps.</b> Load fonts and the map on the contact page, so Google may receive your IP address.</li>
-        <li><b>cdnjs.</b> Delivers a script library used for page animations.</li>
+        <li><b>Google Maps.</b> Loads the map on the contact page, so Google may receive your IP address when you open that page.</li>
       </ul>
       <p>If we add analytics or advertising tools, we will update this policy to say so.</p>
 
@@ -365,10 +364,9 @@ for (const p of pages) {
   <meta name="twitter:image" content="${ORIGIN}/assets/og-image.jpg">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <script type="application/ld+json">${JSON.stringify(ld)}</script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.min.css?v=11">
+  <link rel="preload" href="/fonts/anton-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/poppins-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/style.min.css?v=13">
 </head>
 <body class="page-content">
 
@@ -389,9 +387,9 @@ for (const p of pages) {
 
   ${footer.trim()}
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="/js/page.min.js?v=11"></script>
+  <script defer src="/js/vendor/gsap.min.js"></script>
+  <script defer src="/js/vendor/ScrollTrigger.min.js"></script>
+  <script defer src="/js/page.min.js?v=13"></script>
 </body>
 </html>
 `;
