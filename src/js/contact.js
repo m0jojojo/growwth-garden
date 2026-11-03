@@ -7,6 +7,16 @@
     menu.setAttribute('aria-expanded', open);
   });
 
+  /* services dropdown */
+  const navItem = document.querySelector('.nav__item');
+  if (navItem) {
+    const trigger = navItem.querySelector('.nav__trigger');
+    const setOpen = open => { navItem.classList.toggle('is-open', open); trigger.setAttribute('aria-expanded', open); };
+    trigger.addEventListener('click', e => { e.preventDefault(); setOpen(!navItem.classList.contains('is-open')); });
+    document.addEventListener('click', e => { if (!navItem.contains(e.target)) setOpen(false); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') setOpen(false); });
+  }
+
   /* floating labels: keep the label up once a field has text */
   document.querySelectorAll('.field').forEach(f => {
     const input = f.querySelector('input, textarea');

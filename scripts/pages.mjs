@@ -259,8 +259,9 @@ const pages = [
   },
 ];
 
-const activeNav = (h, path) => h
-  .replace(`<a href="${path}" class="has-sub">`, `<a href="${path}" class="has-sub is-active">`)
+const activeNav = (h, nav, path) => h
+  .replace(`<a href="${nav}" class="has-sub nav__trigger"`, `<a href="${nav}" class="has-sub nav__trigger is-active"`)
+  .replace(`<a href="${nav}">`, `<a class="is-active" href="${nav}">`)
   .replace(`<a href="${path}">`, `<a class="is-active" href="${path}">`);
 
 const esc = s => s.replace(/&(?!amp;)/g, '&amp;');
@@ -303,13 +304,13 @@ for (const p of pages) {
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.min.css?v=3">
+  <link rel="stylesheet" href="/css/style.min.css?v=4">
 </head>
 <body class="page-content">
 
   <section class="page-hero">
     <div class="hero__noise" aria-hidden="true"></div>
-    ${activeNav(header.trim(), p.nav || p.path)}
+    ${activeNav(header.trim(), p.nav || p.path, p.path)}
     <div class="page-hero__text">
       <h1 class="page-hero__title">${p.h1}</h1>
       <p class="crumbs">${crumbHtml}</p>
@@ -326,7 +327,7 @@ for (const p of pages) {
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="/js/page.min.js?v=3"></script>
+  <script src="/js/page.min.js?v=4"></script>
 </body>
 </html>
 `;

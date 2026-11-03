@@ -40,7 +40,17 @@
     navEl.classList.toggle('is-open', open);
     menu.setAttribute('aria-expanded', open);
   });
-  navEl.addEventListener('click', e => { if (e.target.closest('a')) { menu.classList.remove('is-open'); navEl.classList.remove('is-open'); menu.setAttribute('aria-expanded', false); } });
+
+  /* services dropdown */
+  const navItem = document.querySelector('.nav__item');
+  if (navItem) {
+    const trigger = navItem.querySelector('.nav__trigger');
+    const setOpen = open => { navItem.classList.toggle('is-open', open); trigger.setAttribute('aria-expanded', open); };
+    trigger.addEventListener('click', e => { e.preventDefault(); setOpen(!navItem.classList.contains('is-open')); });
+    document.addEventListener('click', e => { if (!navItem.contains(e.target)) setOpen(false); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') setOpen(false); });
+  }
+  navEl.addEventListener('click', e => { if (e.target.closest('a:not(.nav__trigger)')) { menu.classList.remove('is-open'); navEl.classList.remove('is-open'); menu.setAttribute('aria-expanded', false); } });
 
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (!window.gsap) return;

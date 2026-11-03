@@ -54,6 +54,12 @@ ul { list-style: none; }
 .nav a { display: inline-flex; align-items: center; gap: calc(var(--u) * 4); transition: color .25s; }
 .nav a:hover, .nav a.is-active { color: var(--lime); }
 .nav svg { width: calc(var(--u) * 8); height: calc(var(--u) * 5); }
+.nav__item { position: relative; display: flex; align-items: center; }
+.nav__trigger svg { transition: transform .25s; }
+.nav__item.is-open .nav__trigger svg { transform: rotate(180deg); }
+.nav__drop { position: absolute; top: calc(100% + var(--u) * 14); left: 50%; z-index: 30; min-width: calc(var(--u) * 210); padding: calc(var(--u) * 6) 0; background: var(--dark); border-top: 2px solid var(--lime); box-shadow: 0 12px 30px rgba(0,0,0,.25); opacity: 0; visibility: hidden; transform: translate(-50%, 6px); transition: opacity .2s, transform .2s, visibility .2s; }
+.nav__item.is-open .nav__drop { opacity: 1; visibility: visible; transform: translate(-50%, 0); }
+.nav__drop a { display: flex; padding: calc(var(--u) * 11) calc(var(--u) * 18); white-space: nowrap; }
 
 .phone { display: flex; align-items: center; gap: calc(var(--u) * 14); }
 .phone__icon { width: calc(var(--u) * 44); height: calc(var(--u) * 44); border-radius: 50%; background: var(--lime); color: #111; display: grid; place-items: center; transition: transform .3s; }
@@ -455,7 +461,12 @@ a.outline { display: inline-block; }
   .nav { position: absolute; left: 0; right: 0; top: calc(100% + 12px); z-index: 20; flex-direction: column; gap: 0; padding: 8px 20px; background: var(--dark); font-size: 17px; opacity: 0; visibility: hidden; transform: translateY(-8px); transition: opacity .3s, transform .3s, visibility .3s; }
   .nav.is-open { opacity: 1; visibility: visible; transform: none; }
   .nav a { padding: 14px 0; border-bottom: 1px solid #3a3a3a; }
-  .nav a:last-child { border: 0; }
+  .nav > a:last-child { border: 0; }
+  .nav__item { display: block; }
+  .nav__item > a { display: flex; }
+  .nav__drop { position: static; min-width: 0; padding: 0 0 0 16px; border: 0; box-shadow: none; background: transparent; opacity: 1; visibility: visible; transform: none; display: none; }
+  .nav__item.is-open .nav__drop { display: block; transform: none; }
+  .nav__drop a { padding: 12px 0; font-size: 15px; white-space: normal; }
   .nav svg { width: 10px; height: 6px; }
 
   /* hero: stacked */
