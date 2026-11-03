@@ -75,7 +75,7 @@ const pages = [
       <div class="prose__cta">
         <h2 class="prose__h" style="margin-top:0">Have a project in mind?</h2>
         <p>Tell us what you want to build and we will come back with a plan.</p>
-        <a class="btn btn--blue" href="/contact"><span>Talk to our team</span></a>
+        <a class="btn btn--blue" href="/contact"><span>Discuss YOUR Brand</span></a>
       </div>`,
   },
   {
@@ -121,7 +121,7 @@ const pages = [
       <div class="prose__cta">
         <h2 class="prose__h" style="margin-top:0">Ready to build a brand people remember?</h2>
         <p>Tell us about your business and we will suggest where to start.</p>
-        <a class="btn btn--blue" href="/contact"><span>Talk to our team</span></a>
+        <a class="btn btn--blue" href="/contact"><span>Discuss YOUR Brand</span></a>
       </div>`,
   },
   {
@@ -166,7 +166,7 @@ const pages = [
       <div class="prose__cta">
         <h2 class="prose__h" style="margin-top:0">Want more of the right inquiries?</h2>
         <p>Tell us who your ideal customer is and we will map out the channels to reach them.</p>
-        <a class="btn btn--blue" href="/contact"><span>Talk to our team</span></a>
+        <a class="btn btn--blue" href="/contact"><span>Discuss YOUR Brand</span></a>
       </div>`,
   },
   {
@@ -369,7 +369,7 @@ for (const p of pages) {
   <link rel="preload" href="/fonts/anton-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/poppins-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-2PJVVDJ4FC');if(location.hostname==='growwthgarden.com')addEventListener('load',function(){var s=document.createElement('script');s.async=1;s.src='https://www.googletagmanager.com/gtag/js?id=G-2PJVVDJ4FC';document.head.appendChild(s)})</script>
-  <link rel="stylesheet" href="/css/style.min.css?v=14">
+  <link rel="stylesheet" href="/css/style.min.css?v=16">
 </head>
 <body class="page-content">
 
@@ -392,7 +392,7 @@ for (const p of pages) {
 
   <script defer src="/js/vendor/gsap.min.js"></script>
   <script defer src="/js/vendor/ScrollTrigger.min.js"></script>
-  <script defer src="/js/page.min.js?v=14"></script>
+  <script defer src="/js/page.min.js?v=16"></script>
 </body>
 </html>
 `;

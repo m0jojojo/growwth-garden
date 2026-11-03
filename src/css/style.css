@@ -118,7 +118,8 @@ ul { list-style: none; }
   font-family: var(--font-display); font-size: calc(var(--u) * 12); letter-spacing: .12em; text-transform: uppercase;
   transition: background .3s, color .3s;
 }
-.btn svg { width: calc(var(--u) * 14); height: calc(var(--u) * 14); }
+.btn svg { flex: none; width: calc(var(--u) * 14); height: calc(var(--u) * 14); }
+.hero__right .btn { line-height: 1.35; }
 .btn:hover { background: var(--lime); color: #111; }
 .btn:hover svg path { stroke: var(--lime); }
 .btn:hover svg circle { fill: #111; }
