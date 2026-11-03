@@ -8,6 +8,61 @@ const footer = readFileSync('src/partials/footer.html', 'utf8');
 
 const pages = [
   {
+    path: '/services',
+    title: 'Marketing, Website & Branding Services | Growwth Garden',
+    description: 'Websites, apps and AI systems, branding, and lead generation (SEO, social, performance marketing) from Growwth Garden in Rewari, Haryana.',
+    h1: 'Our Services',
+    crumbs: [['Home', '/'], ['Our Services']],
+    schema: [
+      ['Websites, Apps & AI Systems', 'Website development, app development, e-commerce, AI systems and AI automations.'],
+      ['Branding', 'Brand strategy, identity, rebranding, content development and communication design.'],
+      ['Lead Generation', 'SEO, AEO and GEO, social media, performance and influencer marketing, email and WhatsApp marketing, with automated follow-up.'],
+    ].map(([name, description]) => ({ '@type': 'Service', name, description, provider: { '@id': ORIGIN + '/#organization' }, areaServed: 'IN' })),
+    body: `
+      <p class="prose__lead">One team for the three things that grow a business online: a site that converts, a brand people remember, and a steady flow of qualified leads.</p>
+
+      <h2 class="prose__h">Websites, Apps &amp; AI Systems</h2>
+      <p>We build your SEO-ready website or app from scratch in just a few days. Every page is designed around your customers, coded clean and fast, and wired with AI automation so your work runs on its own from day one.</p>
+      <ul class="prose__list">
+        <li>Website development</li>
+        <li>App development</li>
+        <li>E-commerce</li>
+        <li>AI systems and fine-tuned AI systems</li>
+        <li>AI automations</li>
+      </ul>
+
+      <h2 class="prose__h">Branding</h2>
+      <p>Your story, your look, your voice, shaped so the market knows who you are long before the ad budget kicks in.</p>
+      <ul class="prose__list">
+        <li>Brand strategy &amp; positioning</li>
+        <li>Brand identity</li>
+        <li>Rebranding &amp; refresh</li>
+        <li>Content development</li>
+        <li>Brand experience</li>
+        <li>Communication &amp; design</li>
+        <li>Corporate communications</li>
+        <li>Brand conformance (IPR)</li>
+      </ul>
+
+      <h2 class="prose__h">Lead Generation</h2>
+      <p>We start by identifying your ideal customers, mapping their demographics and where they spend time online. Then we set up the right lead channels and automate the flow, so every inquiry is captured, qualified and followed up without you chasing it.</p>
+      <ul class="prose__list">
+        <li>SEO, AEO &amp; GEO</li>
+        <li>Social media marketing</li>
+        <li>Performance marketing</li>
+        <li>Influencer marketing</li>
+        <li>Email &amp; WhatsApp marketing</li>
+        <li>ORM &amp; automation</li>
+        <li>ChatGPT ads</li>
+      </ul>
+
+      <div class="prose__cta">
+        <h2 class="prose__h" style="margin-top:0">Not sure where to start?</h2>
+        <p>Tell us about your business and goals and we will recommend the right mix.</p>
+        <a class="btn btn--blue" href="/contact"><span>Talk to our team</span></a>
+      </div>`,
+  },
+  {
     path: '/about',
     title: 'About Growwth Garden | Marketing Agency in Rewari, Haryana',
     description: 'Growwth Garden is a Rewari-based marketing agency combining websites, branding and lead generation so your growth runs as one system.',
@@ -41,6 +96,10 @@ const pages = [
       </div>`,
   },
 ];
+
+const activeNav = (h, path) => h
+  .replace(`<a href="${path}" class="has-sub">`, `<a href="${path}" class="has-sub is-active">`)
+  .replace(`<a href="${path}">`, `<a class="is-active" href="${path}">`);
 
 const esc = s => s.replace(/&(?!amp;)/g, '&amp;');
 
@@ -82,13 +141,13 @@ for (const p of pages) {
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.min.css">
+  <link rel="stylesheet" href="/css/style.min.css?v=2">
 </head>
 <body class="page-content">
 
   <section class="page-hero">
     <div class="hero__noise" aria-hidden="true"></div>
-    ${header.trim()}
+    ${activeNav(header.trim(), p.path)}
     <div class="page-hero__text">
       <h1 class="page-hero__title">${p.h1}</h1>
       <p class="crumbs">${crumbHtml}</p>
@@ -105,7 +164,7 @@ for (const p of pages) {
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="/js/page.min.js"></script>
+  <script src="/js/page.min.js?v=2"></script>
 </body>
 </html>
 `;
