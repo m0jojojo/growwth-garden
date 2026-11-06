@@ -1,5 +1,5 @@
 // Builds the content pages (about, services) into public/ from the data below plus src/partials.
-import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { dirname } from 'node:path';
 
 const ORIGIN = 'https://growwthgarden.com';
@@ -8,6 +8,60 @@ const footer = readFileSync('src/partials/footer.html', 'utf8');
 
 const faqHtml = items => items.map(([q, a]) => `<details class="faq">\n        <summary>${q}</summary>\n        <p>${a}</p>\n      </details>`).join('\n      ');
 const faqSchema = items => ({ '@type': 'FAQPage', mainEntity: items.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a.replace(/<[^>]+>/g, '') } })) });
+
+const strip = h => h.replace(/<[^>]+>/g, '');
+// FAQ items are read back out of the article's visible <details class="faq"> blocks, so markup and schema never drift apart
+const faqFromHtml = html => [...html.matchAll(/<details class="faq"><summary>(.*?)<\/summary><p>(.*?)<\/p><\/details>/g)].map(m => [m[1], m[2]]);
+
+// Sidebar "In this article": built from the article's own h2/h3 headings (h3s are nested under their h2), so it never drifts from the content.
+const slug = t => t.replace(/<[^>]+>|&[a-z]+;/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+function withToc(body) {
+  const seen = new Set();
+  body = body
+    .replace('<h2 class="prose__h">Final thoughts</h2>', '<h2 class="prose__h" id="final-thoughts">Final thoughts</h2>')
+    .replace(/<h3 class="prose__sub">(.*?)<\/h3>/g, (_, t) => { let id = slug(t), n = 2; while (seen.has(id)) id = slug(t) + '-' + n++; seen.add(id); return `<h3 class="prose__sub" id="${id}">${t}</h3>`; })
+    .replace(/<nav class="post-toc"[\s\S]*?<\/nav>\s*/, '');
+  const items = [];
+  for (const m of body.matchAll(/<h2 class="prose__h" id="([^"]+)">(?:<span class="post-n">(\d+)<\/span>)?(.*?)<\/h2>|<h3 class="prose__sub" id="([^"]+)">(.*?)<\/h3>/g)) {
+    if (m[1]) items.push({ id: m[1], n: m[2], text: m[3], subs: [] });
+    else if (items.length) items.at(-1).subs.push({ id: m[4], text: m[5] });
+  }
+  const li = i => `<li class="post-toc__item"><a href="#${i.id}">${i.n ? `<span class="post-toc__n">${i.n}</span>` : ''}${i.text}</a>${i.subs.length ? `\n              <ul class="post-toc__sub">${i.subs.map(x => `<li><a href="#${x.id}">${x.text}</a></li>`).join('')}</ul>\n            ` : ''}</li>`;
+  const aside = `<aside class="post-aside">
+        <details class="post-toc" open>
+          <summary class="post-toc__h">In this article</summary>
+          <ol class="post-toc__list">
+            ${items.map(li).join('\n            ')}
+          </ol>
+        </details>
+      </aside>`;
+  return `<div class="post-layout">\n      ${aside}\n      <div class="post-main">\n${body}\n      </div>\n    </div>`;
+}
+
+// Author photo: drop a real photo in public/assets as author-abhijeet.jpg (or .webp / .png) and rebuild; until then a branded placeholder is used.
+const authorPhoto = (() => {
+  for (const ext of ['jpg', 'webp', 'png']) if (existsSync(`public/assets/author-abhijeet.${ext}`)) return { src: `/assets/author-abhijeet.${ext}`, real: true };
+  return { src: '/assets/author-placeholder.svg', real: false };
+})();
+const icon = {
+  copy: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8.5" y="8.5" width="11" height="11" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M15.5 8.5v-3a1.5 1.5 0 00-1.5-1.5H5.5A1.5 1.5 0 004 5.5V14a1.5 1.5 0 001.5 1.5h3" fill="none" stroke="currentColor" stroke-width="1.7"/></svg>',
+  linkedin: '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.9 8.9H3.7V20h3.2zM5.3 4a1.9 1.9 0 100 3.8 1.9 1.9 0 000-3.8zM20.3 20v-6.1c0-3-1.6-4.4-3.8-4.4-1.7 0-2.5 1-2.9 1.6V8.9h-3.2V20h3.2v-6.2c0-.3 0-.7.1-.9.3-.7.9-1.4 2-1.4 1.4 0 2 1.1 2 2.6V20z"/></svg>',
+  x: '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M17.7 3h3l-6.6 7.5L21.8 21h-6l-4.7-6.1L5.6 21h-3l7-8L2.2 3h6.1l4.2 5.6zm-1 16.2h1.7L7.4 4.7H5.6z"/></svg>',
+  facebook: '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M13.5 21v-7.5h2.6l.4-3h-3V8.6c0-.9.3-1.5 1.5-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4v2.2H7.8v3h2.6V21z"/></svg>',
+  whatsapp: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5a8.5 8.5 0 00-7.3 12.8L3.5 20.5l4.3-1.1A8.5 8.5 0 1012 3.5z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path fill="currentColor" d="M9 8.5c.3 2.6 2.9 5.2 5.5 5.5l1.1-1.1-1.9-1-.8.7c-.9-.4-1.6-1.1-2-2l.7-.8-1-1.9z"/></svg>',
+};
+const shareHtml = (url, title) => {
+  const u = encodeURIComponent(url), t = encodeURIComponent(title);
+  const a = (label, href, svg) => `<a class="share__btn" href="${href}" target="_blank" rel="noopener noreferrer" aria-label="${label}">${svg}</a>`;
+  return `<div class="share" role="group" aria-label="Share this article">
+          <button class="share__btn" type="button" data-copy="${url}" aria-label="Copy link">${icon.copy}</button>
+          ${a('Share on LinkedIn', `https://www.linkedin.com/sharing/share-offsite/?url=${u}`, icon.linkedin)}
+          ${a('Share on X', `https://twitter.com/intent/tweet?url=${u}&text=${t}`, icon.x)}
+          ${a('Share on Facebook', `https://www.facebook.com/sharer/sharer.php?u=${u}`, icon.facebook)}
+          ${a('Share on WhatsApp', `https://wa.me/?text=${t}%20${u}`, icon.whatsapp)}
+          <span class="share__note" role="status" aria-live="polite"></span>
+        </div>`;
+};
 
 const websitesFaq = [
   ['What do you build?', 'Business websites, e-commerce stores, mobile and web apps, AI systems and AI automations. Everything is designed around your customers and built to be fast and easy to find on Google.'],
@@ -322,11 +376,43 @@ const pages = [
         <a class="btn btn--blue" href="/contact"><span>Talk to our team</span></a>
       </div>`,
   },
+  {
+    path: '/blog',
+    nav: '/blog',
+    title: 'Blog: Websites, Branding & Lead Generation | Growwth Garden',
+    description: 'Practical guides on website costs, branding and lead generation from the Growwth Garden team in Delhi.',
+    h1: 'Our Blog',
+    crumbs: [['Home', '/'], ['Blog']],
+    schema: [
+      { '@type': 'CollectionPage', name: 'Growwth Garden Blog', url: ORIGIN + '/blog', isPartOf: { '@id': ORIGIN + '/#website' }, publisher: { '@id': ORIGIN + '/#organization' } },
+    ],
+    body: `
+      <p class="prose__lead">Practical guides on websites, branding and lead generation, written by the team that does the work.</p>
+      <div class="posts posts--list">
+        <article class="post">
+          <a class="post__thumb" href="/blog/website-development-cost-in-india" aria-label="Website Development Cost in India 2026"><img src="/assets/blog-website-cost.svg" alt="" loading="lazy" width="650" height="640"></a>
+          <div class="post__meta"><span>3 Nov 2026</span><span>12 min read</span></div>
+          <h2 class="post__title"><a href="/blog/website-development-cost-in-india">How Much Does Website Development Cost in India in 2026?</a></h2>
+          <p class="post__excerpt">A full price guide in rupees: cost by website type, platform, page count, freelancer vs agency, hosting, maintenance and hidden costs.</p>
+        </article>
+      </div>`,
+  },
+  {
+    path: '/blog/website-development-cost-in-india',
+    nav: '/blog',
+    article: { category: 'Websites', published: '2026-11-03', modified: '2026-11-03', author: 'Abhijeet', read: '12 min read', keywords: 'website creation cost in India, website development cost in India, website cost in India 2026' },
+    title: 'Website Development Cost in India 2026: Price Guide | Growwth Garden',
+    description: 'How much does website development cost in India in 2026? Compare prices by site type, platform, freelancer vs agency, hosting, maintenance and hidden costs.',
+    h1: 'How Much Does Website Development Cost in India in <em>2026?</em>',
+    crumbs: [['Home', '/'], ['Blog', '/blog'], ['Website Development Cost in India']],
+    body: readFileSync('src/posts/website-development-cost-in-india.html', 'utf8'),
+  },
 ];
 
 const activeNav = (h, nav, path) => h
   .replace(`<a href="${nav}" class="has-sub nav__trigger"`, `<a href="${nav}" class="has-sub nav__trigger is-active"`)
   .replace(`<a href="${nav}">`, `<a class="is-active" href="${nav}">`)
+  .replace(`<a href="${nav}" class="has-sub">`, `<a href="${nav}" class="has-sub is-active">`)
   .replace(`<a href="${path}">`, `<a class="is-active" href="${path}">`);
 
 const esc = s => s.replace(/&(?!amp;)/g, '&amp;');
@@ -341,6 +427,41 @@ for (const p of pages) {
       itemListElement: p.crumbs.map(([n, h], i) => ({ '@type': 'ListItem', position: i + 1, name: n, item: h ? ORIGIN + h : url })),
     }, ...(p.schema || [])],
   };
+  const art = p.article;
+  if (art) {
+    const faq = faqFromHtml(p.body);
+    p.body = withToc(p.body);
+    ld['@graph'].push({
+      '@type': 'BlogPosting',
+      headline: strip(p.h1),
+      description: p.description,
+      image: ORIGIN + '/assets/og-image.jpg',
+      datePublished: art.published,
+      dateModified: art.modified,
+      inLanguage: 'en-IN',
+      mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+      author: { '@type': 'Person', name: art.author, ...(authorPhoto.real && { image: ORIGIN + authorPhoto.src }), worksFor: { '@id': ORIGIN + '/#organization' } },
+      publisher: { '@id': ORIGIN + '/#organization' },
+      about: 'Website development cost in India',
+      keywords: art.keywords,
+    }, faqSchema(faq));
+  }
+  const heroText = art ? `<div class="page-hero__text post-hero">
+      <div class="post-hero__copy">
+        <p class="crumbs">${crumbHtml}</p>
+        <p class="post-hero__tag">${art.category}</p>
+        <h1 class="page-hero__title">${p.h1}</h1>
+        <div class="post-hero__meta">
+          <p class="post-hero__date"><time datetime="${art.modified}">${new Date(art.modified).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' })}</time> <span aria-hidden="true">&bull;</span> ${art.read}</p>
+          <p class="author-pill"><img src="${authorPhoto.src}" alt="" width="76" height="76"><span>${art.author}</span></p>
+        </div>
+        ${shareHtml(url, strip(p.h1))}
+      </div>
+      <figure class="post-hero__photo"><img src="${authorPhoto.src}" alt="${authorPhoto.real ? art.author + ', author at Growwth Garden' : ''}" width="780" height="975" fetchpriority="high"></figure>
+    </div>` : `<div class="page-hero__text">
+      <h1 class="page-hero__title">${p.h1}</h1>
+      <p class="crumbs">${crumbHtml}</p>
+    </div>`;
   const html = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -352,8 +473,8 @@ for (const p of pages) {
   <meta name="description" content="${esc(p.description)}">
   <link rel="canonical" href="${url}">
   <meta name="robots" content="index, follow, max-image-preview:large">
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Growwth Garden">
+  <meta property="og:type" content="${art ? 'article' : 'website'}">
+  <meta property="og:site_name" content="Growwth Garden">${art ? `\n  <meta property="article:published_time" content="${art.published}T09:00:00+05:30">\n  <meta property="article:modified_time" content="${art.modified}T09:00:00+05:30">\n  <meta property="article:author" content="${art.author}">` : ''}
   <meta property="og:title" content="${esc(p.title)}">
   <meta property="og:description" content="${esc(p.description)}">
   <meta property="og:url" content="${url}">
@@ -373,16 +494,13 @@ for (const p of pages) {
 </head>
 <body class="page-content">
 
-  <section class="page-hero">
+  <section class="page-hero${art ? ' page-hero--post' : ''}">
     <div class="hero__noise" aria-hidden="true"></div>
     ${activeNav(header.trim(), p.nav || p.path, p.path)}
-    <div class="page-hero__text">
-      <h1 class="page-hero__title">${p.h1}</h1>
-      <p class="crumbs">${crumbHtml}</p>
-    </div>
+    ${heroText}
   </section>
 
-  <main class="prose">
+  <main class="prose${art ? ' prose--post' : ''}">
     <div class="about__noise" aria-hidden="true"></div>
     <div class="container">${p.body}
     </div>
