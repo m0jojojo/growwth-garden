@@ -43,6 +43,8 @@ const authorPhoto = (() => {
   for (const ext of ['jpg', 'webp', 'png']) if (existsSync(`public/assets/author-abhijeet.${ext}`)) return { src: `/assets/author-abhijeet.${ext}`, real: true };
   return { src: '/assets/author-placeholder.svg', real: false };
 })();
+// Small round author avatar (pill + author schema): public/assets/author-avatar.jpg if present, otherwise the main author photo.
+const authorAvatar = existsSync('public/assets/author-avatar.jpg') ? { src: '/assets/author-avatar.jpg', real: true } : authorPhoto;
 const icon = {
   copy: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8.5" y="8.5" width="11" height="11" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M15.5 8.5v-3a1.5 1.5 0 00-1.5-1.5H5.5A1.5 1.5 0 004 5.5V14a1.5 1.5 0 001.5 1.5h3" fill="none" stroke="currentColor" stroke-width="1.7"/></svg>',
   linkedin: '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.9 8.9H3.7V20h3.2zM5.3 4a1.9 1.9 0 100 3.8 1.9 1.9 0 000-3.8zM20.3 20v-6.1c0-3-1.6-4.4-3.8-4.4-1.7 0-2.5 1-2.9 1.6V8.9h-3.2V20h3.2v-6.2c0-.3 0-.7.1-.9.3-.7.9-1.4 2-1.4 1.4 0 2 1.1 2 2.6V20z"/></svg>',
@@ -411,7 +413,7 @@ const pages = [
       <p class="prose__lead">Practical guides on websites, branding and lead generation, written by the team that does the work.</p>
       <div class="posts posts--list">
         <article class="post">
-          <a class="post__thumb" href="/blog/website-development-cost-in-india" aria-label="Website Development Cost in India 2026"><img src="/assets/blog-website-cost.svg" alt="" loading="lazy" width="650" height="640"></a>
+          <a class="post__thumb" href="/blog/website-development-cost-in-india" aria-label="Website Development Cost in India 2026"><img src="/assets/blog-website-cost.jpg" alt="" loading="lazy" width="736" height="736"></a>
           <div class="post__meta"><span>3 Nov 2026</span><span>12 min read</span></div>
           <h2 class="post__title"><a href="/blog/website-development-cost-in-india">How Much Does Website Development Cost in India in 2026?</a></h2>
           <p class="post__excerpt">A full price guide in rupees: cost by website type, platform, page count, freelancer vs agency, hosting, maintenance and hidden costs.</p>
@@ -461,7 +463,7 @@ for (const p of pages) {
       dateModified: art.modified,
       inLanguage: 'en-IN',
       mainEntityOfPage: { '@type': 'WebPage', '@id': url },
-      author: { '@type': 'Person', name: art.author, ...(authorPhoto.real && { image: ORIGIN + authorPhoto.src }), worksFor: { '@id': ORIGIN + '/#organization' } },
+      author: { '@type': 'Person', name: art.author, ...(authorAvatar.real && { image: ORIGIN + authorAvatar.src }), worksFor: { '@id': ORIGIN + '/#organization' } },
       publisher: { '@id': ORIGIN + '/#organization' },
       about: 'Website development cost in India',
       keywords: art.keywords,
@@ -474,11 +476,11 @@ for (const p of pages) {
         <h1 class="page-hero__title">${p.h1}</h1>
         <div class="post-hero__meta">
           <p class="post-hero__date"><time datetime="${art.modified}">${new Date(art.modified).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' })}</time> <span aria-hidden="true">&bull;</span> ${art.read}</p>
-          <p class="author-pill"><img src="${authorPhoto.src}" alt="" width="76" height="76"><span>${art.author}</span></p>
+          <p class="author-pill"><img src="${authorAvatar.src}" alt="" width="76" height="76"><span>${art.author}</span></p>
         </div>
         ${shareHtml(url, strip(p.h1))}
       </div>
-      <figure class="post-hero__photo"><img src="${authorPhoto.src}" alt="${authorPhoto.real ? art.author + ', author at Growwth Garden' : ''}" width="780" height="975" fetchpriority="high"></figure>
+      <figure class="post-hero__photo"><img src="${authorPhoto.src}" alt="${authorPhoto.real ? 'Illustration of a laptop showing a website, surrounded by design and development icons' : ''}" width="711" height="689" fetchpriority="high"></figure>
     </div>` : `<div class="page-hero__text">
       <h1 class="page-hero__title">${p.h1}</h1>
       <p class="crumbs">${crumbHtml}</p>
@@ -511,7 +513,7 @@ for (const p of pages) {
   <link rel="preload" href="/fonts/anton-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/poppins-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-2PJVVDJ4FC');if(location.hostname==='growwthgarden.com')addEventListener('load',function(){var s=document.createElement('script');s.async=1;s.src='https://www.googletagmanager.com/gtag/js?id=G-2PJVVDJ4FC';document.head.appendChild(s)})</script>
-  <link rel="stylesheet" href="/css/style.min.css?v=25">
+  <link rel="stylesheet" href="/css/style.min.css?v=31">
 </head>
 <body class="page-content">
 
@@ -535,7 +537,7 @@ for (const p of pages) {
 
   <script defer src="/js/vendor/gsap.min.js"></script>
   <script defer src="/js/vendor/ScrollTrigger.min.js"></script>
-  <script defer src="/js/page.min.js?v=25"></script>
+  <script defer src="/js/page.min.js?v=31"></script>
 </body>
 </html>
 `;

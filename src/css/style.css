@@ -685,14 +685,14 @@ a.outline { display: inline-block; }
 .post-hero__meta { margin-top: calc(var(--u) * 26); display: flex; flex-wrap: wrap; align-items: center; gap: calc(var(--u) * 12) calc(var(--u) * 18); }
 .post-hero__date { font-size: calc(var(--u) * 13); font-weight: 500; }
 .author-pill { display: inline-flex; align-items: center; gap: calc(var(--u) * 10); padding: calc(var(--u) * 5) calc(var(--u) * 18) calc(var(--u) * 5) calc(var(--u) * 5); border: 1.5px solid rgba(255, 255, 255, .4); border-radius: 999px; font-size: calc(var(--u) * 14); font-weight: 600; }
-.author-pill img { width: calc(var(--u) * 38); height: calc(var(--u) * 38); border-radius: 50%; object-fit: cover; background: var(--lime); }
+.author-pill img { width: calc(var(--u) * 38); height: calc(var(--u) * 38); border-radius: 50%; object-fit: cover; object-position: center 30%; background: var(--lime); }
 .share { margin-top: calc(var(--u) * 22); display: flex; flex-wrap: wrap; align-items: center; gap: calc(var(--u) * 10); }
 .share__btn { display: grid; place-items: center; width: calc(var(--u) * 40); height: calc(var(--u) * 40); border: 1.5px solid var(--lime); border-radius: 50%; color: #fff; cursor: pointer; transition: background .25s, color .25s; }
 .share__btn svg { width: calc(var(--u) * 18); height: calc(var(--u) * 18); }
 .share__btn:hover, .share__btn:focus-visible { background: var(--lime); color: var(--dark); }
 .share__note { min-width: 1px; font-size: calc(var(--u) * 12); font-weight: 600; color: var(--lime); }
 .post-hero__photo { align-self: end; box-shadow: calc(var(--u) * -14) 0 0 var(--lime); background: var(--lime); }
-.post-hero__photo img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; object-position: center top; }
+.post-hero__photo img { display: block; width: 100%; height: auto; aspect-ratio: 711 / 689; object-fit: cover; object-position: center top; }
 
 .posts--list { grid-template-columns: repeat(3, 1fr); margin-top: calc(var(--u) * 34); }
 .prose .posts--list .post__title { font-size: calc(var(--u) * 23.7); margin-top: calc(var(--u) * 16); }
@@ -800,7 +800,7 @@ a.outline { display: inline-block; }
   .share__btn svg { width: 18px; height: 18px; }
   .share__note { font-size: 12px; }
   .post-hero__photo { box-shadow: -10px 0 0 var(--lime); margin-left: 10px; }
-  .post-hero__photo img { aspect-ratio: 4 / 4.2; }
+  .post-hero__photo img { aspect-ratio: 711 / 689; }
   .posts--list { grid-template-columns: 1fr; margin-top: 28px; }
   .prose .posts--list .post__title { font-size: 24px; }
   .prose .post__excerpt { font-size: 15px; }
