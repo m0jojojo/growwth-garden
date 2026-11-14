@@ -46,22 +46,14 @@ const authorPhoto = (() => {
 // Small round author avatar (pill + author schema): public/assets/author-avatar.jpg if present, otherwise the main author photo.
 const authorAvatar = existsSync('public/assets/author-avatar.jpg') ? { src: '/assets/author-avatar.jpg', real: true } : authorPhoto;
 const icon = {
-  copy: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8.5" y="8.5" width="11" height="11" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M15.5 8.5v-3a1.5 1.5 0 00-1.5-1.5H5.5A1.5 1.5 0 004 5.5V14a1.5 1.5 0 001.5 1.5h3" fill="none" stroke="currentColor" stroke-width="1.7"/></svg>',
+  instagram: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="4.6" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="3.6" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="16.9" cy="7.1" r="1.1" fill="currentColor"/></svg>',
   linkedin: '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.9 8.9H3.7V20h3.2zM5.3 4a1.9 1.9 0 100 3.8 1.9 1.9 0 000-3.8zM20.3 20v-6.1c0-3-1.6-4.4-3.8-4.4-1.7 0-2.5 1-2.9 1.6V8.9h-3.2V20h3.2v-6.2c0-.3 0-.7.1-.9.3-.7.9-1.4 2-1.4 1.4 0 2 1.1 2 2.6V20z"/></svg>',
-  x: '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M17.7 3h3l-6.6 7.5L21.8 21h-6l-4.7-6.1L5.6 21h-3l7-8L2.2 3h6.1l4.2 5.6zm-1 16.2h1.7L7.4 4.7H5.6z"/></svg>',
-  facebook: '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M13.5 21v-7.5h2.6l.4-3h-3V8.6c0-.9.3-1.5 1.5-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4v2.2H7.8v3h2.6V21z"/></svg>',
-  whatsapp: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5a8.5 8.5 0 00-7.3 12.8L3.5 20.5l4.3-1.1A8.5 8.5 0 1012 3.5z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path fill="currentColor" d="M9 8.5c.3 2.6 2.9 5.2 5.5 5.5l1.1-1.1-1.9-1-.8.7c-.9-.4-1.6-1.1-2-2l.7-.8-1-1.9z"/></svg>',
 };
-const shareHtml = (url, title) => {
-  const u = encodeURIComponent(url), t = encodeURIComponent(title);
+const shareHtml = () => {
   const a = (label, href, svg) => `<a class="share__btn" href="${href}" target="_blank" rel="noopener noreferrer" aria-label="${label}">${svg}</a>`;
-  return `<div class="share" role="group" aria-label="Share this article">
-          <button class="share__btn" type="button" data-copy="${url}" aria-label="Copy link">${icon.copy}</button>
-          ${a('Share on LinkedIn', `https://www.linkedin.com/sharing/share-offsite/?url=${u}`, icon.linkedin)}
-          ${a('Share on X', `https://twitter.com/intent/tweet?url=${u}&text=${t}`, icon.x)}
-          ${a('Share on Facebook', `https://www.facebook.com/sharer/sharer.php?u=${u}`, icon.facebook)}
-          ${a('Share on WhatsApp', `https://wa.me/?text=${t}%20${u}`, icon.whatsapp)}
-          <span class="share__note" role="status" aria-live="polite"></span>
+  return `<div class="share" role="group" aria-label="Follow the author">
+          ${a('Follow on Instagram', 'https://www.instagram.com/_m0j0_j0jo/', icon.instagram)}
+          ${a('Connect on LinkedIn', 'https://www.linkedin.com/in/abhiyadav26', icon.linkedin)}
         </div>`;
 };
 
@@ -478,9 +470,9 @@ for (const p of pages) {
           <p class="post-hero__date"><time datetime="${art.modified}">${new Date(art.modified).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' })}</time> <span aria-hidden="true">&bull;</span> ${art.read}</p>
           <p class="author-pill"><img src="${authorAvatar.src}" alt="" width="76" height="76"><span>${art.author}</span></p>
         </div>
-        ${shareHtml(url, strip(p.h1))}
+        ${shareHtml()}
       </div>
-      <figure class="post-hero__photo"><img src="${authorPhoto.src}" alt="${authorPhoto.real ? 'Illustration of a laptop showing a website, surrounded by design and development icons' : ''}" width="711" height="689" fetchpriority="high"></figure>
+      <figure class="post-hero__photo"><img src="${authorPhoto.src}" alt="${authorPhoto.real ? 'Illustration of hands designing and coding a website on a laptop and a tablet' : ''}" width="736" height="736" fetchpriority="high"></figure>
     </div>` : `<div class="page-hero__text">
       <h1 class="page-hero__title">${p.h1}</h1>
       <p class="crumbs">${crumbHtml}</p>
@@ -513,7 +505,7 @@ for (const p of pages) {
   <link rel="preload" href="/fonts/anton-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/poppins-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-2PJVVDJ4FC');if(location.hostname==='growwthgarden.com')addEventListener('load',function(){var s=document.createElement('script');s.async=1;s.src='https://www.googletagmanager.com/gtag/js?id=G-2PJVVDJ4FC';document.head.appendChild(s)})</script>
-  <link rel="stylesheet" href="/css/style.min.css?v=31">
+  <link rel="stylesheet" href="/css/style.min.css?v=35">
 </head>
 <body class="page-content">
 
@@ -537,7 +529,7 @@ for (const p of pages) {
 
   <script defer src="/js/vendor/gsap.min.js"></script>
   <script defer src="/js/vendor/ScrollTrigger.min.js"></script>
-  <script defer src="/js/page.min.js?v=31"></script>
+  <script defer src="/js/page.min.js?v=35"></script>
 </body>
 </html>
 `;

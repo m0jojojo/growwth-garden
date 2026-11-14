@@ -141,16 +141,6 @@
   } else {
     skillBars.forEach(bar => (bar.style.width = bar.dataset.to + '%'));
   }
-  /* ---------- process: cards rise, their titles slide in from the left ---------- */
-  if (!reduce) {
-    document.querySelectorAll('.step').forEach((step, i) => {
-      const st = { trigger: '.steps', start: 'top 85%', once: true };
-      gsap.from(step, { y: 40, autoAlpha: 0, duration: .8, delay: i * .12, ease: 'power3.out', clearProps: 'all', scrollTrigger: st });
-      gsap.from(step.querySelector('.step__title span'), { xPercent: -40, autoAlpha: 0, duration: 1, delay: .3 + i * .12, ease: 'power3.out', clearProps: 'all', scrollTrigger: st });
-    });
-    gsap.from('.process__head > *', { y: 40, autoAlpha: 0, duration: .9, stagger: .15, ease: 'power3.out', clearProps: 'all',
-      scrollTrigger: { trigger: '.process__head', start: 'top 85%', once: true } });
-  }
   /* ---------- testimonials: looping carousel, 2 per view, one slide every few seconds (Swiper in the original) ---------- */
   const tTrack = document.querySelector('.testi__track');
   if (tTrack && !reduce) {

@@ -692,7 +692,7 @@ a.outline { display: inline-block; }
 .share__btn:hover, .share__btn:focus-visible { background: var(--lime); color: var(--dark); }
 .share__note { min-width: 1px; font-size: calc(var(--u) * 12); font-weight: 600; color: var(--lime); }
 .post-hero__photo { align-self: end; box-shadow: calc(var(--u) * -14) 0 0 var(--lime); background: var(--lime); }
-.post-hero__photo img { display: block; width: 100%; height: auto; aspect-ratio: 711 / 689; object-fit: cover; object-position: center top; }
+.post-hero__photo img { display: block; width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: cover; object-position: center top; }
 
 .posts--list { grid-template-columns: repeat(3, 1fr); margin-top: calc(var(--u) * 34); }
 .prose .posts--list .post__title { font-size: calc(var(--u) * 23.7); margin-top: calc(var(--u) * 16); }
@@ -800,7 +800,7 @@ a.outline { display: inline-block; }
   .share__btn svg { width: 18px; height: 18px; }
   .share__note { font-size: 12px; }
   .post-hero__photo { box-shadow: -10px 0 0 var(--lime); margin-left: 10px; }
-  .post-hero__photo img { aspect-ratio: 711 / 689; }
+  .post-hero__photo img { aspect-ratio: 1 / 1; }
   .posts--list { grid-template-columns: 1fr; margin-top: 28px; }
   .prose .posts--list .post__title { font-size: 24px; }
   .prose .post__excerpt { font-size: 15px; }
