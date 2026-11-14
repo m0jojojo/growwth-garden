@@ -37,6 +37,7 @@
     let ticking = false;
     const update = () => {
       ticking = false;
+      if (mq.matches) return; /* phones: the sidebar is collapsed, so skip the per-scroll layout reads that make touch scrolling jank */
       let cur = -1;
       heads.forEach((h, i) => { if (h && h.getBoundingClientRect().top <= innerHeight * .3) cur = i; });
       links.forEach((a, i) => a.classList.toggle('is-active', i === cur));
@@ -50,6 +51,7 @@
     };
     addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
     addEventListener('resize', update);
+    mq.addEventListener('change', update);
     update();
   }
 

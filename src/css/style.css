@@ -747,7 +747,7 @@ a.outline { display: inline-block; }
 .post-body figcaption { margin-top: calc(var(--u) * 8); text-align: center; font-size: calc(var(--u) * 12.5); color: #666; }
 .post-svgtxt { font-family: var(--font-body); fill: var(--dark); }
 
-.post-tbl { margin-top: calc(var(--u) * 22); overflow-x: auto; background: #fff; border: 1px solid #c4c4c4; -webkit-overflow-scrolling: touch; }
+.post-tbl { margin-top: calc(var(--u) * 22); overflow-x: auto; overscroll-behavior-x: contain; background: #fff; border: 1px solid #c4c4c4; -webkit-overflow-scrolling: touch; }
 .post-tbl table { width: 100%; min-width: calc(var(--u) * 560); border-collapse: collapse; font-size: calc(var(--u) * 13.5); line-height: 1.5; color: #4a4a4a; }
 .post-tbl caption { caption-side: top; padding: calc(var(--u) * 14) calc(var(--u) * 16) calc(var(--u) * 6); text-align: left; font-weight: 600; font-size: calc(var(--u) * 13); color: #666; }
 .post-tbl th { padding: calc(var(--u) * 11) calc(var(--u) * 16); background: var(--blue); color: #fff; text-align: left; font-family: var(--font-display); font-weight: 400; font-size: calc(var(--u) * 13); letter-spacing: .06em; text-transform: uppercase; white-space: nowrap; }
