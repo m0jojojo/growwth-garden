@@ -26,7 +26,7 @@
   <link rel="preload" href="/fonts/anton-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/poppins-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-2PJVVDJ4FC');if(location.hostname==='growwthgarden.com')addEventListener('load',function(){var s=document.createElement('script');s.async=1;s.src='https://www.googletagmanager.com/gtag/js?id=G-2PJVVDJ4FC';document.head.appendChild(s)})</script>
-  <link rel="stylesheet" href="/css/style.min.css?v=17">
+  <link rel="stylesheet" href="/css/style.min.css?v=24">
 </head>
 <body class="page-content">
 
@@ -73,9 +73,10 @@
     </div>
   </section>
 
-  <main class="prose">
+  <main class="prose prose--aside">
     <div class="about__noise" aria-hidden="true"></div>
-    <div class="container">
+    <div class="container"><div class="svc-layout">
+      <div class="svc-main">
       <p class="prose__lead">We build your SEO-ready website or app from scratch in just a few days. Every page is designed around your customers, coded clean and fast, and wired with AI automation so your work runs on its own from day one.</p>
 
       <h2 class="prose__h">What we build</h2>
@@ -126,6 +127,26 @@
         <p>Tell us what you want to build and we will come back with a plan.</p>
         <a class="btn btn--blue" href="/contact"><span>Discuss YOUR Brand</span></a>
       </div>
+      </div>
+      <aside class="svc-aside" aria-label="Website query form"><form class="form svc-form" action="/api/contact" method="post" novalidate>
+        <h2 class="form__title">Tell us about your business.</h2>
+        <label class="field"><span class="field__label">Name</span><input type="text" name="name" autocomplete="name" required></label>
+        <label class="field"><span class="field__label">Email Address</span><input type="email" name="email" autocomplete="email" required></label>
+        <label class="field"><span class="field__label">Phone / WhatsApp</span><input type="tel" name="phone" autocomplete="tel"></label>
+        <label class="field"><span class="field__label">Brand name</span><input type="text" name="brand"></label>
+        <fieldset class="choice">
+          <legend>Do you already have a domain?</legend>
+          <label><input type="radio" name="has_domain" value="Yes"><span>Yes</span></label>
+          <label><input type="radio" name="has_domain" value="No"><span>No</span></label>
+        </fieldset>
+        <label class="field field--domain" hidden><span class="field__label">Your domain (e.g. yourbrand.com)</span><input type="text" name="domain"></label>
+        <label class="field"><span class="field__label">Social links (Instagram, LinkedIn...)</span><input type="text" name="socials"></label>
+        <label class="field field--area"><span class="field__label">Extra notes (if any)</span><textarea name="notes" rows="3"></textarea></label>
+        <input class="form__trap" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <button class="btn form__btn" type="submit"><span>Send my query</span></button>
+        <p class="form__note" role="status" aria-live="polite"></p>
+      </form></aside>
+    </div>
     </div>
   </main>
 
@@ -182,6 +203,6 @@
 
   <script defer src="/js/vendor/gsap.min.js"></script>
   <script defer src="/js/vendor/ScrollTrigger.min.js"></script>
-  <script defer src="/js/page.min.js?v=17"></script>
+  <script defer src="/js/page.min.js?v=24"></script>
 </body>
 </html>

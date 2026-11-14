@@ -2,6 +2,10 @@
   "name": "growwth-garden",
   "compatibility_date": "2026-10-23",
   "main": "worker/index.js",
+  "routes": [
+    { "pattern": "growwthgarden.com", "custom_domain": true },
+    { "pattern": "www.growwthgarden.com", "custom_domain": true }
+  ],
   "assets": {
     "directory": "./public",
     "binding": "ASSETS"

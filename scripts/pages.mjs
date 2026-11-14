@@ -87,9 +87,30 @@ const leadFaq = [
   ['How do you handle leads once they come in?', 'We automate the flow so every inquiry is captured, qualified and followed up without you chasing it, using email, WhatsApp and CRM-style automations.'],
 ];
 
+// Sticky website-query form shown beside the body of the websites page (posts to /api/contact; src/js/page.js composes the message).
+const websiteForm = `<form class="form svc-form" action="/api/contact" method="post" novalidate>
+        <h2 class="form__title">Tell us about your business.</h2>
+        <label class="field"><span class="field__label">Name</span><input type="text" name="name" autocomplete="name" required></label>
+        <label class="field"><span class="field__label">Email Address</span><input type="email" name="email" autocomplete="email" required></label>
+        <label class="field"><span class="field__label">Phone / WhatsApp</span><input type="tel" name="phone" autocomplete="tel"></label>
+        <label class="field"><span class="field__label">Brand name</span><input type="text" name="brand"></label>
+        <fieldset class="choice">
+          <legend>Do you already have a domain?</legend>
+          <label><input type="radio" name="has_domain" value="Yes"><span>Yes</span></label>
+          <label><input type="radio" name="has_domain" value="No"><span>No</span></label>
+        </fieldset>
+        <label class="field field--domain" hidden><span class="field__label">Your domain (e.g. yourbrand.com)</span><input type="text" name="domain"></label>
+        <label class="field"><span class="field__label">Social links (Instagram, LinkedIn...)</span><input type="text" name="socials"></label>
+        <label class="field field--area"><span class="field__label">Extra notes (if any)</span><textarea name="notes" rows="3"></textarea></label>
+        <input class="form__trap" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <button class="btn form__btn" type="submit"><span>Send my query</span></button>
+        <p class="form__note" role="status" aria-live="polite"></p>
+      </form>`;
+
 const pages = [
   {
     path: '/services/websites-apps-ai',
+    aside: true,
     nav: '/services',
     title: 'Website, App & AI Development in Delhi | Growwth Garden',
     description: 'SEO-ready websites, apps, e-commerce and AI automations built fast and clean by Growwth Garden in Delhi. Talk to our team.',
@@ -490,7 +511,7 @@ for (const p of pages) {
   <link rel="preload" href="/fonts/anton-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/poppins-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-2PJVVDJ4FC');if(location.hostname==='growwthgarden.com')addEventListener('load',function(){var s=document.createElement('script');s.async=1;s.src='https://www.googletagmanager.com/gtag/js?id=G-2PJVVDJ4FC';document.head.appendChild(s)})</script>
-  <link rel="stylesheet" href="/css/style.min.css?v=17">
+  <link rel="stylesheet" href="/css/style.min.css?v=24">
 </head>
 <body class="page-content">
 
@@ -500,9 +521,13 @@ for (const p of pages) {
     ${heroText}
   </section>
 
-  <main class="prose${art ? ' prose--post' : ''}">
+  <main class="prose${art ? ' prose--post' : ''}${p.aside ? ' prose--aside' : ''}">
     <div class="about__noise" aria-hidden="true"></div>
-    <div class="container">${p.body}
+    <div class="container">${p.aside ? `<div class="svc-layout">
+      <div class="svc-main">${p.body}
+      </div>
+      <aside class="svc-aside" aria-label="Website query form">${websiteForm}</aside>
+    </div>` : p.body}
     </div>
   </main>
 
@@ -510,7 +535,7 @@ for (const p of pages) {
 
   <script defer src="/js/vendor/gsap.min.js"></script>
   <script defer src="/js/vendor/ScrollTrigger.min.js"></script>
-  <script defer src="/js/page.min.js?v=17"></script>
+  <script defer src="/js/page.min.js?v=24"></script>
 </body>
 </html>
 `;
