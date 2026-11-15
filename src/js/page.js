@@ -87,6 +87,75 @@
     });
   }
 
+  /* website cost calculator (cost guide post): every range comes from the guide's own tables */
+  const calc = document.querySelector('.calc');
+  if (calc) {
+    // type: [hours low, hours high, default pages, default hosting, build time, build time with AI]
+    // hours are set so that a small agency (₹1,000 – ₹2,000 / hr) lands in the type's price range from section 1
+    const TYPES = {
+      template: [10, 15, 5, 'shared', 'Days to 2 weeks', '2–4 hours'],
+      landing: [15, 30, 1, 'shared', '1–3 weeks', '2–6 hours'],
+      basic: [40, 50, 8, 'shared', '2–6 weeks', '2–3 days'],
+      smb: [50, 100, 15, 'shared', '4–8 weeks', '3–4 days'],
+      corporate: [120, 300, 25, 'vps', '6–10 weeks', '1–2 weeks'],
+      ecom: [80, 400, 15, 'vps', '8–16 weeks', '1–2 weeks'],
+      marketplace: [600, 1000, 25, 'cloud', '12–20 weeks', '3–4 weeks'],
+      app: [300, 1250, 15, 'cloud', '3–6 months', '1–1.5 months'],
+      enterprise: [1500, 5000, 50, 'dedicated', '4–12 months', '2–3 months'],
+    };
+    // hourly rates from section 5
+    const BUILDERS = { freelancer: [500, 2000, 'freelancer'], agency: [1000, 2000, 'small agency'], full: [1000, 5000, 'full-service agency'] };
+    const HOSTING = { shared: [2000, 10000], vps: [10000, 50000], cloud: [30000, 100000], dedicated: [96000, 360000] };
+    const SEO = { none: [0, 0], basic: [8000, 30000], agency: [15000, 100000] };
+    const ADDONS = { media: [10000, 100000, 'Photography / video'], logo: [1500, 5000, 'Logo design'], legal: [10000, 50000, 'Privacy policy and terms'], a11y: [30000, 150000, 'Accessibility compliance'] };
+
+    const round = n => n < 1000 ? Math.round(n / 10) * 10 : n < 10000 ? Math.round(n / 100) * 100 : Math.round(n / 1000) * 1000;
+    const inr = n => '₹' + round(n).toLocaleString('en-IN');
+    const range = ([a, b]) => a === b ? inr(a) : inr(a) + ' – ' + inr(b);
+    const add = (x, y) => [x[0] + y[0], x[1] + y[1]];
+    const scale = (x, k) => [x[0] * k, x[1] * k];
+    const sum = ls => ls.reduce((s, l) => add(s, l[1]), [0, 0]);
+    const out = k => calc.querySelector(`[data-out="${k}"]`);
+    const f = calc.elements;
+
+    const update = () => {
+      const t = TYPES[f.type.value], b = BUILDERS[f.builder.value];
+      const once = [], yearly = [];
+      once.push([`Build: ${t[0]}–${t[1]} hrs at ₹${b[0].toLocaleString('en-IN')}–${b[1].toLocaleString('en-IN')} / hr (${b[2]})`, [t[0] * b[0], t[1] * b[1]]]);
+      once.push(f.design.value === 'custom' ? ['Custom design', [30000, 80000]] : ['Premium theme', [3000, 10000]]);
+      const pages = Math.min(200, Math.max(1, parseInt(f.pages.value, 10) || 1));
+      if (f.copy.checked) once.push([`Copywriting (${pages} page${pages > 1 ? 's' : ''})`, [2000 * pages, 10000 * pages]]);
+      for (const k in ADDONS) if (f[k].checked) once.push([ADDONS[k][2], ADDONS[k].slice(0, 2)]);
+      if (f.buffer.checked) once.push(['20% contingency', scale(sum(once), .2)]);
+
+      yearly.push(['Domain', [500, 2000]], ['Hosting', HOSTING[f.hosting.value]]);
+      if (f.maint.checked) { const base = add(once[0][1], once[1][1]); yearly.push(['Maintenance (15–20% of build)', [base[0] * .15, base[1] * .2]]); }
+      if (f.email.checked) yearly.push(['Business email', [12000, 60000]]);
+      if (f.seo.value !== 'none') yearly.push(['SEO', scale(SEO[f.seo.value], 12)]);
+
+      // running costs are shown per month or per year; the year-one total always uses the yearly figure
+      const monthly = f.period.value === 'month', per = monthly ? ' / month' : ' / year';
+      const running = yearly.map(([n, v]) => [n + per, monthly ? scale(v, 1 / 12) : v]);
+      const gst = f.gst.checked ? 1.18 : 1;
+      if (gst > 1) { once.push(['18% GST on the build', scale(sum(once), .18)]); running.push(['18% GST' + per, scale(sum(running), .18)]); }
+
+      const build = sum(once), runYear = scale(sum(yearly), gst);
+      out('build').textContent = range(build);
+      out('runlabel').textContent = monthly ? 'Running costs per month' : 'Running costs per year';
+      out('run').textContent = range(sum(running));
+      out('total').textContent = range(add(build, runYear));
+      out('time').textContent = `${t[4]} (${t[5]} with AI)`;
+      out('lines').innerHTML = [...once, ...running].map(([n, v]) => `<li><span>${n}</span><b>${range(v)}</b></li>`).join('');
+    };
+
+    f.type.addEventListener('change', () => { const t = TYPES[f.type.value]; f.pages.value = t[2]; f.hosting.value = t[3]; });
+    f.pages.addEventListener('input', () => { f.copy.checked = true; });
+    calc.addEventListener('input', update);
+    calc.addEventListener('change', update);
+    calc.addEventListener('submit', e => e.preventDefault());
+    update();
+  }
+
   if (!window.gsap || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   gsap.registerPlugin(ScrollTrigger);
   gsap.timeline({ defaults: { ease: 'power3.out' }, delay: .1 })

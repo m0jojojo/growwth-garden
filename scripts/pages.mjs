@@ -405,9 +405,9 @@ const pages = [
       <p class="prose__lead">Practical guides on websites, branding and lead generation, written by the team that does the work.</p>
       <div class="posts posts--list">
         <article class="post">
-          <a class="post__thumb" href="/blog/website-development-cost-in-india" aria-label="Website Development Cost in India 2026"><img src="/assets/blog-website-cost.jpg" alt="" loading="lazy" width="736" height="736"></a>
+          <a class="post__thumb" href="/blog/website-development-cost-in-india" aria-label="Website Development Cost in India 2027"><img src="/assets/blog-website-cost.jpg" alt="" loading="lazy" width="736" height="736"></a>
           <div class="post__meta"><span>3 Nov 2026</span><span>12 min read</span></div>
-          <h2 class="post__title"><a href="/blog/website-development-cost-in-india">How Much Does Website Development Cost in India in 2026?</a></h2>
+          <h2 class="post__title"><a href="/blog/website-development-cost-in-india">How Much Does Website Development Cost in India in 2027?</a></h2>
           <p class="post__excerpt">A full price guide in rupees: cost by website type, platform, page count, freelancer vs agency, hosting, maintenance and hidden costs.</p>
         </article>
       </div>`,
@@ -415,10 +415,10 @@ const pages = [
   {
     path: '/blog/website-development-cost-in-india',
     nav: '/blog',
-    article: { category: 'Websites', published: '2026-11-03', modified: '2026-11-03', author: 'Abhijeet', read: '12 min read', keywords: 'website creation cost in India, website development cost in India, website cost in India 2026' },
-    title: 'Website Development Cost in India 2026: Price Guide | Growwth Garden',
-    description: 'How much does website development cost in India in 2026? Compare prices by site type, platform, freelancer vs agency, hosting, maintenance and hidden costs.',
-    h1: 'How Much Does Website Development Cost in India in <em>2026?</em>',
+    article: { category: 'Websites', published: '2026-11-03', modified: '2026-11-03', author: 'Abhijeet', read: '12 min read', keywords: 'website creation cost in India, website development cost in India, website cost in India 2027' },
+    title: 'Website Development Cost in India 2027: Price Guide | Growwth Garden',
+    description: 'How much does website development cost in India in 2027? Compare prices by site type, platform, freelancer vs agency, hosting, maintenance and hidden costs.',
+    h1: 'How Much Does Website Development Cost in India in <em>2027?</em>',
     crumbs: [['Home', '/'], ['Blog', '/blog'], ['Website Development Cost in India']],
     body: readFileSync('src/posts/website-development-cost-in-india.html', 'utf8'),
   },
@@ -505,7 +505,7 @@ for (const p of pages) {
   <link rel="preload" href="/fonts/anton-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/poppins-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-2PJVVDJ4FC');if(location.hostname==='growwthgarden.com')addEventListener('load',function(){var s=document.createElement('script');s.async=1;s.src='https://www.googletagmanager.com/gtag/js?id=G-2PJVVDJ4FC';document.head.appendChild(s)})</script>
-  <link rel="stylesheet" href="/css/style.min.css?v=35">
+  <link rel="stylesheet" href="/css/style.min.css?v=36">
 </head>
 <body class="page-content">
 
@@ -529,7 +529,7 @@ for (const p of pages) {
 
   <script defer src="/js/vendor/gsap.min.js"></script>
   <script defer src="/js/vendor/ScrollTrigger.min.js"></script>
-  <script defer src="/js/page.min.js?v=35"></script>
+  <script defer src="/js/page.min.js?v=36"></script>
 </body>
 </html>
 `;
