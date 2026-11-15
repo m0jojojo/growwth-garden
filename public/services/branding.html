@@ -73,9 +73,10 @@
     </div>
   </section>
 
-  <main class="prose">
+  <main class="prose prose--aside">
     <div class="about__noise" aria-hidden="true"></div>
-    <div class="container">
+    <div class="container"><div class="svc-layout">
+      <div class="svc-main">
       <p class="prose__lead">Your story, your look, your voice, shaped so the market knows who you are long before the ad budget kicks in.</p>
 
       <h2 class="prose__h">What branding covers</h2>
@@ -128,6 +129,26 @@
         <p>Tell us about your business and we will suggest where to start.</p>
         <a class="btn btn--blue" href="/contact"><span>Discuss YOUR Brand</span></a>
       </div>
+      </div>
+      <aside class="svc-aside" aria-label="Query form"><form class="form svc-form" action="/api/contact" method="post" novalidate data-topic="Branding query" data-source="Branding" data-event="branding_query">
+        <h2 class="form__title">Tell us about your business.</h2>
+        <label class="field"><span class="field__label">Name</span><input type="text" name="name" autocomplete="name" required></label>
+        <label class="field"><span class="field__label">Email Address</span><input type="email" name="email" autocomplete="email" required></label>
+        <label class="field"><span class="field__label">Phone / WhatsApp</span><input type="tel" name="phone" autocomplete="tel"></label>
+        <label class="field"><span class="field__label">Brand name</span><input type="text" name="brand" data-label="Brand name" autocomplete="organization"></label>
+        <fieldset class="choice" data-label="Do you already have a logo or brand identity?">
+          <legend>Do you already have a logo or brand identity?</legend>
+          <label><input type="radio" name="has_brand" value="Yes"><span>Yes</span></label>
+          <label><input type="radio" name="has_brand" value="No"><span>No</span></label>
+        </fieldset>
+        <label class="field"><span class="field__label">What do you need? (new brand, refresh...)</span><input type="text" name="need" data-label="What do you need?"></label>
+        <label class="field"><span class="field__label">Website or social links</span><input type="text" name="socials" data-label="Website or social links"></label>
+        <label class="field field--area"><span class="field__label">Extra notes (if any)</span><textarea name="notes" rows="3" data-label="Extra notes"></textarea></label>
+        <input class="form__trap" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <button class="btn form__btn" type="submit"><span>Send my query</span></button>
+        <p class="form__note" role="status" aria-live="polite"></p>
+      </form></aside>
+    </div>
     </div>
   </main>
 

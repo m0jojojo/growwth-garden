@@ -73,9 +73,10 @@
     </div>
   </section>
 
-  <main class="prose">
+  <main class="prose prose--aside">
     <div class="about__noise" aria-hidden="true"></div>
-    <div class="container">
+    <div class="container"><div class="svc-layout">
+      <div class="svc-main">
       <p class="prose__lead">We start by identifying your ideal customers, mapping their demographics and where they spend time online. Then we set up the right lead channels and automate the flow, so every inquiry is captured, qualified and followed up without you chasing it.</p>
 
       <h2 class="prose__h">Channels we run</h2>
@@ -127,6 +128,26 @@
         <p>Tell us who your ideal customer is and we will map out the channels to reach them.</p>
         <a class="btn btn--blue" href="/contact"><span>Discuss YOUR Brand</span></a>
       </div>
+      </div>
+      <aside class="svc-aside" aria-label="Query form"><form class="form svc-form" action="/api/contact" method="post" novalidate data-topic="Lead generation query" data-source="Lead Generation" data-event="lead_generation_query">
+        <h2 class="form__title">Tell us about your business.</h2>
+        <label class="field"><span class="field__label">Name</span><input type="text" name="name" autocomplete="name" required></label>
+        <label class="field"><span class="field__label">Email Address</span><input type="email" name="email" autocomplete="email" required></label>
+        <label class="field"><span class="field__label">Phone / WhatsApp</span><input type="tel" name="phone" autocomplete="tel"></label>
+        <label class="field"><span class="field__label">Brand name</span><input type="text" name="brand" data-label="Brand name" autocomplete="organization"></label>
+        <label class="field"><span class="field__label">Website or social links</span><input type="text" name="site_url" data-label="Website or social links"></label>
+        <label class="field"><span class="field__label">Who is your ideal customer?</span><input type="text" name="icp" data-label="Who is your ideal customer?"></label>
+        <fieldset class="choice" data-label="Are you running ads right now?">
+          <legend>Are you running ads right now?</legend>
+          <label><input type="radio" name="running_ads" value="Yes"><span>Yes</span></label>
+          <label><input type="radio" name="running_ads" value="No"><span>No</span></label>
+        </fieldset>
+        <label class="field field--area"><span class="field__label">Extra notes (if any)</span><textarea name="notes" rows="3" data-label="Extra notes"></textarea></label>
+        <input class="form__trap" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <button class="btn form__btn" type="submit"><span>Send my query</span></button>
+        <p class="form__note" role="status" aria-live="polite"></p>
+      </form></aside>
+    </div>
     </div>
   </main>
 

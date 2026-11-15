@@ -81,30 +81,39 @@ const leadFaq = [
   ['How do you handle leads once they come in?', 'We automate the flow so every inquiry is captured, qualified and followed up without you chasing it, using email, WhatsApp and CRM-style automations.'],
 ];
 
-// Sticky website-query form shown beside the body of the websites page (posts to /api/contact; src/js/page.js composes the message).
-const websiteForm = `<form class="form svc-form" action="/api/contact" method="post" novalidate>
+// Sticky query form shown beside the body of each service page (posts to /api/contact; src/js/page.js composes the message
+// from every field that has a data-label, and uses data-topic / data-source / data-event for the subject and analytics).
+const choice = (name, label, options) => `<fieldset class="choice" data-label="${label}">
+          <legend>${label}</legend>
+          ${options.map(o => `<label><input type="radio" name="${name}" value="${o}"><span>${o}</span></label>`).join('\n          ')}
+        </fieldset>`;
+const field = (name, label, attrs = '') => `<label class="field"><span class="field__label">${label}</span><input type="text" name="${name}" data-label="${label.replace(/ \(.*\)$/, '')}"${attrs}></label>`;
+const serviceForm = (topic, source, event, fields) => `<form class="form svc-form" action="/api/contact" method="post" novalidate data-topic="${topic}" data-source="${source}" data-event="${event}">
         <h2 class="form__title">Tell us about your business.</h2>
         <label class="field"><span class="field__label">Name</span><input type="text" name="name" autocomplete="name" required></label>
         <label class="field"><span class="field__label">Email Address</span><input type="email" name="email" autocomplete="email" required></label>
         <label class="field"><span class="field__label">Phone / WhatsApp</span><input type="tel" name="phone" autocomplete="tel"></label>
-        <label class="field"><span class="field__label">Brand name</span><input type="text" name="brand"></label>
-        <fieldset class="choice">
-          <legend>Do you already have a domain?</legend>
-          <label><input type="radio" name="has_domain" value="Yes"><span>Yes</span></label>
-          <label><input type="radio" name="has_domain" value="No"><span>No</span></label>
-        </fieldset>
-        <label class="field field--domain" hidden><span class="field__label">Your domain (e.g. yourbrand.com)</span><input type="text" name="domain"></label>
-        <label class="field"><span class="field__label">Social links (Instagram, LinkedIn...)</span><input type="text" name="socials"></label>
-        <label class="field field--area"><span class="field__label">Extra notes (if any)</span><textarea name="notes" rows="3"></textarea></label>
+        ${field('brand', 'Brand name', ' autocomplete="organization"')}
+        ${fields}
+        <label class="field field--area"><span class="field__label">Extra notes (if any)</span><textarea name="notes" rows="3" data-label="Extra notes"></textarea></label>
         <input class="form__trap" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
         <button class="btn form__btn" type="submit"><span>Send my query</span></button>
         <p class="form__note" role="status" aria-live="polite"></p>
       </form>`;
+const websiteForm = serviceForm('Website query', 'Websites, Apps & AI Systems', 'website_query', `${choice('has_domain', 'Do you already have a domain?', ['Yes', 'No'])}
+        <label class="field field--domain" hidden><span class="field__label">Your domain (e.g. yourbrand.com)</span><input type="text" name="domain" data-label="Domain"></label>
+        ${field('socials', 'Social links (Instagram, LinkedIn...)')}`);
+const brandingForm = serviceForm('Branding query', 'Branding', 'branding_query', `${choice('has_brand', 'Do you already have a logo or brand identity?', ['Yes', 'No'])}
+        ${field('need', 'What do you need? (new brand, refresh...)')}
+        ${field('socials', 'Website or social links')}`);
+const leadForm = serviceForm('Lead generation query', 'Lead Generation', 'lead_generation_query', `${field('site_url', 'Website or social links')}
+        ${field('icp', 'Who is your ideal customer?')}
+        ${choice('running_ads', 'Are you running ads right now?', ['Yes', 'No'])}`);
 
 const pages = [
   {
     path: '/services/websites-apps-ai',
-    aside: true,
+    aside: websiteForm,
     nav: '/services',
     title: 'Website, App & AI Development in Delhi | Growwth Garden',
     description: 'SEO-ready websites, apps, e-commerce and AI automations built fast and clean by Growwth Garden in Delhi. Talk to our team.',
@@ -149,6 +158,7 @@ const pages = [
   },
   {
     path: '/services/branding',
+    aside: brandingForm,
     nav: '/services',
     title: 'Branding Services in Delhi | Growwth Garden',
     description: 'Brand strategy, identity, rebranding and content from Growwth Garden in Delhi. Shape a brand the market knows before the ads start.',
@@ -195,6 +205,7 @@ const pages = [
   },
   {
     path: '/services/lead-generation',
+    aside: leadForm,
     nav: '/services',
     title: 'Lead Generation in Delhi: SEO, Social & Ads | Growwth Garden',
     description: 'Lead generation from Growwth Garden in Delhi: SEO, AEO, GEO, social, performance marketing and automated follow-up.',
@@ -520,7 +531,7 @@ for (const p of pages) {
     <div class="container">${p.aside ? `<div class="svc-layout">
       <div class="svc-main">${p.body}
       </div>
-      <aside class="svc-aside" aria-label="Website query form">${websiteForm}</aside>
+      <aside class="svc-aside" aria-label="Query form">${p.aside}</aside>
     </div>` : p.body}
     </div>
   </main>

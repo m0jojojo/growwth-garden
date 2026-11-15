@@ -128,20 +128,20 @@
         <a class="btn btn--blue" href="/contact"><span>Discuss YOUR Brand</span></a>
       </div>
       </div>
-      <aside class="svc-aside" aria-label="Website query form"><form class="form svc-form" action="/api/contact" method="post" novalidate>
+      <aside class="svc-aside" aria-label="Query form"><form class="form svc-form" action="/api/contact" method="post" novalidate data-topic="Website query" data-source="Websites, Apps & AI Systems" data-event="website_query">
         <h2 class="form__title">Tell us about your business.</h2>
         <label class="field"><span class="field__label">Name</span><input type="text" name="name" autocomplete="name" required></label>
         <label class="field"><span class="field__label">Email Address</span><input type="email" name="email" autocomplete="email" required></label>
         <label class="field"><span class="field__label">Phone / WhatsApp</span><input type="tel" name="phone" autocomplete="tel"></label>
-        <label class="field"><span class="field__label">Brand name</span><input type="text" name="brand"></label>
-        <fieldset class="choice">
+        <label class="field"><span class="field__label">Brand name</span><input type="text" name="brand" data-label="Brand name" autocomplete="organization"></label>
+        <fieldset class="choice" data-label="Do you already have a domain?">
           <legend>Do you already have a domain?</legend>
           <label><input type="radio" name="has_domain" value="Yes"><span>Yes</span></label>
           <label><input type="radio" name="has_domain" value="No"><span>No</span></label>
         </fieldset>
-        <label class="field field--domain" hidden><span class="field__label">Your domain (e.g. yourbrand.com)</span><input type="text" name="domain"></label>
-        <label class="field"><span class="field__label">Social links (Instagram, LinkedIn...)</span><input type="text" name="socials"></label>
-        <label class="field field--area"><span class="field__label">Extra notes (if any)</span><textarea name="notes" rows="3"></textarea></label>
+        <label class="field field--domain" hidden><span class="field__label">Your domain (e.g. yourbrand.com)</span><input type="text" name="domain" data-label="Domain"></label>
+        <label class="field"><span class="field__label">Social links (Instagram, LinkedIn...)</span><input type="text" name="socials" data-label="Social links"></label>
+        <label class="field field--area"><span class="field__label">Extra notes (if any)</span><textarea name="notes" rows="3" data-label="Extra notes"></textarea></label>
         <input class="form__trap" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
         <button class="btn form__btn" type="submit"><span>Send my query</span></button>
         <p class="form__note" role="status" aria-live="polite"></p>
