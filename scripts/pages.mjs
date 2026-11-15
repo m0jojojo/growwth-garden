@@ -416,7 +416,7 @@ const pages = [
       <p class="prose__lead">Practical guides on websites, branding and lead generation, written by the team that does the work.</p>
       <div class="posts posts--list">
         <article class="post">
-          <a class="post__thumb" href="/blog/website-development-cost-in-india" aria-label="Website Development Cost in India 2027"><img src="/assets/blog-website-cost-v2.jpg" alt="" loading="lazy" width="736" height="736"></a>
+          <a class="post__thumb" href="/blog/website-development-cost-in-india" aria-label="Website Development Cost in India 2027"><img src="/assets/website-development-cost-india.jpg" alt="Website development in progress: a developer codes on a laptop while a designer sketches the layout on a tablet" loading="lazy" width="736" height="736"></a>
           <div class="post__meta"><span>15 Nov 2026</span><span>12 min read</span></div>
           <h2 class="post__title"><a href="/blog/website-development-cost-in-india">How Much Does Website Development Cost in India in 2027?</a></h2>
           <p class="post__excerpt">A full price guide in rupees: cost by website type, platform, page count, freelancer vs agency, hosting, maintenance and hidden costs.</p>
@@ -483,7 +483,7 @@ for (const p of pages) {
         </div>
         ${shareHtml()}
       </div>
-      <figure class="post-hero__photo"><img src="/assets/blog-website-cost-v2.jpg" alt="Illustration of hands designing and coding a website on a laptop and a tablet" width="736" height="736" fetchpriority="high"></figure>
+      <figure class="post-hero__photo"><img src="/assets/website-development-cost-india.jpg" alt="Website development in progress: a developer codes on a laptop while a designer sketches the layout on a tablet" width="736" height="736" fetchpriority="high"></figure>
     </div>` : `<div class="page-hero__text">
       <h1 class="page-hero__title">${p.h1}</h1>
       <p class="crumbs">${crumbHtml}</p>
