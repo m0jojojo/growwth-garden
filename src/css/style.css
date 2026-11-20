@@ -962,3 +962,50 @@ a.outline { display: inline-block; }
 .svc-form .form__note { color: #aab57a; }
 .svc-form .form__note.is-error { color: #e3a0a0; }
 .svc-form input:-webkit-autofill { -webkit-text-fill-color: #e4e1da; box-shadow: 0 0 0 100px #2c2e36 inset; }
+
+/* ---------- portfolio deck: each PDF page is a sticky slide that stacks over the one before ---------- */
+.prose--deck { padding-bottom: calc(var(--u) * 60); overflow: visible; }
+.prose--deck .container { width: auto; }
+.deck__intro { width: calc(var(--u) * 992); max-width: calc(100% - 32px); margin: 0 auto calc(var(--u) * 40); display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: calc(var(--u) * 20) calc(var(--u) * 40); }
+.deck__intro p { max-width: calc(var(--u) * 560); font-size: calc(var(--u) * 15); line-height: 1.7; color: #4a4a4a; }
+.deck__intro .btn { margin: 0; }
+.deck__progress { position: sticky; top: 0; z-index: 30; height: 4px; margin: 0 auto calc(var(--u) * 24); width: min(92vw, 1180px); background: rgba(20, 32, 192, .15); }
+.deck__progress i { display: block; height: 100%; width: 100%; background: var(--blue); transform-origin: 0 50%; transform: scaleX(0); }
+.deck__list { list-style: none; margin: 0; padding: 0; }
+.deck__slide { --w: min(92vw, 1180px); position: sticky; top: max(18px, calc((100vh - var(--w) * .5625) / 2)); width: var(--w); margin: 0 auto 28vh; }
+.deck__slide:last-child { margin-bottom: 0; }
+.deck__card { position: relative; display: block; overflow: hidden; border-radius: calc(var(--u) * 18); background: #fff; box-shadow: 0 30px 70px -30px rgba(20, 32, 192, .45), 0 2px 0 rgba(0, 0, 0, .04); transform-origin: 50% 0; will-change: transform; }
+.deck__card img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; }
+.deck__n { position: absolute; right: calc(var(--u) * 14); bottom: calc(var(--u) * 14); padding: calc(var(--u) * 5) calc(var(--u) * 10); border-radius: 99px; background: var(--dark); color: var(--lime); font-family: var(--font-display); font-size: calc(var(--u) * 12); letter-spacing: .12em; opacity: .9; }
+.deck__zoom { position: absolute; left: calc(var(--u) * 14); bottom: calc(var(--u) * 14); padding: calc(var(--u) * 5) calc(var(--u) * 10); border-radius: 99px; background: rgba(36, 36, 36, .85); color: #fff; font-size: calc(var(--u) * 11); font-weight: 600; opacity: 0; transition: opacity .25s; }
+.deck__card:hover .deck__zoom, .deck__card:focus-visible .deck__zoom { opacity: 1; }
+.deck__card:focus-visible { outline: 3px solid var(--blue); outline-offset: 4px; }
+.deck__end { width: calc(var(--u) * 992); max-width: calc(100% - 32px); margin: calc(var(--u) * 90) auto 0; padding: calc(var(--u) * 46) calc(var(--u) * 50); background: var(--blue); color: #fff; border-radius: calc(var(--u) * 18); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: calc(var(--u) * 24); }
+.deck__end h2 { font-family: var(--font-display); font-size: calc(var(--u) * 40); line-height: 1.05; text-transform: uppercase; }
+.deck__end h2 em { font-style: normal; color: var(--lime); }
+.prose .deck__end p { margin-top: calc(var(--u) * 10); font-size: calc(var(--u) * 14); color: #fff; }
+.deck__end .btn { margin: 0; color: #fff; }
+.deck__end-actions { display: flex; flex-wrap: wrap; gap: calc(var(--u) * 12); }
+@media (max-width: 900px) {
+  .deck__intro { margin-bottom: 28px; gap: 18px; }
+  .deck__intro p { max-width: none; font-size: 15px; }
+  .deck__progress { margin-bottom: 18px; }
+  .deck__slide { --w: calc(100vw - 32px); margin-bottom: 18vh; }
+  .deck__card { border-radius: 12px; }
+  .deck__n { right: 8px; bottom: 8px; padding: 3px 8px; font-size: 10px; }
+  .deck__zoom { display: none; }
+  .deck__end { margin-top: 60px; padding: 30px 22px; border-radius: 14px; }
+  .deck__end h2 { font-size: 30px; }
+  .prose .deck__end p { font-size: 15px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .deck__slide { position: relative; top: auto; margin-bottom: 32px; }
+}
+/* solid lime button (homepage hero: View Portfolio) */
+.btn--lime { background: var(--lime); border-color: var(--lime); color: var(--dark); }
+.btn--lime:hover { background: transparent; color: var(--lime); }
+.btn--lime svg circle { fill: var(--dark); }
+.btn--lime:hover svg circle { fill: var(--lime); }
+.btn--lime:hover svg path { stroke: var(--dark); }
+.hero__right .btn--lime { margin-top: calc(var(--u) * 12); }
+@media (max-width: 900px) { .hero__right .btn--lime { margin-top: 0; } }

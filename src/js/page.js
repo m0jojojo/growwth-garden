@@ -246,5 +246,25 @@
     .from('.header', { y: -30, autoAlpha: 0, duration: .8 })
     .from('.page-hero__title', { y: -40, autoAlpha: 0, duration: .9 }, .15)
     .from('.crumbs', { y: -20, autoAlpha: 0, duration: .8 }, .4);
+  /* portfolio deck: slides rise in as they arrive, the one underneath settles back, and a bar tracks progress */
+  const deck = document.querySelector('.deck__list');
+  if (deck) {
+    const slides = [...deck.querySelectorAll('.deck__slide')];
+    gsap.to('.deck__progress i', { scaleX: 1, ease: 'none', scrollTrigger: { trigger: deck, start: 'top center', end: 'bottom bottom', scrub: true } });
+    gsap.from('.deck__intro > *', { y: 30, autoAlpha: 0, duration: .9, stagger: .12, ease: 'power3.out', clearProps: 'all' });
+    slides.forEach((slide, i) => {
+      const card = slide.querySelector('.deck__card');
+      const stickTop = () => parseFloat(getComputedStyle(slide).top) || 0;
+      // arrive: rise, straighten and grow into place while scrolling in
+      if (i) gsap.fromTo(card, { y: 90, rotation: i % 2 ? 1.6 : -1.6, scale: .94 }, { y: 0, rotation: 0, scale: 1, ease: 'none',
+        scrollTrigger: { trigger: slide, start: 'top bottom', end: () => 'top ' + (stickTop() + 40) + 'px', scrub: .6, invalidateOnRefresh: true } });
+      else gsap.from(card, { y: 50, scale: .96, autoAlpha: 0, duration: 1, ease: 'power3.out' });
+      // leave: once the next slide comes up, this one shrinks back and peeks out above it
+      const next = slides[i + 1];
+      if (next) gsap.to(card, { scale: .92, y: -22, ease: 'none',
+        scrollTrigger: { trigger: next, start: 'top bottom', end: () => 'top ' + stickTop() + 'px', scrub: .6, invalidateOnRefresh: true } });
+    });
+    gsap.from('.deck__end', { y: 60, autoAlpha: 0, duration: .9, ease: 'power3.out', clearProps: 'all', scrollTrigger: { trigger: '.deck__end', start: 'top 85%', once: true } });
+  }
   gsap.from('.footer__grid > *', { y: 40, autoAlpha: 0, duration: .9, stagger: .12, ease: 'power3.out', clearProps: 'all', scrollTrigger: { trigger: '.footer', start: 'top 85%', once: true } });
 })();

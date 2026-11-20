@@ -110,6 +110,54 @@ const leadForm = serviceForm('Lead generation query', 'Lead Generation', 'lead_g
         ${field('icp', 'Who is your ideal customer?')}
         ${choice('running_ads', 'Are you running ads right now?', ['Yes', 'No'])}`);
 
+
+// Portfolio deck: each page of the brand portfolio PDF is a pixel-exact image (public/assets/portfolio, 1200 and 2400 px WebP),
+// with descriptive alt text and the page's own words in hidden text so search engines and screen readers get the content too.
+const SLIDES = [
+  ['Growwth Garden brand portfolio cover: the agency name on a blue panel beside a team working on laptops, with the line "We make sure that the grass is greener on your side"', 'Growwth Garden. Ideas meet strategy. For the better. We make sure that the grass is greener on your side. www.growwthgarden.com, growwthgarden@gmail.com.'],
+  ['"So, who are we and why we should work together?" beside a lime panel with the GROWWTH logotype', 'So, who are we and why we should work together? We scale businesses by combining tech, branding and AI under one roof. We make sure that you get a hold of the audience your business has been sleeping on. We do not just give viral content but full business strategy to turn it into a revenue generating machine.'],
+  ['"What do we bring on the table?" with eight service tiles in blue and lime', 'What do we bring on the table? Website design and development. Lead generation and demand generation. Social media growth plus SEO, AEO and GEO. AI automations and custom AI agents. Performance marketing setup and management. App design and development. E-commerce stores, build and management. Email, WhatsApp and AI call CRM automations.'],
+  ['"So, how do we plan to scale your business?" with the five steps Discover, Strategize, Create, Execute and Optimize', 'So, how do we plan to scale your business? Discover: understand your business, audience, goals and market. Strategize: develop a tailored marketing plan with clear objectives and KPIs. Create: produce compelling website, branding, content and campaign assets. Execute: launch integrated campaigns across the most effective channels. Optimize: monitor performance, refine strategies and maximise ROI through continuous improvement.'],
+  ['"We know you want proofs" with Instagram insight screenshots showing 1,764,559 views and 892,270 account views', 'We know you want proofs. Content growth: 1,600 to 29k followers in just 60 days with 2 million+ views. A single reel reached 1,764,559 views and 40,063 viewers. Account insights show 892,270 views, 96.3% from reels.'],
+  ['"Online Store and App Concept Designs": a home-decor online store design and a multi-service consumer app design', 'Online store and app concept designs: an e-commerce store for curated home objects, and an all-in-one consumer app covering home services, restaurants, taxi services, supermarket and health care.'],
+  ['"Website UI/UX Concept Designs": four website designs for a snack brand, a WhatsApp follow-up tool, a packaging company and a clothing label', 'Website UI/UX concept designs: a snack brand site, a WhatsApp follow-up SaaS site, a corrugated packaging manufacturer site and a slow-fashion clothing store.'],
+  ['"Founder\'s Branding: LinkedIn Highlights" with LinkedIn profile cards showing about 89,876 and 88,021 followers', 'Founder\'s branding, LinkedIn highlights: a Forbes 30 Under 30 founder profile with 89,876 followers, and the company page with 88,021 followers.'],
+  ['"Portfolio Highlights" table of clients, industries and services', 'Portfolio highlights. IN\'A SHOT, D2C: brand launch, end to end. IGYAAN AI, Ed-Tech: app development. Wooden Work, machine tool manufacturing: custom AI agent and fine-tuned LLM. Lineup-X, SaaS: marketing 360. The Corner Room, restaurant chains: offline and online marketing. Atulya Kaushik, Forbes 30 Under 30 Asia, Ed-Tech: founder\'s branding.'],
+  ['"Success in Numbers": 70+ successful projects, 50+ happy clients, 200M+ campaign reach and 95% client satisfaction', 'Success in numbers: 70+ successful projects, 50+ happy clients, 200M+ campaign reach, 95% client satisfaction. Our results reflect a commitment to delivering strategic marketing solutions that drive measurable growth, strengthen brand presence and create lasting business impact.'],
+  ['"Ready to Scale Your Business?" with office photos and contact details', 'Ready to scale your business? Call +91-9369033958, Instagram @growwthgarden, email growwthgarden@gmail.com, website www.growwthgarden.com.'],
+  ['"See You :)" closing page with office photos: Growwth Garden, full stack marketing and IT solutions agency', 'See you. Growwth Garden, full stack marketing and IT solutions agency. www.growwthgarden.com, growwthgarden@gmail.com.'],
+];
+const slideImg = (n, w) => `/assets/portfolio/growwth-garden-portfolio-${n}-${w}.webp`;
+const deckHtml = `
+      <div class="deck__intro">
+        <p>Our brand portfolio, page by page: who we are, what we do, how we scale businesses, and the work and numbers behind it. Scroll through, or download the PDF to share it with your team.</p>
+        <a class="btn btn--blue" href="/assets/growwth-garden-brand-portfolio.pdf" download><span>Download the PDF</span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="currentColor"/><path d="M12 7v9M8 12.5l4 4 4-4" fill="none" stroke="#e3e3e3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+      <div class="deck__progress" aria-hidden="true"><i></i></div>
+      <ol class="deck__list">
+        ${SLIDES.map(([alt, text], i) => {
+          const n = String(i + 1).padStart(2, '0');
+          return `<li class="deck__slide" id="page-${i + 1}">
+          <a class="deck__card" href="${slideImg(n, 2400)}" target="_blank" rel="noopener" aria-label="Open portfolio page ${i + 1} full size">
+            <img src="${slideImg(n, 1200)}" srcset="${slideImg(n, 1200)} 1200w, ${slideImg(n, 2400)} 2400w" sizes="(max-width: 900px) calc(100vw - 32px), min(92vw, 1180px)" alt="${alt.replace(/"/g, '&quot;')}" width="2400" height="1349"${i ? ' loading="lazy" decoding="async"' : ' fetchpriority="high"'}>
+            <span class="deck__zoom" aria-hidden="true">Open full size</span>
+            <span class="deck__n" aria-hidden="true">${n} / ${String(SLIDES.length).padStart(2, '0')}</span>
+          </a>
+          <p class="sr-only">${text}</p>
+        </li>`;
+        }).join('\n        ')}
+      </ol>
+      <div class="deck__end">
+        <div>
+          <h2>Ready to scale <em>your business?</em></h2>
+          <p>Tell us what you are building and we will come back with a plan.</p>
+        </div>
+        <div class="deck__end-actions">
+          <a class="btn" href="/contact"><span>Share a Brief</span></a>
+          <a class="btn" href="tel:+919369033958"><span>Call +91-9369033958</span></a>
+        </div>
+      </div>`;
+
 const pages = [
   {
     path: '/services/websites-apps-ai',
@@ -405,6 +453,18 @@ const pages = [
       </div>`,
   },
   {
+    path: '/portfolio',
+    nav: '/portfolio',
+    deck: true,
+    title: 'Portfolio: Branding, Websites & Growth Work | Growwth Garden',
+    description: 'See the Growwth Garden brand portfolio: our services, process, website and app designs, founder branding, client highlights and results.',
+    h1: 'Our Portfolio',
+    crumbs: [['Home', '/'], ['Portfolio']],
+    schema: [{ '@type': 'CollectionPage', name: 'Growwth Garden Brand Portfolio', url: ORIGIN + '/portfolio', isPartOf: { '@id': ORIGIN + '/#website' }, publisher: { '@id': ORIGIN + '/#organization' },
+      hasPart: SLIDES.map(([alt], i) => ({ '@type': 'ImageObject', contentUrl: ORIGIN + slideImg(String(i + 1).padStart(2, '0'), 2400), caption: alt.replace(/"/g, '') })) }],
+    body: deckHtml,
+  },
+  {
     path: '/blog',
     nav: '/blog',
     title: 'Blog: Websites, Branding & Lead Generation | Growwth Garden',
@@ -548,7 +608,7 @@ for (const p of pages) {
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-2PJVVDJ4FC');if(location.hostname==='growwthgarden.com')addEventListener('load',function(){var s=document.createElement('script');s.async=1;s.src='https://www.googletagmanager.com/gtag/js?id=G-2PJVVDJ4FC';document.head.appendChild(s)})</script>
   <!-- Microsoft Clarity: loads after the page, on the live domain only -->
   <script>(function(c,l,a,r,i){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};if(location.hostname==='growwthgarden.com')addEventListener('load',function(){var t=l.createElement(r);t.async=1;t.src='https://www.clarity.ms/tag/'+i;l.head.appendChild(t)})})(window,document,'clarity','script','zfsr5pcjx2')</script>
-  <link rel="stylesheet" href="/css/style.min.css?v=36">
+  <link rel="stylesheet" href="/css/style.min.css?v=37">
 </head>
 <body class="page-content">
 
@@ -558,7 +618,7 @@ for (const p of pages) {
     ${heroText}
   </section>
 
-  <main class="prose${art ? ' prose--post' : ''}${p.aside ? ' prose--aside' : ''}">
+  <main class="prose${art ? ' prose--post' : ''}${p.aside ? ' prose--aside' : ''}${p.deck ? ' prose--deck' : ''}">
     <div class="about__noise" aria-hidden="true"></div>
     <div class="container">${p.aside ? `<div class="svc-layout">
       <div class="svc-main">${p.body}
@@ -572,7 +632,7 @@ for (const p of pages) {
 
   <script defer src="/js/vendor/gsap.min.js"></script>
   <script defer src="/js/vendor/ScrollTrigger.min.js"></script>
-  <script defer src="/js/page.min.js?v=36"></script>
+  <script defer src="/js/page.min.js?v=37"></script>
 </body>
 </html>
 `;
