@@ -478,6 +478,12 @@ const pages = [
       <p class="prose__lead">Practical guides on websites, branding and lead generation, written by the team that does the work.</p>
       <div class="posts posts--list">
         <article class="post">
+          <a class="post__thumb" href="/blog/corporate-website-development" aria-label="Corporate Website Development: Complete Guide 2027"><img src="/assets/corporate-website-development.jpg" alt="Developer writing code on a monitor and laptop at a desk in a high-rise office overlooking a city skyline" loading="lazy" width="736" height="736"></a>
+          <div class="post__meta"><span>20 Nov 2026</span><span>15 min read</span></div>
+          <h2 class="post__title"><a href="/blog/corporate-website-development">Corporate Website Development: The Complete Guide (2027)</a></h2>
+          <p class="post__excerpt">Pages, features, platforms, the step-by-step process, cost in India, timelines and how to choose the right development partner.</p>
+        </article>
+        <article class="post">
           <a class="post__thumb" href="/blog/ecommerce-website-development-cost-in-india" aria-label="Ecommerce Website Development Cost in India 2027"><img src="/assets/ecommerce-website-development-cost-india.jpg" alt="Blue E-COMMERCE key with a shopping cart icon on a black keyboard, representing ecommerce website development" loading="lazy" width="736" height="736"></a>
           <div class="post__meta"><span>20 Nov 2026</span><span>14 min read</span></div>
           <h2 class="post__title"><a href="/blog/ecommerce-website-development-cost-in-india">Ecommerce Website Development Cost in India (2027 Guide)</a></h2>
@@ -512,6 +518,17 @@ const pages = [
     h1: 'Ecommerce Website Development Cost in India <em>(2027 Guide)</em>',
     crumbs: [['Home', '/'], ['Blog', '/blog'], ['Ecommerce Website Development Cost in India']],
     body: readFileSync('src/posts/ecommerce-website-development-cost-in-india.html', 'utf8'),
+  },
+  {
+    path: '/blog/corporate-website-development',
+    nav: '/blog',
+    article: { category: 'Websites', published: '2026-11-20', modified: '2026-11-20', author: 'Abhijeet', read: '15 min read', about: 'Corporate website development', image: '/assets/corporate-website-development.jpg', imageAlt: 'Developer writing code on a monitor and laptop at a desk in a high-rise office overlooking a city skyline', keywords: 'corporate website development, corporate website development company, corporate website design, corporate website cost India' ,
+      faq: ['What is corporate website development and what does it cost?', 'Corporate website development is the end-to-end process of planning, designing, building and maintaining a company website that serves customers, investors, partners and job seekers. In India it typically costs ₹1,20,000 to ₹6,00,000, depending on pages, integrations and custom design. Read our <a href="/blog/corporate-website-development">corporate website development guide</a> for pages, platforms, process and timelines.'] },
+    title: 'Corporate Website Development: Complete Guide (2027) | Growwth Garden',
+    description: 'Corporate website development explained: must-have pages, features, platforms, the step-by-step process, cost in India, timelines and how to pick a partner.',
+    h1: 'Corporate Website Development: <em>The Complete Guide (2027)</em>',
+    crumbs: [['Home', '/'], ['Blog', '/blog'], ['Corporate Website Development']],
+    body: readFileSync('src/posts/corporate-website-development.html', 'utf8'),
   },
 ];
 
