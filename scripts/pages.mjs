@@ -586,7 +586,7 @@ for (const p of pages) {
         <h1 class="page-hero__title">${p.h1}</h1>
         <div class="post-hero__meta">
           <p class="post-hero__date"><time datetime="${art.modified}">${new Date(art.modified).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' })}</time> <span aria-hidden="true">&bull;</span> ${art.read}</p>
-          <p class="author-pill"><img src="${authorAvatar.src}" alt="" width="76" height="76"><span>${art.author}</span></p>
+          <p class="author-pill"><img src="${authorAvatar.src}" alt="${art.author}, author at Growwth Garden" width="76" height="76"><span>${art.author}</span></p>
         </div>
         ${shareHtml()}
       </div>
