@@ -532,13 +532,13 @@ for (const p of pages) {
   <meta property="og:title" content="${esc(p.title)}">
   <meta property="og:description" content="${esc(p.description)}">
   <meta property="og:url" content="${url}">
-  <meta property="og:image" content="${ORIGIN}/assets/og-image.jpg">
+  <meta property="og:image" content="${ORIGIN}/assets/growwth-garden-share.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${esc(p.title)}">
   <meta name="twitter:description" content="${esc(p.description)}">
-  <meta name="twitter:image" content="${ORIGIN}/assets/og-image.jpg">
+  <meta name="twitter:image" content="${ORIGIN}/assets/growwth-garden-share.jpg">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <script type="application/ld+json">${JSON.stringify(ld)}</script>
   <link rel="preload" href="/fonts/anton-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
