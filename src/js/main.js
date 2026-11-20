@@ -167,12 +167,8 @@
       gsap.from(post, { y: 60, autoAlpha: 0, duration: .9, delay: i * .15, ease: 'power3.out', clearProps: 'all',
         scrollTrigger: { trigger: '.posts', start: 'top 85%', once: true } }));
   }
-  /* ---------- newsletter: card rises, copy slides in from the left, star keeps turning ---------- */
+  /* ---------- footer (the newsletter box was removed for now; its styles stay in style.css) ---------- */
   if (!reduce) {
-    const nst = { trigger: '.news', start: 'top 85%', once: true };
-    gsap.from('.news', { y: 60, autoAlpha: 0, duration: .9, ease: 'power3.out', clearProps: 'all', scrollTrigger: nst });
-    gsap.from('.news__body > *', { xPercent: -8, autoAlpha: 0, duration: 1, delay: .25, stagger: .12, ease: 'power3.out', clearProps: 'all', scrollTrigger: nst });
-    gsap.to('.news__star', { rotation: 360, duration: 24, ease: 'none', repeat: -1, transformOrigin: '50% 50%' });
     gsap.from('.footer__grid > *', { y: 40, autoAlpha: 0, duration: .9, stagger: .12, ease: 'power3.out', clearProps: 'all',
       scrollTrigger: { trigger: '.footer', start: 'top 85%', once: true } });
   }
