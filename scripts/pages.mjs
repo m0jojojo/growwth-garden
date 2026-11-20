@@ -416,6 +416,12 @@ const pages = [
       <p class="prose__lead">Practical guides on websites, branding and lead generation, written by the team that does the work.</p>
       <div class="posts posts--list">
         <article class="post">
+          <a class="post__thumb" href="/blog/ecommerce-website-development-cost-in-india" aria-label="Ecommerce Website Development Cost in India 2027"><img src="/assets/ecommerce-website-development-cost-india.jpg" alt="Ecommerce website on a laptop and a phone showing product cards, a shopping cart, a rupee price tag and a UPI checkout" loading="lazy" width="736" height="736"></a>
+          <div class="post__meta"><span>20 Nov 2026</span><span>14 min read</span></div>
+          <h2 class="post__title"><a href="/blog/ecommerce-website-development-cost-in-india">Ecommerce Website Development Cost in India (2027 Guide)</a></h2>
+          <p class="post__excerpt">What an online store really costs in rupees: by tier, platform, business model and city, with Shopify fees in India, GST, gateway charges and running costs.</p>
+        </article>
+        <article class="post">
           <a class="post__thumb" href="/blog/website-development-cost-in-india" aria-label="Website Development Cost in India 2027"><img src="/assets/website-development-cost-india.jpg" alt="Website development in progress: a developer codes on a laptop while a designer sketches the layout on a tablet" loading="lazy" width="736" height="736"></a>
           <div class="post__meta"><span>15 Nov 2026</span><span>12 min read</span></div>
           <h2 class="post__title"><a href="/blog/website-development-cost-in-india">How Much Does Website Development Cost in India in 2027?</a></h2>
@@ -426,12 +432,22 @@ const pages = [
   {
     path: '/blog/website-development-cost-in-india',
     nav: '/blog',
-    article: { category: 'Websites', published: '2026-11-03', modified: '2026-11-15', author: 'Abhijeet', read: '12 min read', keywords: 'website creation cost in India, website development cost in India, website cost in India 2027' },
+    article: { category: 'Websites', published: '2026-11-03', modified: '2026-11-20', author: 'Abhijeet', read: '12 min read', about: 'Website development cost in India', image: '/assets/website-development-cost-india.jpg', imageAlt: 'Website development in progress: a developer codes on a laptop while a designer sketches the layout on a tablet', keywords: 'website creation cost in India, website development cost in India, website cost in India 2027' },
     title: 'Website Development Cost in India 2027: Price Guide | Growwth Garden',
     description: 'How much does website development cost in India in 2027? Compare prices by site type, platform, freelancer vs agency, hosting, maintenance and hidden costs.',
     h1: 'How Much Does Website Development Cost in India in <em>2027?</em>',
     crumbs: [['Home', '/'], ['Blog', '/blog'], ['Website Development Cost in India']],
     body: readFileSync('src/posts/website-development-cost-in-india.html', 'utf8'),
+  },
+  {
+    path: '/blog/ecommerce-website-development-cost-in-india',
+    nav: '/blog',
+    article: { category: 'Ecommerce', published: '2026-11-20', modified: '2026-11-20', author: 'Abhijeet', read: '14 min read', about: 'Ecommerce website development cost in India', image: '/assets/ecommerce-website-development-cost-india.jpg', imageAlt: 'Ecommerce website on a laptop and a phone showing product cards, a shopping cart, a rupee price tag and a UPI checkout', keywords: 'ecommerce website development cost in India, ecommerce website cost in India, Shopify store cost India, ecommerce website price India 2027' },
+    title: 'Ecommerce Website Development Cost in India 2027 | Growwth Garden',
+    description: 'Ecommerce website development cost in India for 2027: ₹40,000 to ₹35 lakh+. Compare tiers, Shopify vs WooCommerce fees, GST, city prices and running costs.',
+    h1: 'Ecommerce Website Development Cost in India <em>(2027 Guide)</em>',
+    crumbs: [['Home', '/'], ['Blog', '/blog'], ['Ecommerce Website Development Cost in India']],
+    body: readFileSync('src/posts/ecommerce-website-development-cost-in-india.html', 'utf8'),
   },
 ];
 
@@ -461,14 +477,14 @@ for (const p of pages) {
       '@type': 'BlogPosting',
       headline: strip(p.h1),
       description: p.description,
-      image: ORIGIN + '/assets/og-image.jpg',
+      image: ORIGIN + art.image,
       datePublished: art.published,
       dateModified: art.modified,
       inLanguage: 'en-IN',
       mainEntityOfPage: { '@type': 'WebPage', '@id': url },
       author: { '@type': 'Person', name: art.author, ...(authorAvatar.real && { image: ORIGIN + authorAvatar.src }), worksFor: { '@id': ORIGIN + '/#organization' } },
       publisher: { '@id': ORIGIN + '/#organization' },
-      about: 'Website development cost in India',
+      about: art.about,
       keywords: art.keywords,
     }, faqSchema(faq));
   }
@@ -483,7 +499,7 @@ for (const p of pages) {
         </div>
         ${shareHtml()}
       </div>
-      <figure class="post-hero__photo"><img src="/assets/website-development-cost-india.jpg" alt="Website development in progress: a developer codes on a laptop while a designer sketches the layout on a tablet" width="736" height="736" fetchpriority="high"></figure>
+      <figure class="post-hero__photo"><img src="${art.image}" alt="${art.imageAlt}" width="736" height="736" fetchpriority="high"></figure>
     </div>` : `<div class="page-hero__text">
       <h1 class="page-hero__title">${p.h1}</h1>
       <p class="crumbs">${crumbHtml}</p>

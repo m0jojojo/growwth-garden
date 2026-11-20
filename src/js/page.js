@@ -91,7 +91,7 @@
   }
 
   /* website cost calculator (cost guide post): every range comes from the guide's own tables */
-  const calc = document.querySelector('.calc');
+  const calc = document.querySelector('.calc:not([data-calc])');
   if (calc) {
     // type: [hours low, hours high, default pages, default hosting, build time, build time with AI]
     // hours are set so that a small agency (₹1,000 – ₹2,000 / hr) lands in the type's price range from section 1
@@ -156,6 +156,87 @@
     calc.addEventListener('input', update);
     calc.addEventListener('change', update);
     calc.addEventListener('submit', e => e.preventDefault());
+    update();
+  }
+
+  /* ecommerce cost calculator (ecommerce cost guide post): every range comes from that guide's own tables */
+  const ecalc = document.querySelector('.calc[data-calc="ecom"]');
+  if (ecalc) {
+    // tier: [hours low, hours high, custom design range, build time, build time with AI]
+    // hours are set so that a small agency (₹1,000 – ₹2,000 / hr) on Shopify or WooCommerce lands in the tier's range from section 1
+    const TIERS = {
+      starter: [40, 75, [30000, 80000], '2–4 weeks', '3–5 days'],
+      mid: [150, 200, [80000, 150000], '4–8 weeks', '1–2 weeks'],
+      advanced: [400, 500, [100000, 250000], '8–16 weeks', '3–4 weeks'],
+      enterprise: [1000, 1750, [300000, 700000], '16–36 weeks', '2–3 months'],
+    };
+    const BUILDERS = { freelancer: [500, 2000, 'freelancer'], agency: [1000, 2000, 'small agency'], full: [1000, 5000, 'full-service agency'] };
+    // platform: [hours multiplier, label, monthly running lines]
+    const PLATFORMS = {
+      shopify: [1, 'Shopify', [['Shopify apps', [3000, 15000]]]],
+      woo: [1, 'WooCommerce', [['Hosting', [1000, 5000]], ['Plugins', [1000, 5000]]]],
+      magento: [1.4, 'Magento', [['Hosting and extensions', [5000, 25000]]]],
+      custom: [1.8, 'Custom', [['Hosting and services', [5000, 30000]]]],
+    };
+    // Shopify India plans billed yearly: [name, ₹ per month, Shopify fee per order with a third-party gateway]
+    const SHOPIFY = [['Basic', 1499, .02], ['Grow', 5599, .01], ['Advanced', 22680, .006]];
+    const SEO = { none: [0, 0], basic: [10000, 30000], agency: [15000, 50000] };
+    const ADDONS = {
+      gateway: [10000, 25000, 'Payment gateway integration'], shipping: [20000, 50000, 'Shipping / courier API'],
+      gstinv: [15000, 40000, 'GST invoicing and e-way bills'], crm: [50000, 200000, 'CRM or ERP integration'],
+      pwa: [50000, 200000, 'Progressive web app'], app: [250000, 2000000, 'Native mobile apps'],
+      photo: [20000, 200000, 'Product photography'], content: [15000, 100000, 'Product and category content'],
+      legal: [10000, 150000, 'Legal and policy pages'],
+    };
+    const GATEWAY = .0236; // 2% + 18% GST on the fee
+
+    const round = n => n < 1000 ? Math.round(n / 10) * 10 : n < 10000 ? Math.round(n / 100) * 100 : Math.round(n / 1000) * 1000;
+    const inr = n => '₹' + round(n).toLocaleString('en-IN');
+    const range = ([a, b]) => round(a) === round(b) ? inr(a) : inr(a) + ' – ' + inr(b);
+    const add = (x, y) => [x[0] + y[0], x[1] + y[1]];
+    const scale = (x, k) => [x[0] * k, x[1] * k];
+    const sum = ls => ls.reduce((s, l) => add(s, l[1]), [0, 0]);
+    const out = k => ecalc.querySelector(`[data-out="${k}"]`);
+    const f = ecalc.elements;
+
+    const update = () => {
+      const t = TIERS[f.tier.value], b = BUILDERS[f.builder.value], p = PLATFORMS[f.platform.value];
+      const gmv = +f.gmv.value || 0;
+      const once = [], monthly = [], fees = [];
+      const hrs = [Math.round(t[0] * p[0]), Math.round(t[1] * p[0])];
+      once.push([`Build: ${hrs[0]}–${hrs[1]} hrs at ₹${b[0].toLocaleString('en-IN')}–${b[1].toLocaleString('en-IN')} / hr (${b[2]}, ${p[1]})`, [hrs[0] * b[0], hrs[1] * b[1]]]);
+      once.push(f.design.value === 'custom' ? ['Custom design', t[2]] : ['Premium theme', [5000, 30000]]);
+      for (const k in ADDONS) if (f[k].checked) once.push([ADDONS[k][2], ADDONS[k].slice(0, 2)]);
+      if (f.buffer.checked) once.push(['15% contingency', scale(sum(once), .15)]);
+
+      monthly.push(['Domain', [500 / 12, 2000 / 12]]);
+      if (f.platform.value === 'shopify') {
+        const plan = SHOPIFY.reduce((best, pl) => (pl[1] + pl[2] * gmv < best[1] + best[2] * gmv ? pl : best));
+        monthly.push([`Shopify ${plan[0]} plan (cheapest for your sales)`, [plan[1], plan[1]]]);
+        if (gmv) monthly.push([`Shopify per-order fee (${plan[2] * 100}%)`, [plan[2] * gmv, plan[2] * gmv]]);
+      }
+      for (const l of p[2]) monthly.push(l);
+      if (f.maint.checked) { const base = add(once[0][1], once[1][1]); monthly.push(['Maintenance (15–20% of build a year)', [base[0] * .15 / 12, base[1] * .2 / 12]]); }
+      if (f.seo.value !== 'none') monthly.push(['SEO and content', SEO[f.seo.value]]);
+      if (gmv) fees.push(['Gateway fees (2.36% of sales)', [GATEWAY * gmv, GATEWAY * gmv]]);
+
+      // running costs shown per month or per year; GST goes on the build and services, not on gateway fees (already included)
+      const gst = f.gst.checked ? 1.18 : 1, yearly = f.period.value === 'year', k = yearly ? 12 : 1, per = yearly ? ' / year' : ' / month';
+      const running = [...monthly, ...fees].map(([n, v]) => [n + per, scale(v, k)]);
+      if (gst > 1) { once.push(['18% GST on the build', scale(sum(once), .18)]); running.push(['18% GST on services' + per, scale(sum(monthly), .18 * k)]); }
+
+      const build = sum(once), runYear = add(scale(sum(monthly), 12 * gst), scale(sum(fees), 12));
+      out('build').textContent = range(build);
+      out('runlabel').textContent = yearly ? 'Running costs per year' : 'Running costs per month';
+      out('run').textContent = range(sum(running));
+      out('total').textContent = range(add(build, runYear));
+      out('time').textContent = `${t[3]} (${t[4]} with AI)`;
+      out('lines').innerHTML = [...once, ...running].map(([n, v]) => `<li><span>${n}</span><b>${range(v)}</b></li>`).join('');
+    };
+
+    ecalc.addEventListener('input', update);
+    ecalc.addEventListener('change', update);
+    ecalc.addEventListener('submit', e => e.preventDefault());
     update();
   }
 
