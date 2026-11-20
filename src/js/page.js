@@ -94,7 +94,7 @@
   const calc = document.querySelector('.calc:not([data-calc])');
   if (calc) {
     // type: [hours low, hours high, default pages, default hosting, build time, build time with AI]
-    // hours are set so that a small agency (₹1,000 – ₹2,000 / hr) lands in the type's price range from section 1
+    // hours are set so that a small agency (₹1,000 – ₹2,000 / hr) lands in the type's price range from section 2
     const TYPES = {
       template: [10, 15, 5, 'shared', 'Days to 2 weeks', '2–4 hours'],
       landing: [15, 30, 1, 'shared', '1–3 weeks', '2–6 hours'],
@@ -106,7 +106,7 @@
       app: [300, 1250, 15, 'cloud', '3–6 months', '1–1.5 months'],
       enterprise: [1500, 5000, 50, 'dedicated', '4–12 months', '2–3 months'],
     };
-    // hourly rates from section 5
+    // hourly rates from section 6
     const BUILDERS = { freelancer: [500, 2000, 'freelancer'], agency: [1000, 2000, 'small agency'], full: [1000, 5000, 'full-service agency'] };
     const HOSTING = { shared: [2000, 10000], vps: [10000, 50000], cloud: [30000, 100000], dedicated: [96000, 360000] };
     const SEO = { none: [0, 0], basic: [8000, 30000], agency: [15000, 100000] };
@@ -163,7 +163,7 @@
   const ecalc = document.querySelector('.calc[data-calc="ecom"]');
   if (ecalc) {
     // tier: [hours low, hours high, custom design range, build time, build time with AI]
-    // hours are set so that a small agency (₹1,000 – ₹2,000 / hr) on Shopify or WooCommerce lands in the tier's range from section 1
+    // hours are set so that a small agency (₹1,000 – ₹2,000 / hr) on Shopify or WooCommerce lands in the tier's range from section 2
     const TIERS = {
       starter: [40, 75, [30000, 80000], '2–4 weeks', '3–5 days'],
       mid: [150, 200, [80000, 150000], '4–8 weeks', '1–2 weeks'],

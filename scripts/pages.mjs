@@ -416,7 +416,7 @@ const pages = [
       <p class="prose__lead">Practical guides on websites, branding and lead generation, written by the team that does the work.</p>
       <div class="posts posts--list">
         <article class="post">
-          <a class="post__thumb" href="/blog/ecommerce-website-development-cost-in-india" aria-label="Ecommerce Website Development Cost in India 2027"><img src="/assets/ecommerce-website-development-cost-india.jpg" alt="Ecommerce website on a laptop and a phone showing product cards, a shopping cart, a rupee price tag and a UPI checkout" loading="lazy" width="736" height="736"></a>
+          <a class="post__thumb" href="/blog/ecommerce-website-development-cost-in-india" aria-label="Ecommerce Website Development Cost in India 2027"><img src="/assets/ecommerce-website-development-cost-india.jpg" alt="Blue E-COMMERCE key with a shopping cart icon on a black keyboard, representing ecommerce website development" loading="lazy" width="736" height="736"></a>
           <div class="post__meta"><span>20 Nov 2026</span><span>14 min read</span></div>
           <h2 class="post__title"><a href="/blog/ecommerce-website-development-cost-in-india">Ecommerce Website Development Cost in India (2027 Guide)</a></h2>
           <p class="post__excerpt">What an online store really costs in rupees: by tier, platform, business model and city, with Shopify fees in India, GST, gateway charges and running costs.</p>
@@ -432,7 +432,8 @@ const pages = [
   {
     path: '/blog/website-development-cost-in-india',
     nav: '/blog',
-    article: { category: 'Websites', published: '2026-11-03', modified: '2026-11-20', author: 'Abhijeet', read: '12 min read', about: 'Website development cost in India', image: '/assets/website-development-cost-india.jpg', imageAlt: 'Website development in progress: a developer codes on a laptop while a designer sketches the layout on a tablet', keywords: 'website creation cost in India, website development cost in India, website cost in India 2027' },
+    article: { category: 'Websites', published: '2026-11-03', modified: '2026-11-20', author: 'Abhijeet', read: '12 min read', about: 'Website development cost in India', image: '/assets/website-development-cost-india.jpg', imageAlt: 'Website development in progress: a developer codes on a laptop while a designer sketches the layout on a tablet', keywords: 'website creation cost in India, website development cost in India, website cost in India 2027' ,
+      faq: ['How much does website development cost in India?', 'A professional, mobile-responsive business website in India typically costs ₹50,000 to ₹2,00,000. Simple template sites start around ₹10,000 to ₹30,000, and custom web applications run from ₹3,00,000 to ₹20,00,000 or more. Read our <a href="/blog/website-development-cost-in-india">website development cost in India guide</a> for prices by site type, platform, hosting and maintenance.'] },
     title: 'Website Development Cost in India 2027: Price Guide | Growwth Garden',
     description: 'How much does website development cost in India in 2027? Compare prices by site type, platform, freelancer vs agency, hosting, maintenance and hidden costs.',
     h1: 'How Much Does Website Development Cost in India in <em>2027?</em>',
@@ -442,7 +443,8 @@ const pages = [
   {
     path: '/blog/ecommerce-website-development-cost-in-india',
     nav: '/blog',
-    article: { category: 'Ecommerce', published: '2026-11-20', modified: '2026-11-20', author: 'Abhijeet', read: '14 min read', about: 'Ecommerce website development cost in India', image: '/assets/ecommerce-website-development-cost-india.jpg', imageAlt: 'Ecommerce website on a laptop and a phone showing product cards, a shopping cart, a rupee price tag and a UPI checkout', keywords: 'ecommerce website development cost in India, ecommerce website cost in India, Shopify store cost India, ecommerce website price India 2027' },
+    article: { category: 'Ecommerce', published: '2026-11-20', modified: '2026-11-20', author: 'Abhijeet', read: '14 min read', about: 'Ecommerce website development cost in India', image: '/assets/ecommerce-website-development-cost-india.jpg', imageAlt: 'Blue E-COMMERCE key with a shopping cart icon on a black keyboard, representing ecommerce website development', keywords: 'ecommerce website development cost in India, ecommerce website cost in India, Shopify store cost India, ecommerce website price India 2027' ,
+      faq: ['How much does ecommerce website development cost in India?', 'Ecommerce website development cost in India ranges from about ₹40,000 for a starter store to ₹35,00,000 or more for an enterprise platform or marketplace, and most growing D2C brands spend ₹1,50,000 to ₹4,00,000. Read our <a href="/blog/ecommerce-website-development-cost-in-india">ecommerce website development cost in India guide</a> for prices by platform, business model, city and running costs.'] },
     title: 'Ecommerce Website Development Cost in India 2027 | Growwth Garden',
     description: 'Ecommerce website development cost in India for 2027: ₹40,000 to ₹35 lakh+. Compare tiers, Shopify vs WooCommerce fees, GST, city prices and running costs.',
     h1: 'Ecommerce Website Development Cost in India <em>(2027 Guide)</em>',
@@ -450,6 +452,13 @@ const pages = [
     body: readFileSync('src/posts/ecommerce-website-development-cost-in-india.html', 'utf8'),
   },
 ];
+
+// Blog FAQ: every article defines one question (article.faq) that sums up that article and links to it. Each article's
+// FAQ section is built from the questions of all the *other* articles, so adding a new post adds its question to every
+// existing post (and theirs to it) on the next build: the posts interlink automatically.
+const articleFaqs = pages.filter(p => p.article?.faq).map(p => ({ path: p.path, item: p.article.faq }));
+const relatedFaqHtml = path => articleFaqs.filter(f => f.path !== path)
+  .map(({ item: [q, a] }) => `<details class="faq"><summary>${q}</summary><p>${a}</p></details>`).join('\n');
 
 const activeNav = (h, nav, path) => h
   .replace(`<a href="${nav}" class="has-sub nav__trigger"`, `<a href="${nav}" class="has-sub nav__trigger is-active"`)
@@ -471,6 +480,9 @@ for (const p of pages) {
   };
   const art = p.article;
   if (art) {
+    const related = relatedFaqHtml(p.path);
+    // no other posts yet: drop the FAQ heading too, so the page never shows an empty section
+    p.body = related ? p.body.replace(/<!-- related-faq[^>]*-->/, related) : p.body.replace(/<h2 class="prose__h" id="faq">[\s\S]*?<!-- related-faq[^>]*-->\n?/, '');
     const faq = faqFromHtml(p.body);
     p.body = withToc(p.body);
     ld['@graph'].push({
@@ -486,7 +498,7 @@ for (const p of pages) {
       publisher: { '@id': ORIGIN + '/#organization' },
       about: art.about,
       keywords: art.keywords,
-    }, faqSchema(faq));
+    }, ...(faq.length ? [faqSchema(faq)] : []));
   }
   const heroText = art ? `<div class="page-hero__text post-hero">
       <div class="post-hero__copy">
